@@ -1,7 +1,33 @@
 import React from 'react';
 import { sesGlossaire } from '../data/sesGlossaire';
 
-const categories = ['Toutes', 'Entreprise', 'Emploi', 'Macroéconomie', 'Finances publiques', 'Développement', 'Commerce international', 'Consommation', 'Finance', 'Économie', 'Travail', 'Sociologie', 'Stratification', 'Production', 'Revenus', 'Organisation'];
+const categoryOrder = [
+  'Science économique',
+  'Production',
+  'Entreprise',
+  'Macroéconomie',
+  'Croissance',
+  'Développement',
+  'Marché',
+  'Concurrence',
+  'Défaillances de marché',
+  'Finance',
+  'Finances publiques',
+  'Commerce international',
+  'Consommation',
+  'Revenus',
+  'Redistribution',
+  'Travail',
+  'Sociologie',
+  'Science politique',
+  'Regards croisés',
+  'Méthodes',
+  'Statistiques',
+  'Stratification',
+  'Culture',
+  'Justice sociale',
+  'Organisation'
+];
 
 const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
   'Entreprise': { bg: '#dbeafe', text: '#1d4ed8', border: '#0369a1' },
@@ -19,25 +45,74 @@ const categoryColors: Record<string, { bg: string; text: string; border: string 
   'Consommation': { bg: '#fbcfe8', text: '#831843', border: '#500724' },
   'Finances publiques': { bg: '#fca5a5', text: '#7f1d1d', border: '#5e0e0e' },
   'Commerce international': { bg: '#e0e7ff', text: '#3730a3', border: '#1e1b4b' },
+  'Science économique': { bg: '#ccfbf1', text: '#0f766e', border: '#0f766e' },
+  'Croissance': { bg: '#dcfce7', text: '#166534', border: '#15803d' },
+  'Marché': { bg: '#ede9fe', text: '#5b21b6', border: '#6d28d9' },
+  'Concurrence': { bg: '#dbeafe', text: '#1e40af', border: '#2563eb' },
+  'Défaillances de marché': { bg: '#fee2e2', text: '#991b1b', border: '#dc2626' },
+  'Science politique': { bg: '#cffafe', text: '#155e75', border: '#0891b2' },
+  'Regards croisés': { bg: '#fef9c3', text: '#854d0e', border: '#ca8a04' },
+  'Méthodes': { bg: '#e0f2fe', text: '#075985', border: '#0284c7' },
+  'Statistiques': { bg: '#f3e8ff', text: '#6b21a8', border: '#9333ea' },
+  'Culture': { bg: '#fae8ff', text: '#86198f', border: '#c026d3' },
+  'Justice sociale': { bg: '#ffe4e6', text: '#9f1239', border: '#e11d48' },
 };
 
+const fallbackColors = [
+  { bg: '#f1f5f9', text: '#334155', border: '#94a3b8' },
+  { bg: '#ecfccb', text: '#3f6212', border: '#65a30d' },
+  { bg: '#ffedd5', text: '#9a3412', border: '#ea580c' },
+  { bg: '#f5f3ff', text: '#5b21b6', border: '#7c3aed' }
+];
+
 function getCategoryColor(category: string) {
-  return categoryColors[category] || { bg: '#e5e7eb', text: '#374151', border: '#9ca3af' };
+  if (categoryColors[category]) return categoryColors[category];
+
+  const hash = category.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
+  return fallbackColors[hash % fallbackColors.length];
+}
+
+function normalizeSearch(value: string) {
+  return value
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+    .toLowerCase()
+    .trim();
 }
 
 export default function Lexique() {
   const [selected, setSelected] = React.useState<string>('Toutes');
   const [search, setSearch] = React.useState('');
 
+  const categories = React.useMemo(() => {
+    const available = Array.from(new Set(sesGlossaire.map((item) => item.categorie)));
+    const ordered = available.sort((a, b) => {
+      const aIndex = categoryOrder.indexOf(a);
+      const bIndex = categoryOrder.indexOf(b);
+
+      if (aIndex === -1 && bIndex === -1) return a.localeCompare(b, 'fr');
+      if (aIndex === -1) return 1;
+      if (bIndex === -1) return -1;
+      return aIndex - bIndex;
+    });
+
+    return ['Toutes', ...ordered];
+  }, []);
+
   const filtered = sesGlossaire.filter((item) => {
-    const normalized = search.trim().toLowerCase();
+    const normalized = normalizeSearch(search);
     const matchesCategory = selected === 'Toutes' || item.categorie === selected;
-    const matchesSearch = !normalized ||
-      item.terme.toLowerCase().includes(normalized) ||
-      item.definition.toLowerCase().includes(normalized) ||
-      item.exemple.toLowerCase().includes(normalized) ||
-      item.interpretation.toLowerCase().includes(normalized) ||
-      (item.sigle || '').toLowerCase().includes(normalized);
+    const searchable = normalizeSearch([
+      item.terme,
+      item.sigle,
+      item.categorie,
+      item.definition,
+      item.formule,
+      item.interpretation,
+      item.exemple,
+      ...item.pointsCles
+    ].filter(Boolean).join(' '));
+    const matchesSearch = !normalized || searchable.includes(normalized);
 
     return matchesCategory && matchesSearch;
   });
@@ -47,14 +122,14 @@ export default function Lexique() {
       <div style={{ padding: 20, borderRadius: 24, background: 'linear-gradient(135deg, #fef3c7 0%, #ecfeff 50%, #f8fafc 100%)', border: '1px solid #facc15', boxShadow: '0 18px 40px rgba(250, 204, 21, 0.15)' }}>
         <div style={{ color: '#a16207', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', fontSize: '0.72rem' }}>Lexique SES</div>
         <h2 style={{ margin: '10px 0 8px', color: '#0f172a', fontSize: '2rem' }}>Définitions, formules et exemples</h2>
-        <p style={{ margin: 0, color: '#475569', lineHeight: 1.6 }}>Tout le vocabulaire utile pour comprendre le chômage, le PIB, le CA, la VA, l’EBE, le bénéfice, les investissements et le développement.</p>
+        <p style={{ margin: 0, color: '#475569', lineHeight: 1.6 }}>Tout le vocabulaire utile de Seconde et Première SES : économie, sociologie, marché, travail, justice sociale, méthodes et notions chiffrées.</p>
       </div>
 
       <div style={{ display: 'grid', gap: 12, padding: 18, borderRadius: 22, background: '#ffffff', border: '1px solid #e2e8f0', boxShadow: '0 16px 30px rgba(15, 23, 42, 0.04)' }}>
         <input
           value={search}
           onChange={(event) => setSearch(event.target.value)}
-          placeholder="Recherche : chômage, CA, VA, EBE, croissance, pays en développement..."
+          placeholder="Recherche : chômage, PIB, socialisation, marché, externalité, justice sociale..."
           style={{
             width: '100%',
             padding: '14px 16px',
