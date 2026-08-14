@@ -84,7 +84,7 @@ export default function Exercices() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.3fr) minmax(260px, 0.7fr)', gap: 18 }}>
+      <div className="exercise-layout" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.3fr) minmax(260px, 0.7fr)', gap: 18 }}>
         <section style={{ padding: 20, borderRadius: 24, background: '#ffffff', border: '1px solid #e2e8f0', boxShadow: '0 18px 40px rgba(15, 23, 42, 0.06)' }}>
           {!sessionFinished ? (
             <>
