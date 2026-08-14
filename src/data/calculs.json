@@ -1,0 +1,578 @@
+[
+  {
+    "id": "proportion",
+    "nom": "Proportion / Part en %",
+    "categorie": "Statistiques appliquées",
+    "chapitres": ["Statistiques appliquées"],
+    "niveau": ["Seconde","Première"],
+    "formule": "Proportion (%) = (Effectif sous-catégorie / Effectif total) × 100",
+    "definitionTermes": [
+      { "symbole": "Effectif sous-catégorie", "sens": "nombre ou valeur de la sous-partie" },
+      { "symbole": "Effectif total", "sens": "nombre ou valeur de l'ensemble" }
+    ],
+    "explication": "Mesure la part d'une sous-catégorie par rapport à un total, exprimée en pourcentage.",
+    "exemple": {
+      "enonce": "Sur 800 élèves, 320 sont en filière générale.",
+      "donnees": {"sous":320, "total":800},
+      "calcul": "(320 / 800) × 100 = 40",
+      "resultat": "40 %"
+    },
+    "pieges": ["Confondre proportion et taux de variation (variation dans le temps)."],
+    "motsCles": ["proportion","part","pourcentage de repartition","poids","poid","propotion","%","part en %"],
+    "officielProgramme": true
+  },
+  {
+    "id": "taux-de-variation",
+    "nom": "Taux de variation",
+    "categorie": "Statistiques appliquées",
+    "chapitres": ["Statistiques appliquées"],
+    "niveau": ["Seconde","Première"],
+    "formule": "Taux de variation (%) = [(Valeur arrivée - Valeur départ) / Valeur départ] × 100",
+    "definitionTermes": [
+      { "symbole": "Valeur départ", "sens": "valeur initiale" },
+      { "symbole": "Valeur arrivée", "sens": "valeur finale" }
+    ],
+    "explication": "Mesure la variation relative d'une grandeur entre deux dates, exprimée en pourcentage.",
+    "exemple": {
+      "enonce": "Le PIB passe de 2500 Md€ à 2625 Md€.",
+      "donnees": {"depart":2500, "arrivee":2625},
+      "calcul": "[(2625 - 2500) / 2500] × 100 = 5",
+      "resultat": "5 %"
+    },
+    "pieges": ["Ne pas confondre variation relative (en %) et variation en points (points de pourcentage)."],
+    "motsCles": ["taux de variation","evolution","evolution en pourcentage","tx variation","taux de croissance","variation relative"],
+    "officielProgramme": true
+  },
+  {
+    "id": "taux-de-variation-cumule",
+    "nom": "Taux de variation cumulé",
+    "categorie": "Statistiques appliquées",
+    "chapitres": ["Statistiques appliquées"],
+    "niveau": ["Seconde","Première"],
+    "formule": "Taux cumulé (%) = [(1 + t1) × (1 + t2) × ... × (1 + tn) − 1] × 100",
+    "definitionTermes": [],
+    "explication": "Calcule la variation totale sur plusieurs périodes en multipliant les coefficients de chaque sous-période.",
+    "exemple": {
+      "enonce": "Salaire +3% puis +2% les deux années.",
+      "donnees": {"t1":0.03, "t2":0.02},
+      "calcul": "(1+0.03) × (1+0.02) − 1 = 0.0506",
+      "resultat": "+5,06 %"
+    },
+    "pieges": ["Additionner simplement les taux successifs (faux)."],
+    "motsCles": ["taux cumule","variation cumulee","taux cumulé","evolution sur plusieurs periodes","taux de variation cumulé"],
+    "officielProgramme": true
+  },
+  {
+    "id": "coefficient-multiplicateur",
+    "nom": "Coefficient multiplicateur",
+    "categorie": "Statistiques appliquées",
+    "chapitres": ["Statistiques appliquées"],
+    "niveau": ["Seconde","Première"],
+    "formule": "CM = Valeur arrivée / Valeur départ (et Taux% = (CM − 1) × 100)",
+    "definitionTermes": [],
+    "explication": "Indique de combien de fois une valeur initiale a été multipliée pour obtenir la valeur finale.",
+    "exemple": {
+      "enonce": "Prix passe de 20 € à 25 €.",
+      "donnees": {"depart":20, "arrivee":25},
+      "calcul": "CM = 25 / 20 = 1.25 ; Taux = (1.25 - 1) × 100 = 25%",
+      "resultat": "CM = 1,25 (soit +25 %)"
+    },
+    "pieges": ["Interpréter un CM < 1 (ex: 0.5 -> −50 %, non −100 %)."],
+    "motsCles": ["coefficient multiplicateur","coeff multiplicateur","coefficien multiplicateur","CM","combien de fois plus","multiplié par"],
+    "officielProgramme": true
+  },
+  {
+    "id": "indice-base-100",
+    "nom": "Indice simple en base 100",
+    "categorie": "Statistiques appliquées",
+    "chapitres": ["Statistiques appliquées"],
+    "niveau": ["Seconde","Première"],
+    "formule": "Indice_t = (Valeur_t / Valeur_référence) × 100",
+    "definitionTermes": [],
+    "explication": "Permet de comparer facilement une série par rapport à une année de référence prise comme 100.",
+    "exemple": {
+      "enonce": "Panier valait 100 € en 2015, 118 € en 2024.",
+      "donnees": {"ref":100, "t":118},
+      "calcul": "(118 / 100) × 100 = 118",
+      "resultat": "Indice = 118 (augmentation de 18 %)"
+    },
+    "pieges": [],
+    "motsCles": ["indice base 100","indice simple","indice de prix","indise","indice base cent"],
+    "officielProgramme": true
+  },
+  {
+    "id": "moyenne-arithmetique",
+    "nom": "Moyenne arithmétique simple",
+    "categorie": "Statistiques appliquées",
+    "chapitres": ["Statistiques appliquées"],
+    "niveau": ["Seconde","Première"],
+    "formule": "Moyenne = (Σ valeurs) / (nombre de valeurs)",
+    "definitionTermes": [],
+    "explication": "La moyenne est la somme des valeurs divisée par leur nombre.",
+    "exemple": {
+      "enonce": "Notes : 12,14,9,16,15.",
+      "donnees": {"notes":[12,14,9,16,15]},
+      "calcul": "(12+14+9+16+15)/5 = 13.2",
+      "resultat": "13,2"
+    },
+    "pieges": [],
+    "motsCles": ["moyenne","moyenne arithmetique","moyenne simple"],
+    "officielProgramme": true
+  },
+  {
+    "id": "moyenne-ponderee",
+    "nom": "Moyenne arithmétique pondérée",
+    "categorie": "Statistiques appliquées",
+    "chapitres": ["Statistiques appliquées"],
+    "niveau": ["Seconde","Première"],
+    "formule": "Moyenne pondérée = Σ(valeur_i × poids_i) / Σ(poids_i)",
+    "definitionTermes": [],
+    "explication": "La moyenne pondérée tient compte de coefficients (poids) attachés à chaque valeur.",
+    "exemple": {
+      "enonce": "Devoir coeff 2 note 14, contrôle coeff 1 note 10.",
+      "donnees": {"v1":14,"p1":2,"v2":10,"p2":1},
+      "calcul": "(14×2 + 10×1) / (2+1) = 38/3 ≈ 12.67",
+      "resultat": "≈12,67"
+    },
+    "pieges": ["Oublier de diviser par la somme des coefficients."],
+    "motsCles": ["moyenne ponderee","moyenne ponderée","moyenne coefficient"],
+    "officielProgramme": true
+  },
+  {
+    "id": "mediane",
+    "nom": "Médiane",
+    "categorie": "Statistiques appliquées",
+    "chapitres": ["Statistiques appliquées"],
+    "niveau": ["Seconde","Première"],
+    "formule": "Définition (pas de formule unique) : valeur qui sépare la série ordonnée en deux parts égales",
+    "definitionTermes": [],
+    "explication": "La médiane est la valeur centrale d'une série ordonnée et est moins sensible aux valeurs extrêmes que la moyenne.",
+    "exemple": {
+      "enonce": "Salaires : 1400,1500,1600,1700,1900,2200,3000.",
+      "donnees": {"serie":[1400,1500,1600,1700,1900,2200,3000]},
+      "calcul": "La 4e valeur sur 7 est 1700",
+      "resultat": "1700"
+    },
+    "pieges": ["Confondre médiane et moyenne."],
+    "motsCles": ["mediane","valeur centrale","salaire median"],
+    "officielProgramme": true
+  },
+  {
+    "id": "valeur-nominale-reelle",
+    "nom": "Valeur nominale et valeur réelle",
+    "categorie": "Statistiques appliquées",
+    "chapitres": ["Statistiques appliquées"],
+    "niveau": ["Première"],
+    "formule": "Valeur réelle = Valeur nominale × (Indice prix année référence / Indice prix année courante)",
+    "definitionTermes": [],
+    "explication": "Permet d'exprimer une valeur en euros constants pour neutraliser l'inflation.",
+    "exemple": {
+      "enonce": "Salaire nominal passe de 2000 à 2100 €, indice prix 100→104.",
+      "donnees": {"nominal":2100,"indiceRef":100,"indiceCourant":104},
+      "calcul": "2100 × (100/104) ≈ 2019.20",
+      "resultat": "≈2019,20 € (valeur réelle)"
+    },
+    "pieges": ["Comparer deux valeurs nominales sans ajuster l'inflation."],
+    "motsCles": ["valeur nominale","valeur reelle","pouvoir d'achat","deflater","euros constants","euros courants"],
+    "officielProgramme": true
+  },
+  {
+    "id": "taux-interet-reel-nominal",
+    "nom": "Taux d'intérêt nominal et réel",
+    "categorie": "Statistiques appliquées",
+    "chapitres": ["Statistiques appliquées"],
+    "niveau": ["Première"],
+    "formule": "Taux réel ≈ Taux nominal − Taux d'inflation (approximation)",
+    "definitionTermes": [],
+    "explication": "Estime la variation du pouvoir d'achat d'un placement en retirant l'inflation du taux nominal.",
+    "exemple": {
+      "enonce": "Taux nominal 3 %, inflation 2 %.",
+      "donnees": {"nominal":3, "inflation":2},
+      "calcul": "3 - 2 = 1",
+      "resultat": "≈1 % (taux réel)"
+    },
+    "pieges": [],
+    "motsCles": ["taux interet reel","taux interet nominal","formule de fisher"],
+    "officielProgramme": true
+  },
+  {
+    "id": "contribution-a-la-variation",
+    "nom": "Contribution à la variation (décomposition)",
+    "categorie": "Statistiques appliquées",
+    "chapitres": ["Statistiques appliquées"],
+    "niveau": ["Première"],
+    "formule": "Contribution_i (%) ≈ Poids_i (base départ) × Taux variation_i",
+    "definitionTermes": [],
+    "explication": "Permet d'évaluer combien chaque poste contribue à la variation globale (ex: croissance du PIB).",
+    "exemple": {
+      "enonce": "Consommation pèse 55% et croît de 2% ; investissement pèse 22% et croît de 1%.",
+      "donnees": {},
+      "calcul": "0.55×2 = 1.1 point ; 0.22×1 = 0.22 point",
+      "resultat": "Contributions approximatives: 1.1 et 0.22 points"
+    },
+    "pieges": [],
+    "motsCles": ["contribution a la croissance","decomposition croissance","contribution a la variation"],
+    "officielProgramme": false
+  },
+  {
+    "id": "valeur-ajoutee",
+    "nom": "Valeur ajoutée (VA)",
+    "categorie": "Production et richesse",
+    "chapitres": ["Comment crée-t-on des richesses et comment les mesure-t-on ?"],
+    "niveau": ["Seconde","Première"],
+    "formule": "VA = Valeur de la production − Consommations intermédiaires",
+    "definitionTermes": [],
+    "explication": "La VA mesure la richesse créée par une entreprise sur une période donnée.",
+    "exemple": {
+      "enonce": "Boulangerie : production 150000 €, consommations intermédiaires 60000 €.",
+      "donnees": {"prod":150000,"consInter":60000},
+      "calcul": "150000 - 60000 = 90000",
+      "resultat": "90 000 €"
+    },
+    "pieges": [],
+    "motsCles": ["valeur ajoutee","VA","richesse creee","valeur ajouté"],
+    "officielProgramme": false
+  },
+  {
+    "id": "pib-approche-production",
+    "nom": "PIB — approche production",
+    "categorie": "Production et richesse",
+    "chapitres": ["Comment crée-t-on des richesses et comment les mesure-t-on ?"],
+    "niveau": ["Seconde","Première"],
+    "formule": "PIB = Somme des VA des producteurs résidents + Impôts sur les produits − Subventions",
+    "definitionTermes": [],
+    "explication": "Le PIB mesure la somme des richesses produites dans un pays durant une période.",
+    "exemple": {
+      "enonce": "3 secteurs: 400,250,150 Md€ + 40 Md€ impôts nets.",
+      "donnees": {"s1":400,"s2":250,"s3":150,"imp":40},
+      "calcul": "400+250+150+40 = 840",
+      "resultat": "840 Md€"
+    },
+    "pieges": [],
+    "motsCles": ["PIB","produit interieur brut","somme des valeurs ajoutées"],
+    "officielProgramme": false
+  },
+  {
+    "id": "pib-par-habitant",
+    "nom": "PIB par habitant",
+    "categorie": "Production et richesse",
+    "chapitres": ["Comment crée-t-on des richesses et comment les mesure-t-on ?"],
+    "niveau": ["Seconde","Première"],
+    "formule": "PIB/habitant = PIB total / Population totale",
+    "definitionTermes": [],
+    "explication": "Donne une moyenne du niveau de richesse par personne, sans renseigner la répartition.",
+    "exemple": {
+      "enonce": "PIB 2600 Md€, population 65 M.",
+      "donnees": {"PIB":2600000000000,"POP":65000000},
+      "calcul": "2600000000000 / 65000000 ≈ 40000",
+      "resultat": "≈ 40 000 € par habitant"
+    },
+    "pieges": ["Interpréter comme distribution individuelle; c'est une moyenne."],
+    "motsCles": ["PIB par habitant","PIB/hab","PIB par tete","richesse par habitant"],
+    "officielProgramme": false
+  },
+  {
+    "id": "taux-croissance-pib",
+    "nom": "Taux de croissance du PIB (en volume)",
+    "categorie": "Production et richesse",
+    "chapitres": ["Comment crée-t-on des richesses et comment les mesure-t-on ?"],
+    "niveau": ["Première"],
+    "formule": "Identique au taux de variation appliqué au PIB en volume",
+    "definitionTermes": [],
+    "explication": "Mesure la croissance réelle de la production en neutralisant l'inflation.",
+    "exemple": {
+      "enonce": "PIB en volume passe 2500→2550 Md€.",
+      "donnees": {"depart":2500,"arrivee":2550},
+      "calcul": "(2550-2500)/2500 × 100 = 2",
+      "resultat": "2 %"
+    },
+    "pieges": ["Utiliser le PIB en valeur au lieu du PIB en volume."],
+    "motsCles": ["taux de croissance","croissance du PIB","croissance en volume"],
+    "officielProgramme": false
+  },
+  {
+    "id": "prix-quantite-equilibre",
+    "nom": "Prix et quantité d'équilibre",
+    "categorie": "Marché et prix",
+    "chapitres": ["Comment se forment les prix sur un marché ?"],
+    "niveau": ["Seconde","Première"],
+    "formule": "Résoudre Qo(p) = Qd(p)",
+    "definitionTermes": [],
+    "explication": "Le prix d'équilibre égalise l'offre et la demande; on résout l'équation pour p puis Q.",
+    "exemple": {
+      "enonce": "Qo = 20p ; Qd = 200 − 10p.",
+      "donnees": {},
+      "calcul": "20p = 200 − 10p → 30p = 200 → p ≈ 6.67 ; Q ≈ 133",
+      "resultat": "p ≈ 6.67 €, Q ≈ 133"
+    },
+    "pieges": [],
+    "motsCles": ["prix d'equilibre","quantite d'equilibre","offre et demande","equilibre de marche"],
+    "officielProgramme": false
+  },
+  {
+    "id": "elasticite-prix-demande",
+    "nom": "Élasticité-prix de la demande",
+    "categorie": "Marché et prix",
+    "chapitres": ["Comment se forment les prix sur un marché ?"],
+    "niveau": ["Seconde","Première"],
+    "formule": "Élasticité = (ΔQ/Q) / (Δp/p)",
+    "definitionTermes": [],
+    "explication": "Mesure la sensibilité de la quantité demandée à une variation de prix.",
+    "exemple": {
+      "enonce": "Prix +10%, quantité −5%.",
+      "donnees": {"dQ":-5,"dP":10},
+      "calcul": "-5 / 10 = -0.5",
+      "resultat": "Élasticité = -0,5 (inélastique)"
+    },
+    "pieges": [],
+    "motsCles": ["elasticite prix","elasticite","elasticite de la demande","sensibilite au prix"],
+    "officielProgramme": false
+  },
+  {
+    "id": "taux-de-chomage-bit",
+    "nom": "Taux de chômage (BIT)",
+    "categorie": "Marché du travail",
+    "chapitres": ["Quelles relations entre le diplôme, l'emploi et le salaire ?"],
+    "niveau": ["Seconde","Première"],
+    "formule": "Taux de chômage (%) = (Nombre de chômeurs / Population active) × 100",
+    "definitionTermes": [],
+    "explication": "Mesure la proportion de chômeurs parmi la population active selon la définition BIT.",
+    "exemple": {
+      "enonce": "2.8 M chômeurs, population active 30 M.",
+      "donnees": {"chomeurs":2.8,"active":30},
+      "calcul": "(2.8 / 30) × 100 ≈ 9.33",
+      "resultat": "≈ 9,3 %"
+    },
+    "pieges": ["Diviser par la population totale au lieu de la population active."],
+    "motsCles": ["taux de chomage","chomage BIT","taux chomage"],
+    "officielProgramme": false
+  },
+  {
+    "id": "taux-d-emploi",
+    "nom": "Taux d'emploi",
+    "categorie": "Marché du travail",
+    "chapitres": ["Quelles relations entre le diplôme, l'emploi et le salaire ?"],
+    "niveau": ["Seconde","Première"],
+    "formule": "Taux d'emploi (%) = (Nombre d'actifs occupés / Population 15-64) × 100",
+    "definitionTermes": [],
+    "explication": "Mesure la part des personnes en emploi dans la population en âge de travailler.",
+    "exemple": {
+      "enonce": "28 M ont un emploi sur 40 M de 15-64 ans.",
+      "donnees": {"emplois":28,"pop15_64":40},
+      "calcul": "(28 / 40) × 100 = 70",
+      "resultat": "70 %"
+    },
+    "pieges": [],
+    "motsCles": ["taux d'emploi","taux demploi"],
+    "officielProgramme": false
+  },
+  {
+    "id": "taux-d-activite",
+    "nom": "Taux d'activité",
+    "categorie": "Marché du travail",
+    "chapitres": ["Quelles relations entre le diplôme, l'emploi et le salaire ?"],
+    "niveau": ["Seconde","Première"],
+    "formule": "Taux d'activité (%) = (Population active / Population 15-64) × 100",
+    "definitionTermes": [],
+    "explication": "Mesure la part de la population en âge de travailler qui fait partie de la population active (occupés+chômeurs).",
+    "exemple": {
+      "enonce": "Population active 30 M, population 15-64 = 40 M.",
+      "donnees": {"active":30,"pop15_64":40},
+      "calcul": "(30 / 40) × 100 = 75",
+      "resultat": "75 %"
+    },
+    "pieges": ["Confondre taux d'activité et taux d'emploi."],
+    "motsCles": ["taux d'activite","population active","taux dactivite"],
+    "officielProgramme": false
+  },
+  {
+    "id": "salaire-net-a-partir-du-brut",
+    "nom": "Salaire net à partir du salaire brut (ordre de grandeur)",
+    "categorie": "Marché du travail",
+    "chapitres": ["Quelles relations entre le diplôme, l'emploi et le salaire ?"],
+    "niveau": ["Seconde","Première"],
+    "formule": "Salaire net ≈ Salaire brut × (1 − taux cotisations salariales)",
+    "definitionTermes": [],
+    "explication": "Approximation pédagogique pour estimer le salaire net à partir du brut (taux ~22-23%).",
+    "exemple": {
+      "enonce": "Salaire brut = 2000 €.",
+      "donnees": {"brut":2000,"cot":0.23},
+      "calcul": "2000 × (1 - 0.23) = 1540",
+      "resultat": "≈ 1540 € net"
+    },
+    "pieges": [],
+    "motsCles": ["salaire net","salaire brut","cotisations sociales","net a partir du brut"],
+    "officielProgramme": false
+  },
+  {
+    "id": "surplus-consommateur-producteur",
+    "nom": "Surplus du consommateur et du producteur",
+    "categorie": "Fonctionnement du marché",
+    "chapitres": ["Comment un marché concurrentiel fonctionne-t-il ?"],
+    "niveau": ["Première"],
+    "formule": "Surplus = Différence entre disposition à payer / accepter et le prix d'équilibre",
+    "definitionTermes": [],
+    "explication": "Mesure les gains à l'échange pour acheteurs et vendeurs par rapport au prix d'équilibre.",
+    "exemple": {
+      "enonce": "Consommateur prêt à payer 15 € ; prix d'équilibre 10 €.",
+      "donnees": {},
+      "calcul": "Surplus consommateur = 15 - 10 = 5",
+      "resultat": "5 €"
+    },
+    "pieges": [],
+    "motsCles": ["surplus du consommateur","surplus du producteur","gains a lechange"],
+    "officielProgramme": false
+  },
+  {
+    "id": "cout-marginal",
+    "nom": "Coût marginal et équilibre en CPP",
+    "categorie": "Fonctionnement du marché",
+    "chapitres": ["Comment un marché concurrentiel fonctionne-t-il ?"],
+    "niveau": ["Première"],
+    "formule": "Coût marginal (Cm) = ΔCoût total / ΔQuantité",
+    "definitionTermes": [],
+    "explication": "En CPP, l'offre optimale est au point où prix = coût marginal.",
+    "exemple": {
+      "enonce": "Coût total passe 500→512 en produisant une unité de plus.",
+      "donnees": {"ct1":500,"ct2":512,"dq":1},
+      "calcul": "(512 - 500) / 1 = 12",
+      "resultat": "Cm = 12 €"
+    },
+    "pieges": [],
+    "motsCles": ["cout marginal","Cm","prix = cout marginal"],
+    "officielProgramme": false
+  },
+  {
+    "id": "profit",
+    "nom": "Profit",
+    "categorie": "Fonctionnement du marché",
+    "chapitres": ["Comment un marché concurrentiel fonctionne-t-il ?"],
+    "niveau": ["Première"],
+    "formule": "Profit = Chiffre d'affaires − Coût total = (Prix − Coût moyen) × Quantité",
+    "definitionTermes": [],
+    "explication": "Mesure le gain monétaire d'une entreprise après prise en compte des coûts.",
+    "exemple": {
+      "enonce": "Vente 1000 unités à 15 €, coût moyen 11 €.",
+      "donnees": {"p":15,"cm":11,"q":1000},
+      "calcul": "(15 - 11) × 1000 = 4000",
+      "resultat": "4000 €"
+    },
+    "pieges": [],
+    "motsCles": ["profit","benefice","marge"],
+    "officielProgramme": false
+  },
+  {
+    "id": "capacite-besoin-financement",
+    "nom": "Capacité / besoin de financement",
+    "categorie": "Financement des agents",
+    "chapitres": ["Comment les agents économiques se financent-ils ?"],
+    "niveau": ["Première"],
+    "formule": "Capacité/Besoin = Revenu disponible − (Consommation finale + Investissement) = Épargne − Investissement",
+    "definitionTermes": [],
+    "explication": "Indique si un agent (ménage) dégage un excédent ou un besoin de financement.",
+    "exemple": {
+      "enonce": "Revenu disponible 40000 €, consommation 32000 €, investissement 5000 €.",
+      "donnees": {"rev":40000,"cons":32000,"inv":5000},
+      "calcul": "Epargne = 40000 - 32000 = 8000 ; capacité = 8000 - 5000 = 3000",
+      "resultat": "3 000 € (capacité)"
+    },
+    "pieges": [],
+    "motsCles": ["capacite de financement","besoin de financement","epargne moins investissement"],
+    "officielProgramme": false
+  },
+  {
+    "id": "taux-d-epargne",
+    "nom": "Taux d'épargne",
+    "categorie": "Financement des agents",
+    "chapitres": ["Comment les agents économiques se financent-ils ?"],
+    "niveau": ["Première"],
+    "formule": "Taux d'épargne (%) = (Épargne / Revenu disponible) × 100",
+    "definitionTermes": [],
+    "explication": "Part du revenu disponible qui est épargnée.",
+    "exemple": {
+      "enonce": "Épargne 8000 €, revenu disponible 40000 €.",
+      "donnees": {"epargne":8000,"rev":40000},
+      "calcul": "(8000 / 40000) × 100 = 20",
+      "resultat": "20 %"
+    },
+    "pieges": [],
+    "motsCles": ["taux d'epargne","taux depargne","propension a epargner"],
+    "officielProgramme": false
+  },
+  {
+    "id": "solde-budgetaire-etat",
+    "nom": "Solde budgétaire de l'État",
+    "categorie": "Finance publique",
+    "chapitres": ["Comment les agents économiques se financent-ils ?"],
+    "niveau": ["Première"],
+    "formule": "Solde budgétaire = Recettes publiques − Dépenses publiques",
+    "definitionTermes": [],
+    "explication": "Un solde négatif correspond à un déficit public qui doit être financé par l'emprunt.",
+    "exemple": {
+      "enonce": "Recettes 300 Md€, dépenses 340 Md€.",
+      "donnees": {"rec":300,"dep":340},
+      "calcul": "300 - 340 = -40",
+      "resultat": "-40 Md€ (déficit)"
+    },
+    "pieges": [],
+    "motsCles": ["solde budgetaire","deficit public","dette publique"],
+    "officielProgramme": false
+  },
+  {
+    "id": "creation-monetaire-credit",
+    "nom": "Création monétaire par le crédit bancaire",
+    "categorie": "Monnaie et création monétaire",
+    "chapitres": ["Qu'est-ce que la monnaie et comment est-elle créée ?"],
+    "niveau": ["Première"],
+    "formule": "Mécanisme comptable (créance actif / dépôt passif)",
+    "definitionTermes": [],
+    "explication": "Quand une banque accorde un crédit, elle crée simultanément une créance à l'actif et un dépôt au passif : la monnaie est créée ex nihilo.",
+    "exemple": {
+      "enonce": "Entreprise emprunte 100 000 € ; bilan banque : actif +100k (créance), passif +100k (dépôt).",
+      "donnees": {},
+      "calcul": "Masse monétaire augmente de 100 000 €, puis diminue quand le crédit est remboursé.",
+      "resultat": "+100 000 € créé"
+    },
+    "pieges": [],
+    "motsCles": ["creation monetaire","credit bancaire","bilan banque","monnaie ex nihilo"],
+    "officielProgramme": false
+  },
+  {
+    "id": "taux-de-participation-abstention",
+    "nom": "Taux de participation et taux d'abstention",
+    "categorie": "Sociologie et science politique",
+    "chapitres": ["Voter : une affaire individuelle ou collective ?"],
+    "niveau": ["Seconde","Première"],
+    "formule": "Taux de participation (%) = (Nombre de votants / Nombre d'inscrits) × 100 ; Abstention = 100 − Participation",
+    "definitionTermes": [],
+    "explication": "Mesure la part des inscrits qui votent et la part qui s'abstient.",
+    "exemple": {
+      "enonce": "45 M inscrits, 27 M votants.",
+      "donnees": {"inscrits":45,"votants":27},
+      "calcul": "(27/45)×100 = 60 ; abstention = 40",
+      "resultat": "Participation 60 %, Abstention 40 %"
+    },
+    "pieges": [],
+    "motsCles": ["taux de participation","taux d'abstention","participation electorale"],
+    "officielProgramme": false
+  },
+  {
+    "id": "taux-d-inscription",
+    "nom": "Taux d'inscription sur les listes électorales",
+    "categorie": "Sociologie et science politique",
+    "chapitres": ["Voter : une affaire individuelle ou collective ?"],
+    "niveau": ["Seconde","Première"],
+    "formule": "Taux d'inscription (%) = (Nombre d'inscrits / Population en âge de voter) × 100",
+    "definitionTermes": [],
+    "explication": "Mesure la proportion de la population en âge de voter qui est effectivement inscrite sur les listes.",
+    "exemple": {
+      "enonce": "45 M inscrits pour 48 M en âge de voter.",
+      "donnees": {"inscrits":45,"pop":48},
+      "calcul": "(45/48)×100 ≈ 93.75",
+      "resultat": "≈93.75 %"
+    },
+    "pieges": [],
+    "motsCles": ["taux d'inscription","listes electorales","inscription electorale"],
+    "officielProgramme": false
+  }
+]
