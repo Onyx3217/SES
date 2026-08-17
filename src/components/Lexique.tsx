@@ -1,5 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { allGlossaryTerms, EnrichedGlossaryTerm } from '../data/glossaireHelper';
+import { speakText, stopSpeaking } from '../utils/audioHelper';
+import { insertSnippetIntoNotebook } from '../data/notebookHelper';
 
 const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
   'Entreprise': { bg: '#dbeafe', text: '#1d4ed8', border: '#93c5fd' },
@@ -46,6 +48,8 @@ export default function Lexique({ onSelectCalcul }: { onSelectCalcul?: (calculId
   const [mode, setMode] = useState<'liste' | 'flashcards'>('liste');
   const [flashcardIndex, setFlashcardIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [speakingId, setSpeakingId] = useState<string | null>(null);
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
   const [favorites, setFavorites] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem('ses_glossary_favs');
@@ -55,6 +59,24 @@ export default function Lexique({ onSelectCalcul }: { onSelectCalcul?: (calculId
     }
   });
   const [showOnlyFavs, setShowOnlyFavs] = useState(false);
+
+  const handleSpeak = (term: EnrichedGlossaryTerm) => {
+    if (speakingId === term.id) {
+      stopSpeaking();
+      setSpeakingId(null);
+    } else {
+      const text = `${term.terme}. ${term.sigle ? `Sigle : ${term.sigle}.` : ''} Définition : ${term.definition}. ${term.interpretation ? `Interprétation : ${term.interpretation}.` : ''} ${term.exemple ? `Exemple : ${term.exemple}.` : ''}`;
+      speakText(text, () => setSpeakingId(null));
+      setSpeakingId(term.id);
+    }
+  };
+
+  const handleAddToNotebook = (term: EnrichedGlossaryTerm) => {
+    const contenu = `### ${term.terme} ${term.sigle ? `(${term.sigle})` : ''}\n*Catégorie : ${term.categorie}*\n\n**Définition officielle :**\n${term.definition}\n\n${term.formule ? `**Formule :** \`${term.formule}\`\n\n` : ''}${term.interpretation ? `**Interprétation SES :**\n${term.interpretation}\n\n` : ''}${term.exemple ? `**Exemple concret :**\n${term.exemple}\n\n` : ''}**Points clés :**\n${term.pointsCles.map((p) => `- ${p}`).join('\n')}`;
+    insertSnippetIntoNotebook(term.terme, contenu, term.categorie, 'Vocabulaire');
+    setToastMsg(`« ${term.terme} » ajouté à votre Notebook !`);
+    setTimeout(() => setToastMsg(null), 2500);
+  };
 
   // Save favorites to localStorage
   useEffect(() => {
@@ -117,6 +139,27 @@ export default function Lexique({ onSelectCalcul }: { onSelectCalcul?: (calculId
 
   return (
     <div style={{ display: 'grid', gap: 20 }}>
+      {/* TOAST NOTIFICATION */}
+      {toastMsg && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 24,
+            right: 24,
+            background: '#0f172a',
+            color: '#38bdf8',
+            padding: '12px 20px',
+            borderRadius: 14,
+            boxShadow: '0 10px 30px rgba(0,0,0,0.25)',
+            fontWeight: 800,
+            fontSize: '0.9rem',
+            zIndex: 9999,
+          }}
+        >
+          📥 {toastMsg}
+        </div>
+      )}
+
       {/* HEADER BANNER */}
       <div
         style={{
@@ -348,21 +391,59 @@ export default function Lexique({ onSelectCalcul }: { onSelectCalcul?: (calculId
                     ))}
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => toggleFavorite(term.id)}
-                    title={isFav ? 'Retirer des favoris' : 'Ajouter aux favoris'}
-                    style={{
-                      border: 'none',
-                      background: 'transparent',
-                      color: isFav ? '#f59e0b' : '#cbd5e1',
-                      fontSize: '1.3rem',
-                      cursor: 'pointer',
-                      padding: 2,
-                    }}
-                  >
-                    ★
-                  </button>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <button
+                      type="button"
+                      onClick={() => handleSpeak(term)}
+                      title="Écouter la définition"
+                      style={{
+                        border: '1px solid #cbd5e1',
+                        background: speakingId === term.id ? '#1e3a8a' : '#ffffff',
+                        color: speakingId === term.id ? '#ffffff' : '#0f172a',
+                        borderRadius: 8,
+                        padding: '4px 8px',
+                        fontSize: '0.78rem',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      🔊 {speakingId === term.id ? 'Stop' : 'Écouter'}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleAddToNotebook(term)}
+                      title="Ajouter à mon Notebook"
+                      style={{
+                        border: '1px solid #cbd5e1',
+                        background: '#f8fafc',
+                        color: '#0f172a',
+                        borderRadius: 8,
+                        padding: '4px 8px',
+                        fontSize: '0.78rem',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      📥 Notebook
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => toggleFavorite(term.id)}
+                      title={isFav ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+                      style={{
+                        border: 'none',
+                        background: 'transparent',
+                        color: isFav ? '#f59e0b' : '#cbd5e1',
+                        fontSize: '1.3rem',
+                        cursor: 'pointer',
+                        padding: 2,
+                      }}
+                    >
+                      ★
+                    </button>
+                  </div>
                 </div>
 
                 {/* Definition */}

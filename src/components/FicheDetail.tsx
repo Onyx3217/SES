@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { getCalculById, generateRandomExerciseFor, FicheCalcul } from '../data/calculsData';
 import { AnimatedNumberText, CountUpNumber } from './AnimatedNumber';
+import { speakText, stopSpeaking } from '../utils/audioHelper';
+import { insertSnippetIntoNotebook } from '../data/notebookHelper';
 
 const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
   'Entreprise et production': { bg: '#dbeafe', text: '#1d4ed8', border: '#93c5fd' },
@@ -41,6 +43,8 @@ export default function FicheDetail({ id, onNavigateTo }: { id: string | null; o
   const [showHint, setShowHint] = useState(false);
   const [showDetailedSolution, setShowDetailedSolution] = useState(false);
   const [dynamicExercise, setDynamicExercise] = useState<any>(null);
+  const [speaking, setSpeaking] = useState(false);
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
 
   // Initialize values when fiche changes
   useEffect(() => {
@@ -55,6 +59,8 @@ export default function FicheDetail({ id, onNavigateTo }: { id: string | null; o
       setShowHint(false);
       setShowDetailedSolution(false);
       setDynamicExercise(null);
+      stopSpeaking();
+      setSpeaking(false);
     }
   }, [id, fiche]);
 
@@ -125,12 +131,51 @@ export default function FicheDetail({ id, onNavigateTo }: { id: string | null; o
     }
   };
 
+  const handleSpeak = () => {
+    if (speaking) {
+      stopSpeaking();
+      setSpeaking(false);
+    } else {
+      const text = `${fiche.nom}. Définition : ${fiche.definitionCourte}. Formule : ${fiche.formule}. Phrase type bac : ${fiche.exempleCours.phraseLecture}`;
+      speakText(text, () => setSpeaking(false));
+      setSpeaking(true);
+    }
+  };
+
+  const handleAddToNotebook = () => {
+    const contenu = `### ${fiche.nom}\n*Catégorie : ${fiche.categorie}*\n\n**Formule :** \`${fiche.formule}\`\n\n**Définition :** ${fiche.explicationPedagogique.definition}\n\n**Phrase type BAC :**\n« ${fiche.exempleCours.phraseLecture} »\n\n**Pièges à éviter :**\n${fiche.pieges.map((p) => `- ${p}`).join('\n')}`;
+    insertSnippetIntoNotebook(fiche.nom, contenu, fiche.chapitres[0] || 'Calculs', 'Calcul');
+    setToastMsg(`« ${fiche.nom} » ajouté à votre Notebook !`);
+    setTimeout(() => setToastMsg(null), 2500);
+  };
+
   // Compute simulator result
   const simResult = fiche.simulateur.calculer(simulatorValues);
   const catColor = getCatColor(fiche.categorie);
 
   return (
     <div key={fiche.id} style={{ display: 'grid', gap: 20 }}>
+      {/* TOAST NOTIFICATION */}
+      {toastMsg && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 24,
+            right: 24,
+            background: '#0f172a',
+            color: '#38bdf8',
+            padding: '12px 20px',
+            borderRadius: 14,
+            boxShadow: '0 10px 30px rgba(0,0,0,0.25)',
+            fontWeight: 800,
+            fontSize: '0.9rem',
+            zIndex: 9999,
+          }}
+        >
+          📥 {toastMsg}
+        </div>
+      )}
+
       {/* HEADER CARD */}
       <div
         style={{
@@ -141,37 +186,74 @@ export default function FicheDetail({ id, onNavigateTo }: { id: string | null; o
           boxShadow: '0 12px 30px rgba(15, 23, 42, 0.04)',
         }}
       >
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginBottom: 12 }}>
-          <span
-            style={{
-              background: catColor.bg,
-              color: catColor.text,
-              border: `1px solid ${catColor.border}`,
-              padding: '5px 12px',
-              borderRadius: 999,
-              fontWeight: 800,
-              fontSize: '0.78rem',
-              letterSpacing: '0.04em',
-            }}
-          >
-            {fiche.categorie}
-          </span>
-          {fiche.niveau.map((lvl) => (
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
             <span
-              key={lvl}
               style={{
-                background: lvl === 'Seconde' ? '#ecfeff' : '#f5f3ff',
-                color: lvl === 'Seconde' ? '#0891b2' : '#6d28d9',
-                border: `1px solid ${lvl === 'Seconde' ? '#a5f3fc' : '#ddd6fe'}`,
-                padding: '5px 10px',
+                background: catColor.bg,
+                color: catColor.text,
+                border: `1px solid ${catColor.border}`,
+                padding: '5px 12px',
                 borderRadius: 999,
-                fontWeight: 700,
-                fontSize: '0.76rem',
+                fontWeight: 800,
+                fontSize: '0.78rem',
+                letterSpacing: '0.04em',
               }}
             >
-              🎓 {lvl}
+              {fiche.categorie}
             </span>
-          ))}
+            {fiche.niveau.map((lvl) => (
+              <span
+                key={lvl}
+                style={{
+                  background: lvl === 'Seconde' ? '#ecfeff' : '#f5f3ff',
+                  color: lvl === 'Seconde' ? '#0891b2' : '#6d28d9',
+                  border: `1px solid ${lvl === 'Seconde' ? '#a5f3fc' : '#ddd6fe'}`,
+                  padding: '5px 10px',
+                  borderRadius: 999,
+                  fontWeight: 700,
+                  fontSize: '0.76rem',
+                }}
+              >
+                🎓 {lvl}
+              </span>
+            ))}
+          </div>
+
+          <div style={{ display: 'flex', gap: 6 }}>
+            <button
+              type="button"
+              onClick={handleSpeak}
+              style={{
+                border: '1px solid #cbd5e1',
+                background: speaking ? '#0284c7' : '#ffffff',
+                color: speaking ? '#ffffff' : '#0f172a',
+                borderRadius: 10,
+                padding: '6px 12px',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+              }}
+            >
+              🔊 {speaking ? 'Arrêter' : 'Écouter'}
+            </button>
+            <button
+              type="button"
+              onClick={handleAddToNotebook}
+              style={{
+                border: '1px solid #cbd5e1',
+                background: '#ffffff',
+                color: '#0f172a',
+                borderRadius: 10,
+                padding: '6px 12px',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+              }}
+            >
+              📥 Notebook
+            </button>
+          </div>
         </div>
 
         <h2 style={{ margin: '0 0 10px', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', color: '#0f172a', fontWeight: 800 }}>
