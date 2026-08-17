@@ -3,11 +3,14 @@ export type SesDefinition = {
   terme: string;
   sigle?: string;
   categorie: string;
+  niveau?: ('Seconde' | 'Première' | 'Tous')[];
+  discipline?: 'Science économique' | 'Sociologie et science politique' | 'Regards croisés' | 'Méthodes';
   definition: string;
   formule?: string;
   interpretation: string;
   exemple: string;
   pointsCles: string[];
+  liens?: string[];
 };
 
 export const sesGlossaire: SesDefinition[] = [

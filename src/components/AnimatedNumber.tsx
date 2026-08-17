@@ -29,12 +29,12 @@ export function CountUpNumber({
   value,
   decimals = 0,
   duration = 850,
-  start = 1,
+  start = 0,
   useGrouping = false,
   className,
   style,
 }: CountUpNumberProps) {
-  const initialValue = value === 0 ? 0 : start;
+  const initialValue = start;
   const [displayValue, setDisplayValue] = React.useState(initialValue);
 
   React.useEffect(() => {

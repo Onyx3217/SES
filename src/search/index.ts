@@ -1,7 +1,6 @@
 import Fuse from 'fuse.js';
-import rawData from '../data/calculs.json';
-
-type Fiche = typeof rawData[number];
+import { calculsCatalog, FicheCalcul } from '../data/calculsData';
+import { allGlossaryTerms, EnrichedGlossaryTerm } from '../data/glossaireHelper';
 
 function normalize(s: string): string {
   return s
@@ -13,27 +12,52 @@ function normalize(s: string): string {
     .trim();
 }
 
-const fuse = new Fuse(rawData as Fiche[], {
+const fuseCalculs = new Fuse(calculsCatalog, {
   keys: [
-    { name: 'nom', weight: 0.5 },
-    { name: 'motsCles', weight: 0.35 },
+    { name: 'nom', weight: 0.4 },
+    { name: 'motsCles', weight: 0.3 },
+    { name: 'formule', weight: 0.15 },
     { name: 'chapitres', weight: 0.1 },
-    { name: 'definitionCourte', weight: 0.05 }
+    { name: 'definitionCourte', weight: 0.05 },
   ],
   threshold: 0.38,
   ignoreLocation: true,
   includeScore: true,
-  useExtendedSearch: true,
-  isCaseSensitive: false
+  isCaseSensitive: false,
 });
 
-export function rechercher(query: string, maxResults = 8) {
+const fuseGlossaire = new Fuse(allGlossaryTerms, {
+  keys: [
+    { name: 'terme', weight: 0.45 },
+    { name: 'sigle', weight: 0.25 },
+    { name: 'pointsCles', weight: 0.15 },
+    { name: 'categorie', weight: 0.1 },
+    { name: 'definition', weight: 0.05 },
+  ],
+  threshold: 0.38,
+  ignoreLocation: true,
+  includeScore: true,
+  isCaseSensitive: false,
+});
+
+export function rechercherCalculs(query: string, maxResults = 8): FicheCalcul[] {
   const q = normalize(query);
-  if (!q) return [] as Fiche[];
-  const results = fuse.search(q, { limit: maxResults });
-  return results.map(r => r.item);
+  if (!q) return [];
+  const results = fuseCalculs.search(q, { limit: maxResults });
+  return results.map((r) => r.item);
 }
 
-export function getAll() {
-  return rawData as Fiche[];
+export function rechercherGlossaire(query: string, maxResults = 8): EnrichedGlossaryTerm[] {
+  const q = normalize(query);
+  if (!q) return [];
+  const results = fuseGlossaire.search(q, { limit: maxResults });
+  return results.map((r) => r.item);
+}
+
+export function rechercher(query: string, maxResults = 8) {
+  return rechercherCalculs(query, maxResults);
+}
+
+export function getAllCalculs() {
+  return calculsCatalog;
 }

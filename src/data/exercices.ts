@@ -1,160 +1,271 @@
-import rawData from './calculs.json';
+import { calculsCatalog, generateRandomExerciseFor } from './calculsData';
+import { allGlossaryTerms } from './glossaireHelper';
 
-const fiches = rawData as any[];
-
-type ExerciseChoice = {
+export type ExerciseChoice = {
   id: string;
   label: string;
 };
 
 export type Exercise = {
   id: string;
+  type: 'calcul' | 'qcm';
   theme: string;
+  niveau: ('Seconde' | 'Première')[];
   question: string;
+  contexte?: string;
   choices: ExerciseChoice[];
   answer: string;
   explanation: string;
+  pointsCles?: string[];
 };
 
 function shuffle<T>(items: T[]): T[] {
   const copy = [...items];
-  for (let index = copy.length - 1; index > 0; index -= 1) {
-    const randomIndex = Math.floor(Math.random() * (index + 1));
-    [copy[index], copy[randomIndex]] = [copy[randomIndex], copy[index]];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
 }
 
-function formatNumber(value: number): string {
-  return Number.isInteger(value) ? String(value) : value.toFixed(1).replace('.', ',');
-}
+// ---------------- DYNAMIC CALCULATION EXERCISES ----------------
+export function generateCalculationExercise(): Exercise {
+  const calculs = calculsCatalog;
+  const picked = calculs[Math.floor(Math.random() * calculs.length)];
+  const randomData = generateRandomExerciseFor(picked.id);
 
-function buildProportionExercise(): Exercise {
-  const total = 180 + Math.floor(Math.random() * 520);
-  const part = Math.floor(total * (0.2 + Math.random() * 0.45));
-  const percent = Math.round((part / total) * 100);
-  const answer = `${percent} %`;
-
-  return {
-    id: `proportion-${Date.now()}-${Math.random()}`,
-    theme: 'Statistiques',
-    question: `Dans un groupe de ${total} élèves, ${part} sont en filière générale. Quelle est la proportion en % ?`,
-    choices: shuffle([
-      `${percent} %`,
-      `${Math.max(5, percent - 10)} %`,
-      `${percent + 15} %`,
-      `${Math.max(5, percent - 20)} %`,
-    ]).map((label, index) => ({ id: `p-${index}`, label })),
-    answer,
-    explanation: `On calcule : (${part} / ${total}) × 100 = ${percent} %.`,
-  };
-}
-
-function buildVariationExercise(): Exercise {
-  const depart = 60 + Math.floor(Math.random() * 250);
-  const arrivee = Math.round(depart * (1 + (0.08 + Math.random() * 0.35)));
-  const taux = Math.round(((arrivee - depart) / depart) * 100);
-
-  return {
-    id: `variation-${Date.now()}-${Math.random()}`,
-    theme: 'Taux de variation',
-    question: `Une valeur passe de ${depart} à ${arrivee}. Quel est le taux de variation ?`,
-    choices: shuffle([
-      `+${taux} %`,
-      `+${Math.max(5, taux - 10)} %`,
-      `-${taux} %`,
-      `+${taux + 10} %`,
-    ]).map((label, index) => ({ id: `v-${index}`, label })),
-    answer: `+${taux} %`,
-    explanation: `Taux = ((${arrivee} - ${depart}) / ${depart}) × 100 = ${taux} %.`,
-  };
-}
-
-function buildMoyenneExercise(): Exercise {
-  const values = [10, 12, 13, 15, 9, 11, 14, 16].sort(() => Math.random() - 0.5).slice(0, 5);
-  const moyenne = values.reduce((sum, value) => sum + value, 0) / values.length;
-  const rounded = Number(moyenne.toFixed(1));
-  const answer = formatNumber(rounded);
-
-  return {
-    id: `moyenne-${Date.now()}-${Math.random()}`,
-    theme: 'Moyenne',
-    question: `Calculer la moyenne des notes : ${values.join(', ')}.`,
-    choices: shuffle([
-      answer,
-      formatNumber(Number((rounded + 1.2).toFixed(1))),
-      formatNumber(Number((rounded - 1.2).toFixed(1))),
-      formatNumber(Number((rounded + 2.8).toFixed(1))),
-    ]).map((label, index) => ({ id: `m-${index}`, label })),
-    answer,
-    explanation: `La moyenne est : (${values.join(' + ')}) / ${values.length} = ${answer}.`,
-  };
-}
-
-function buildCoefficientExercise(): Exercise {
-  const depart = 40 + Math.floor(Math.random() * 90);
-  const arrivee = Math.round(depart * (1.1 + Math.random() * 0.9));
-  const coeff = (arrivee / depart).toFixed(2).replace('.', ',');
-
-  return {
-    id: `coeff-${Date.now()}-${Math.random()}`,
-    theme: 'Coefficient multiplicateur',
-    question: `Un prix passe de ${depart} € à ${arrivee} €. Quel est le coefficient multiplicateur ?`,
-    choices: shuffle([
-      coeff,
-      (Number(coeff.replace(',', '.')) * 0.9).toFixed(2).replace('.', ','),
-      (Number(coeff.replace(',', '.')) + 0.5).toFixed(2).replace('.', ','),
-      (Number(coeff.replace(',', '.')) / 2).toFixed(2).replace('.', ','),
-    ]).map((label, index) => ({ id: `c-${index}`, label })),
-    answer: coeff,
-    explanation: `Coefficient = ${arrivee} / ${depart} = ${coeff}.`,
-  };
-}
-
-function buildIndiceExercise(): Exercise {
-  const ref = 100 + Math.floor(Math.random() * 120);
-  const valeur = Math.round(ref * (1.1 + Math.random() * 0.5));
-  const indice = Math.round((valeur / ref) * 100);
-
-  return {
-    id: `indice-${Date.now()}-${Math.random()}`,
-    theme: 'Indice',
-    question: `Un indice de référence vaut ${ref}. La valeur actuelle vaut ${valeur}. Quel est l’indice en base 100 ?`,
-    choices: shuffle([
-      `${indice}`,
-      `${indice + 10}`,
-      `${Math.max(50, indice - 15)}`,
-      `${indice - 10}`,
-    ]).map((label, index) => ({ id: `i-${index}`, label })),
-    answer: `${indice}`,
-    explanation: `Indice = (${valeur} / ${ref}) × 100 = ${indice}.`,
-  };
-}
-
-export function generateExerciseSet(count = 5): Exercise[] {
-  const builders = [
-    buildProportionExercise,
-    buildVariationExercise,
-    buildMoyenneExercise,
-    buildCoefficientExercise,
-    buildIndiceExercise,
-  ];
-
-  const exercises = shuffle(builders).slice(0, Math.min(count, builders.length)).map((builder) => builder());
-
-  while (exercises.length < count) {
-    const builder = builders[Math.floor(Math.random() * builders.length)];
-    exercises.push(builder());
+  if (!randomData) {
+    return {
+      id: `calc-${Date.now()}-${Math.random()}`,
+      type: 'calcul',
+      theme: picked.categorie,
+      niveau: picked.niveau,
+      question: picked.exercicePratique.question,
+      contexte: picked.exercicePratique.enonce,
+      choices: shuffle([
+        `${picked.exercicePratique.reponseAttendue} ${picked.exercicePratique.unite}`,
+        `${Number(picked.exercicePratique.reponseAttendue) * 1.2} ${picked.exercicePratique.unite}`,
+        `${Math.max(0, Number(picked.exercicePratique.reponseAttendue) * 0.8)} ${picked.exercicePratique.unite}`,
+        `${Number(picked.exercicePratique.reponseAttendue) + 10} ${picked.exercicePratique.unite}`,
+      ]).map((label, idx) => ({ id: `c-${idx}`, label })),
+      answer: `${picked.exercicePratique.reponseAttendue} ${picked.exercicePratique.unite}`,
+      explanation: `${picked.exercicePratique.resolutionDetaillee.calculPose} -> Phrase BAC : ${picked.exercicePratique.resolutionDetaillee.phraseLectureBac}`,
+    };
   }
 
-  return exercises.slice(0, count);
+  const correctAns = `${randomData.reponseAttendue} ${randomData.unite}`.trim();
+  const num = typeof randomData.reponseAttendue === 'number' ? randomData.reponseAttendue : parseFloat(String(randomData.reponseAttendue));
+
+  const wrong1 = `${(num * 1.25).toFixed(1).replace('.0', '')} ${randomData.unite}`.trim();
+  const wrong2 = `${(num * 0.75).toFixed(1).replace('.0', '')} ${randomData.unite}`.trim();
+  const wrong3 = `${(num + (num >= 0 ? 10 : -10)).toFixed(1).replace('.0', '')} ${randomData.unite}`.trim();
+
+  return {
+    id: `calc-${picked.id}-${Date.now()}-${Math.random()}`,
+    type: 'calcul',
+    theme: picked.categorie,
+    niveau: picked.niveau,
+    question: randomData.question,
+    contexte: randomData.enonce,
+    choices: shuffle([correctAns, wrong1, wrong2, wrong3]).map((label, idx) => ({
+      id: `c-${idx}-${Date.now()}`,
+      label,
+    })),
+    answer: correctAns,
+    explanation: `${randomData.resolution.calculPose} -> « ${randomData.resolution.phraseLectureBac} »`,
+  };
 }
 
-export function getQuickConcepts() {
-  return fiches.slice(0, 8).map((fiche: any) => ({
-    id: fiche.id,
-    nom: fiche.nom,
-    categorie: fiche.categorie,
-    niveau: fiche.niveau,
-  }));
+// ---------------- OFFICIAL CURRICULUM QCM QUESTIONS ----------------
+export const qcmBank: Exercise[] = [
+  // SECONDE
+  {
+    id: 'qcm-sec-1',
+    type: 'qcm',
+    theme: 'Production et entreprise',
+    niveau: ['Seconde', 'Première'],
+    question: "Quelle est la différence fondamentale entre le chiffre d'affaires et la valeur ajoutée ?",
+    choices: [
+      { id: '1', label: "La valeur ajoutée retire les consommations intermédiaires du chiffre d'affaires." },
+      { id: '2', label: "Le chiffre d'affaires retire les impôts de la valeur ajoutée." },
+      { id: '3', label: "C'est la même chose exprimée en pourcentages." },
+      { id: '4', label: "La valeur ajoutée est toujours supérieure au chiffre d'affaires." },
+    ],
+    answer: "La valeur ajoutée retire les consommations intermédiaires du chiffre d'affaires.",
+    explanation: "La valeur ajoutée mesure la richesse réellement créée par l'entreprise : VA = CA − Consommations intermédiaires.",
+  },
+  {
+    id: 'qcm-sec-2',
+    type: 'qcm',
+    theme: 'Socialisation',
+    niveau: ['Seconde', 'Première'],
+    question: "Qu'appelle-t-on la 'socialisation primaire' en sociologie ?",
+    choices: [
+      { id: '1', label: "La socialisation qui se déroule pendant l'enfance et l'adolescence, principalement via la famille et l'école." },
+      { id: '2', label: "La socialisation professionnelle qui a lieu au travail à l'âge adulte." },
+      { id: '3', label: "L'apprentissage des règles de droit au tribunal." },
+      { id: '4', label: "La première inscription sur les listes électorales à 18 ans." },
+    ],
+    answer: "La socialisation qui se déroule pendant l'enfance et l'adolescence, principalement via la famille et l'école.",
+    explanation: "La socialisation primaire s'effectue durant l'enfance. Elle structure durablement les normes, valeurs et dispositions de l'individu.",
+  },
+  {
+    id: 'qcm-sec-3',
+    type: 'qcm',
+    theme: 'Marché et prix',
+    niveau: ['Seconde', 'Première'],
+    question: "Sur un marché de biens, si la demande des consommateurs augmente alors que l'offre reste inchangée, que devient le prix d'équilibre ?",
+    choices: [
+      { id: '1', label: "Le prix d'équilibre augmente." },
+      { id: '2', label: "Le prix d'équilibre diminue." },
+      { id: '3', label: "Le prix d'équilibre reste strictement identique." },
+      { id: '4', label: "L'offre disparaît immédiatement." },
+    ],
+    answer: "Le prix d'équilibre augmente.",
+    explanation: "Une hausse de la demande crée une tension sur les quantités disponibles : pour rétablir l'équilibre, le prix de marché augmente.",
+  },
+  {
+    id: 'qcm-sec-4',
+    type: 'qcm',
+    theme: 'Science politique',
+    niveau: ['Seconde', 'Première'],
+    question: "Qu'est-ce qu'un scrutin majoritaire à deux tours ?",
+    choices: [
+      { id: '1', label: "Un mode de scrutin où le candidat obtenant la majorité des voix au second tour remporte le siège." },
+      { id: '2', label: "Un système qui distribue les sièges proportionnellement au pourcentage de voix." },
+      { id: '3', label: "Un vote obligatoire sous peine d'amende." },
+      { id: '4', label: "Un tirage au sort parmi les citoyens majeurs." },
+    ],
+    answer: "Un mode de scrutin où le candidat obtenant la majorité des voix au second tour remporte le siège.",
+    explanation: "Le scrutin majoritaire favorise le dégagement d'une majorité claire en attribuant le siège au candidat arrivé en tête.",
+  },
+  {
+    id: 'qcm-sec-5',
+    type: 'qcm',
+    theme: 'Emploi et travail',
+    niveau: ['Seconde', 'Première'],
+    question: "Qui fait partie de la 'population active' selon l'INSEE et le BIT ?",
+    choices: [
+      { id: '1', label: "Les personnes occupant un emploi rémunéré ET les personnes au chômage en recherche active." },
+      { id: '2', label: "Uniquement les salariés en contrat à durée indéterminée (CDI)." },
+      { id: '3', label: "L'ensemble de tous les habitants d'un pays y compris les retraités et les enfants." },
+      { id: '4', label: "Uniquement les travailleurs indépendants et chefs d'entreprise." },
+    ],
+    answer: "Les personnes occupant un emploi rémunéré ET les personnes au chômage en recherche active.",
+    explanation: "Population active = Actifs occupés (en emploi) + Chômeurs (sans emploi à la recherche d'un travail).",
+  },
+
+  // PREMIÈRE
+  {
+    id: 'qcm-prem-1',
+    type: 'qcm',
+    theme: 'Marché concurrentiel',
+    niveau: ['Première'],
+    question: "En Concurrence Pure et Parfaite (CPP), à quelle condition une entreprise maximise-t-elle son profit à court terme ?",
+    choices: [
+      { id: '1', label: "Lorsque le Prix de marché est égal au Coût marginal (P = Cm)." },
+      { id: '2', label: "Lorsque le Prix de marché est égal au Chiffre d'affaires." },
+      { id: '3', label: "Lorsque les coûts fixes sont nuls." },
+      { id: '4', label: "Lorsque le coût moyen est au maximum." },
+    ],
+    answer: "Lorsque le Prix de marché est égal au Coût marginal (P = Cm).",
+    explanation: "Tant que le prix est supérieur au coût de la dernière unité (P > Cm), produire rapporte plus qu'elle ne coûte. Le profit est maximal pour Prix = Coût marginal.",
+  },
+  {
+    id: 'qcm-prem-2',
+    type: 'qcm',
+    theme: 'Défaillances de marché',
+    niveau: ['Première'],
+    question: "Qu'est-ce qu'une 'externalité négative' en économie ?",
+    choices: [
+      { id: '1', label: "L'impact négatif de l'activité d'un agent sur le bien-être d'un tiers sans compensation financière marchande." },
+      { id: '2', label: "Une amende infligée par un tribunal de commerce." },
+      { id: '3', label: "Une perte comptable déclarée au bilan de l'entreprise." },
+      { id: '4', label: "Une hausse générale des taux d'intérêt par la banque centrale." },
+    ],
+    answer: "L'impact négatif de l'activité d'un agent sur le bien-être d'un tiers sans compensation financière marchande.",
+    explanation: "La pollution est l'exemple type : l'usine pollue la rivière sans payer le coût infligé aux riverains, d'où la nécessité d'une taxe pigouvienne pour l'internaliser.",
+  },
+  {
+    id: 'qcm-prem-3',
+    type: 'qcm',
+    theme: 'Monnaie et financement',
+    niveau: ['Première'],
+    question: "Comment la majeure partie de la monnaie en circulation est-elle créée dans l'économie moderne ?",
+    choices: [
+      { id: '1', label: "Par les banques commerciales lorsqu'elles accordent des crédits aux ménages et entreprises." },
+      { id: '2', label: "Uniquement par l'impression de billets de banque à l'imprimerie de la Banque centrale." },
+      { id: '3', label: "Par l'extraction d'or dans les mines." },
+      { id: '4', label: "Par la collecte des impôts par le Trésor public." },
+    ],
+    answer: "Par les banques commerciales lorsqu'elles accordent des crédits aux ménages et entreprises.",
+    explanation: "C'est le principe 'les crédits font les dépôts' : la monnaie scripturale est créée ex nihilo lors d'un prêt et détruite lors du remboursement du capital.",
+  },
+  {
+    id: 'qcm-prem-4',
+    type: 'qcm',
+    theme: 'Engagement politique',
+    niveau: ['Première'],
+    question: "Qu'explique le 'paradoxe de l'action collective' mis en évidence par Mancur Olson ?",
+    choices: [
+      { id: '1', label: "Un individu rationnel a intérêt à se comporter en 'passager clandestin' en profitant des gains de l'action sans en supporter le coût." },
+      { id: '2', label: "Les citoyens votent toujours contre leurs intérêts économiques." },
+      { id: '3', label: "Plus un groupe est grand, plus ses membres sont solidaires." },
+      { id: '4', label: "Les grèves augmentent toujours le pouvoir d'achat immédiatement." },
+    ],
+    answer: "Un individu rationnel a intérêt à se comporter en 'passager clandestin' en profitant des gains de l'action sans en supporter le coût.",
+    explanation: "Pour surmonter ce paradoxe, les organisations utilisent des incitations sélectives ou procurent des rétributions symboliques aux militants.",
+  },
+  {
+    id: 'qcm-prem-5',
+    type: 'qcm',
+    theme: 'Sociologie des réseaux',
+    niveau: ['Première'],
+    question: "Selon le sociologue Mark Granovetter, pourquoi les 'liens faibles' sont-ils particulièrement efficaces pour trouver un emploi ?",
+    choices: [
+      { id: '1', label: "Parce qu'ils servent de ponts vers des réseaux sociaux différents et apportent des informations nouvelles et inédites." },
+      { id: '2', label: "Parce que les amis proches refusent souvent d'aider." },
+      { id: '3', label: "Parce qu'ils coûtent moins cher à entretenir." },
+      { id: '4', label: "Parce qu'ils garantissent un contrat en CDI." },
+    ],
+    answer: "Parce qu'ils servent de ponts vers des réseaux sociaux différents et apportent des informations nouvelles et inédites.",
+    explanation: "Les liens forts (famille, amis très proches) partagent souvent les mêmes informations, alors que les connaissances éloignées (liens faibles) ouvrent des opportunités professionnelles nouvelles.",
+  },
+  {
+    id: 'qcm-prem-6',
+    type: 'qcm',
+    theme: 'Protection sociale',
+    niveau: ['Première'],
+    question: "Quelle est la caractéristique principale d'une protection sociale reposant sur une logique d'assurance (modèle bismarckien) ?",
+    choices: [
+      { id: '1', label: "Les prestations sont financées par des cotisations sur le travail et réservées aux travailleurs cotisants." },
+      { id: '2', label: "Les aides sont financées par l'impôt et versées sous conditions de ressources sans avoir cotisé." },
+      { id: '3', label: "Tous les soins sont gratuits sans aucune condition." },
+      { id: '4', label: "Chaque citoyen doit obligatoirement souscrire une assurance privée à but lucratif." },
+    ],
+    answer: "Les prestations sont financées par des cotisations sur le travail et réservées aux travailleurs cotisants.",
+    explanation: "La logique d'assurance (Bismarck) protège contre la perte de revenu liée aux risques sociaux en contrepartie du paiement de cotisations.",
+  },
+];
+
+export function generateExerciseSet(count = 5, filterNiveau: 'Tous' | 'Seconde' | 'Première' = 'Tous', modeFilter: 'tous' | 'calculs' | 'qcm' = 'tous'): Exercise[] {
+  const pool: Exercise[] = [];
+
+  if (modeFilter === 'calculs' || modeFilter === 'tous') {
+    // Add dynamic calculation exercises
+    for (let i = 0; i < count; i++) {
+      pool.push(generateCalculationExercise());
+    }
+  }
+
+  if (modeFilter === 'qcm' || modeFilter === 'tous') {
+    // Add QCM exercises
+    const eligibleQcm = qcmBank.filter((q) => {
+      if (filterNiveau === 'Tous') return true;
+      return q.niveau.includes(filterNiveau);
+    });
+    pool.push(...shuffle(eligibleQcm));
+  }
+
+  return shuffle(pool).slice(0, count);
 }
