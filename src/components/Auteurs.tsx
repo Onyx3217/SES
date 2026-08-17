@@ -33,8 +33,20 @@ export default function Auteurs({ onNavigateToNotebook }: { onNavigateToNotebook
     }
   };
 
-  const handleCopyCitation = (citation: string, id: string) => {
-    navigator.clipboard.writeText(citation);
+  const handleCopyCitation = async (citation: string, id: string) => {
+    try {
+      await navigator.clipboard.writeText(citation);
+    } catch {
+      // Fallback for non-HTTPS / older browsers
+      const ta = document.createElement('textarea');
+      ta.value = citation;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
   };

@@ -23,6 +23,13 @@ export default function PomodoroTimer() {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMsg(msg);
+    setIsExpanded(true);
+    setTimeout(() => setToastMsg(null), 5000);
+  };
 
   useEffect(() => {
     let interval: any = null;
@@ -33,11 +40,11 @@ export default function PomodoroTimer() {
     } else if (timeLeft === 0) {
       playChime();
       if (mode === 'focus') {
-        alert('🎉 Session Focus terminée ! Prenez 5 minutes de pause.');
+        showToast('🎉 Session Focus terminée ! Prenez 5 min de pause.');
         setMode('break');
         setTimeLeft(5 * 60);
       } else {
-        alert('⏰ Pause terminée ! Prêt pour une nouvelle session de révision ?');
+        showToast('⏰ Pause terminée ! Prêt pour réviser ?');
         setMode('focus');
         setTimeLeft(25 * 60);
       }
@@ -113,6 +120,12 @@ export default function PomodoroTimer() {
           <div style={{ textAlign: 'center', fontSize: '2.4rem', fontWeight: 900, fontFamily: 'Consolas, monospace' }}>
             {timeFormatted}
           </div>
+
+          {toastMsg && (
+            <div style={{ padding: '8px 12px', borderRadius: 10, background: 'rgba(255,255,255,0.15)', fontSize: '0.82rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.4 }}>
+              {toastMsg}
+            </div>
+          )}
 
           <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
             <button

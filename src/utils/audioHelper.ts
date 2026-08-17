@@ -4,7 +4,6 @@ let currentUtterance: SpeechSynthesisUtterance | null = null;
 
 export function speakText(text: string, onEnd?: () => void) {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
-    alert("La synthèse vocale n'est pas supportée par votre navigateur.");
     return;
   }
 
@@ -24,25 +23,33 @@ export function speakText(text: string, onEnd?: () => void) {
   utterance.rate = 1.0;
   utterance.pitch = 1.0;
 
-  // Try to pick a French voice
-  const voices = window.speechSynthesis.getVoices();
-  const frenchVoice = voices.find((v) => v.lang.startsWith('fr') || v.lang.includes('FR'));
-  if (frenchVoice) {
-    utterance.voice = frenchVoice;
-  }
-
   utterance.onend = () => {
     currentUtterance = null;
     onEnd?.();
   };
-
   utterance.onerror = () => {
     currentUtterance = null;
     onEnd?.();
   };
 
   currentUtterance = utterance;
-  window.speechSynthesis.speak(utterance);
+
+  // Chrome loads voices asynchronously — wait for them if not yet available
+  const trySpeak = () => {
+    const voices = window.speechSynthesis.getVoices();
+    const frenchVoice = voices.find((v) => v.lang.startsWith('fr') || v.lang.includes('FR'));
+    if (frenchVoice) utterance.voice = frenchVoice;
+    window.speechSynthesis.speak(utterance);
+  };
+
+  if (window.speechSynthesis.getVoices().length > 0) {
+    trySpeak();
+  } else {
+    window.speechSynthesis.onvoiceschanged = () => {
+      window.speechSynthesis.onvoiceschanged = null;
+      trySpeak();
+    };
+  }
 }
 
 export function stopSpeaking() {

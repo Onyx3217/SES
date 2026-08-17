@@ -16,9 +16,12 @@ export default function Notebook({ onNavigateToCalcul }: { onNavigateToCalcul?: 
   const [editContenu, setEditContenu] = useState('');
   const [editTags, setEditTags] = useState('');
 
-  // Reload notes when storage updates
+  // Reload notes when navigated back to this view, or when localStorage is updated from another module
   useEffect(() => {
     setNotes(getStoredNotes());
+    const onStorage = () => setNotes(getStoredNotes());
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
   }, []);
 
   const selectedNote = useMemo(() => {
@@ -100,10 +103,20 @@ export default function Notebook({ onNavigateToCalcul }: { onNavigateToCalcul?: 
     setNotes(updated);
   };
 
-  const handleCopyMarkdown = (note: NoteItem) => {
+  const handleCopyMarkdown = async (note: NoteItem) => {
     const text = `# ${note.titre}\n*Chapitre : ${note.chapitre || 'Général'}*\n\n${note.contenu}`;
-    navigator.clipboard.writeText(text);
-    alert('Note copiée dans le presse-papier au format Markdown !');
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
   };
 
   const handleExportAll = () => {
