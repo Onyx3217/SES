@@ -18,9 +18,9 @@ import PomodoroTimer from './components/PomodoroTimer';
 import { CountUpNumber } from './components/AnimatedNumber';
 
 const views = [
-  { key: 'calculs', label: 'Calculs & Méthodes', icon: '🧮' },
-  { key: 'notebook', label: 'Mon Notebook', icon: '📓' },
-  { key: 'lexique', label: 'Lexique SES', icon: '📖' },
+  { key: 'notebook', label: 'Gemini Notebook', icon: '✨', badge: 'IA' },
+  { key: 'calculs', label: 'Calculs & Formules', icon: '🧮' },
+  { key: 'lexique', label: 'Lexique & Vocabulaire', icon: '📖' },
   { key: 'auteurs', label: 'Grands Auteurs', icon: '🏛️' },
   { key: 'mecanismes', label: 'Schémas Causaux', icon: '🔄' },
   { key: 'methodeBac', label: 'Méthode Bac', icon: '🧭' },
@@ -44,7 +44,7 @@ const popularQuickIds = [
 
 function App() {
   const [selectedCalculId, setSelectedCalculId] = useState<string | null>('proportion');
-  const [currentView, setCurrentView] = useState<View>('calculs');
+  const [currentView, setCurrentView] = useState<View>('notebook');
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
     try {
       return localStorage.getItem('ses_dark_mode') === 'true';
@@ -75,7 +75,14 @@ function App() {
   };
 
   return (
-    <div style={{ background: isDarkMode ? '#090d16' : '#f8fafc', color: isDarkMode ? '#f1f5f9' : '#0f172a', minHeight: '100vh', transition: 'background 0.25s ease' }}>
+    <div
+      style={{
+        background: isDarkMode ? '#090d16' : '#f8fafc',
+        color: isDarkMode ? '#f1f5f9' : '#0f172a',
+        minHeight: '100vh',
+        transition: 'background 0.25s ease',
+      }}
+    >
       <style>{`
         * {
           box-sizing: border-box;
@@ -85,19 +92,20 @@ function App() {
           margin: 0;
           min-height: 100%;
           font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          line-height: 1.5;
         }
         button, input, textarea {
           font-family: inherit;
         }
         @keyframes pageFadeIn {
-          from { opacity: 0; transform: translateY(8px); }
+          from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
         }
         .view-container {
-          animation: pageFadeIn 260ms cubic-bezier(0.2, 0.9, 0.3, 1);
+          animation: pageFadeIn 280ms cubic-bezier(0.16, 1, 0.3, 1);
         }
         .chip-nav {
-          transition: all 0.18s ease;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .chip-nav:active {
           transform: scale(0.96);
@@ -110,47 +118,48 @@ function App() {
           bottom: 0;
           left: 0;
           right: 0;
-          background: ${isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)'};
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border-top: 1px solid ${isDarkMode ? '#1e293b' : '#e2e8f0'};
-          padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px));
+          background: ${isDarkMode ? 'rgba(15, 23, 42, 0.96)' : 'rgba(255, 255, 255, 0.96)'};
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border-top: 1.5px solid ${isDarkMode ? '#1e293b' : '#e2e8f0'};
+          padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
           z-index: 1000;
           overflow-x: auto;
-          gap: 6px;
-          box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+          gap: 8px;
+          box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.12);
         }
 
         .bottom-nav-item {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 3px;
+          gap: 4px;
           border: none;
           background: none;
           color: ${isDarkMode ? '#94a3b8' : '#64748b'};
-          font-size: 0.7rem;
+          font-size: 0.72rem;
           font-weight: 800;
           cursor: pointer;
-          padding: 6px 10px;
-          border-radius: 12px;
+          padding: 8px 12px;
+          border-radius: 16px;
           white-space: nowrap;
-          transition: all 0.15s ease;
+          transition: all 0.2s ease;
           flex: 0 0 auto;
         }
         .bottom-nav-item.active {
           color: ${isDarkMode ? '#38bdf8' : '#1d4ed8'};
           background: ${isDarkMode ? '#1e293b' : '#eff6ff'};
+          transform: translateY(-2px);
         }
         .bottom-nav-item .icon {
-          font-size: 1.2rem;
+          font-size: 1.3rem;
         }
 
         .desktop-nav {
           display: flex;
         }
 
-        @media (max-width: 960px) {
+        @media (max-width: 1024px) {
           .desktop-nav {
             display: none !important;
           }
@@ -158,7 +167,7 @@ function App() {
             display: flex;
           }
           .main-content-wrapper {
-            padding-bottom: 84px !important;
+            padding: 16px 14px 100px !important;
           }
           .calculs-layout {
             grid-template-columns: 1fr !important;
@@ -166,42 +175,42 @@ function App() {
         }
       `}</style>
 
-      <div className="main-content-wrapper" style={{ minHeight: '100vh', padding: '16px 16px 40px' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+      <div className="main-content-wrapper" style={{ minHeight: '100vh', padding: '24px 28px 60px' }}>
+        <div style={{ maxWidth: 1380, margin: '0 auto' }}>
           {/* TOP HEADER */}
           <header
             style={{
               display: 'flex',
               flexWrap: 'wrap',
               justifyContent: 'space-between',
-              gap: 14,
+              gap: 18,
               alignItems: 'center',
-              padding: '16px 22px',
-              borderRadius: 24,
-              background: isDarkMode ? 'linear-gradient(135deg, #020617 0%, #0f172a 60%, #1e1b4b 100%)' : 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #0369a1 100%)',
+              padding: '20px 28px',
+              borderRadius: 28,
+              background: isDarkMode ? 'linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e1b4b 100%)' : 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 55%, #0284c7 100%)',
               color: '#f8fafc',
               border: isDarkMode ? '1px solid #1e293b' : 'none',
               boxShadow: '0 20px 45px rgba(15, 23, 42, 0.22)',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span style={{ fontSize: '0.72rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#38bdf8', fontWeight: 800 }}>
+                  <span style={{ fontSize: '0.74rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#38bdf8', fontWeight: 900 }}>
                     Lycée SES
                   </span>
-                  <span style={{ background: '#38bdf8', color: '#0f172a', borderRadius: 999, padding: '2px 8px', fontSize: '0.66rem', fontWeight: 800 }}>
+                  <span style={{ background: '#38bdf8', color: '#0f172a', borderRadius: 999, padding: '2px 8px', fontSize: '0.68rem', fontWeight: 900 }}>
                     Seconde & Première
                   </span>
                 </div>
-                <h1 style={{ margin: '4px 0 0', fontSize: 'clamp(1.5rem, 2.2vw, 2.1rem)', lineHeight: 1.1, fontWeight: 900, color: '#ffffff' }}>
+                <h1 style={{ margin: '4px 0 0', fontSize: 'clamp(1.5rem, 2.2vw, 2.2rem)', lineHeight: 1.15, fontWeight: 900, color: '#ffffff' }}>
                   SES <span style={{ color: '#38bdf8' }}>Compagnon</span>
                 </h1>
               </div>
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="desktop-nav" style={{ flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
+            <nav className="desktop-nav" style={{ flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
               {views.map((item) => {
                 const isActive = currentView === item.key;
                 return (
@@ -211,21 +220,26 @@ function App() {
                     className="chip-nav"
                     onClick={() => setCurrentView(item.key)}
                     style={{
-                      border: isActive ? '1px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.12)',
-                      background: isActive ? '#38bdf8' : 'rgba(255, 255, 255, 0.07)',
+                      border: isActive ? '1.5px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.12)',
+                      background: isActive ? '#38bdf8' : 'rgba(255, 255, 255, 0.08)',
                       color: isActive ? '#0f172a' : '#ffffff',
                       borderRadius: 999,
-                      padding: '8px 14px',
+                      padding: '9px 16px',
                       fontWeight: 800,
-                      fontSize: '0.82rem',
+                      fontSize: '0.84rem',
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: 6,
+                      gap: 8,
                     }}
                   >
                     <span>{item.icon}</span>
                     <span>{item.label}</span>
+                    {(item as any).badge && (
+                      <span style={{ background: isActive ? '#0f172a' : '#38bdf8', color: isActive ? '#38bdf8' : '#0f172a', padding: '1px 6px', borderRadius: 999, fontSize: '0.66rem', fontWeight: 900 }}>
+                        {(item as any).badge}
+                      </span>
+                    )}
                   </button>
                 );
               })}
@@ -237,13 +251,14 @@ function App() {
                 title={isDarkMode ? 'Passer en mode clair' : 'Passer en mode sombre'}
                 style={{
                   border: '1px solid rgba(255, 255, 255, 0.2)',
-                  background: 'rgba(255, 255, 255, 0.1)',
+                  background: 'rgba(255, 255, 255, 0.12)',
                   color: '#ffffff',
                   borderRadius: 999,
-                  padding: '8px 12px',
-                  fontSize: '0.9rem',
+                  padding: '9px 14px',
+                  fontSize: '0.95rem',
                   cursor: 'pointer',
-                  marginLeft: 4,
+                  marginLeft: 6,
+                  transition: 'all 0.2s ease',
                 }}
               >
                 {isDarkMode ? '☀️' : '🌙'}
@@ -252,13 +267,18 @@ function App() {
           </header>
 
           {/* MAIN VIEW AREA */}
-          <main style={{ paddingTop: 20 }}>
+          <main style={{ paddingTop: 28 }}>
             <div key={currentView} className="view-container">
-              {/* VIEW 1: CALCULS & METHODES */}
+              {/* VIEW 1: GEMINI NOTEBOOK */}
+              {currentView === 'notebook' && (
+                <Notebook onNavigateToCalcul={handleSelectCalcul} />
+              )}
+
+              {/* VIEW 2: CALCULS & METHODES */}
               {currentView === 'calculs' && (
                 <>
                   {/* STATS STRIP */}
-                  <section style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: 12, marginBottom: 20 }}>
+                  <section style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 16, marginBottom: 24 }}>
                     {[
                       { label: 'Calculs officiels', value: stats.calculsCount, icon: '🧮', color: '#1d4ed8', bg: '#eff6ff', border: '#bfdbfe' },
                       { label: 'Notions & Vocabulaire', value: stats.vocabCount, icon: '📖', color: '#7c3aed', bg: '#f5f3ff', border: '#ddd6fe' },
@@ -268,24 +288,24 @@ function App() {
                       <div
                         key={card.label}
                         style={{
-                          padding: '14px 18px',
-                          borderRadius: 20,
+                          padding: '16px 20px',
+                          borderRadius: 24,
                           background: isDarkMode ? '#131c2e' : '#ffffff',
                           border: `1.5px solid ${isDarkMode ? '#1e293b' : card.border}`,
                           boxShadow: '0 8px 24px rgba(15, 23, 42, 0.03)',
                           display: 'flex',
                           alignItems: 'center',
-                          gap: 14,
+                          gap: 16,
                         }}
                       >
-                        <div style={{ fontSize: '1.8rem', background: card.bg, padding: 10, borderRadius: 16 }}>
+                        <div style={{ fontSize: '2rem', background: card.bg, padding: 12, borderRadius: 18 }}>
                           {card.icon}
                         </div>
                         <div>
                           <div style={{ color: isDarkMode ? '#94a3b8' : '#64748b', fontSize: '0.74rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>
                             {card.label}
                           </div>
-                          <div style={{ fontSize: '1.6rem', fontWeight: 900, color: card.color, lineHeight: 1.1, marginTop: 2 }}>
+                          <div style={{ fontSize: '1.7rem', fontWeight: 900, color: card.color, lineHeight: 1.1, marginTop: 2 }}>
                             <CountUpNumber value={card.value} />
                           </div>
                         </div>
@@ -294,8 +314,8 @@ function App() {
                   </section>
 
                   {/* QUICK CHIP BAR */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginBottom: 18, padding: '12px 16px', background: isDarkMode ? '#131c2e' : '#ffffff', borderRadius: 20, border: `1px solid ${isDarkMode ? '#1e293b' : '#e2e8f0'}` }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 800, color: isDarkMode ? '#94a3b8' : '#64748b', marginRight: 4 }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center', marginBottom: 24, padding: '16px 20px', background: isDarkMode ? '#131c2e' : '#ffffff', borderRadius: 24, border: `1.5px solid ${isDarkMode ? '#1e293b' : '#e2e8f0'}` }}>
+                    <span style={{ fontSize: '0.82rem', fontWeight: 800, color: isDarkMode ? '#94a3b8' : '#64748b', marginRight: 4 }}>
                       ⚡ Raccourcis fréquents :
                     </span>
                     {popularQuickIds.map((cid) => {
@@ -308,14 +328,14 @@ function App() {
                           className="chip-nav"
                           onClick={() => setSelectedCalculId(cid)}
                           style={{
-                            border: `1px solid ${isSel ? '#2563eb' : isDarkMode ? '#1e293b' : '#e2e8f0'}`,
+                            border: `1.5px solid ${isSel ? '#2563eb' : isDarkMode ? '#1e293b' : '#e2e8f0'}`,
                             background: isSel ? '#2563eb' : isDarkMode ? '#0f172a' : '#f8fafc',
                             color: isSel ? '#ffffff' : isDarkMode ? '#cbd5e1' : '#1e293b',
-                            padding: '6px 12px',
+                            padding: '8px 16px',
                             borderRadius: 999,
                             cursor: 'pointer',
                             fontWeight: 700,
-                            fontSize: '0.78rem',
+                            fontSize: '0.8rem',
                           }}
                         >
                           {cObj ? cObj.nom : cid}
@@ -325,12 +345,12 @@ function App() {
                   </div>
 
                   {/* 2-COLUMN LAYOUT */}
-                  <div className="calculs-layout" style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 340px) minmax(0, 1fr)', gap: 20 }}>
+                  <div className="calculs-layout" style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 360px) minmax(0, 1fr)', gap: 24 }}>
                     {/* Left sidebar: Search & full list */}
-                    <aside style={{ padding: 18, borderRadius: 24, background: isDarkMode ? '#131c2e' : '#ffffff', border: `1px solid ${isDarkMode ? '#1e293b' : '#e2e8f0'}`, boxShadow: '0 10px 30px rgba(15, 23, 42, 0.03)', height: 'fit-content' }}>
-                      <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <h3 style={{ margin: 0, fontSize: '1.05rem', color: isDarkMode ? '#f8fafc' : '#0f172a' }}>Calculs du programme</h3>
-                        <span style={{ fontSize: '0.76rem', background: '#eff6ff', color: '#1d4ed8', padding: '3px 8px', borderRadius: 999, fontWeight: 800 }}>
+                    <aside style={{ padding: 22, borderRadius: 28, background: isDarkMode ? '#131c2e' : '#ffffff', border: `1.5px solid ${isDarkMode ? '#1e293b' : '#e2e8f0'}`, boxShadow: '0 10px 30px rgba(15, 23, 42, 0.03)', height: 'fit-content' }}>
+                      <div style={{ marginBottom: 14, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <h3 style={{ margin: 0, fontSize: '1.1rem', color: isDarkMode ? '#f8fafc' : '#0f172a', fontWeight: 800 }}>Calculs du programme</h3>
+                        <span style={{ fontSize: '0.78rem', background: '#eff6ff', color: '#1d4ed8', padding: '3px 10px', borderRadius: 999, fontWeight: 800 }}>
                           {calculsCatalog.length} fiches
                         </span>
                       </div>
@@ -343,11 +363,6 @@ function App() {
                     </section>
                   </div>
                 </>
-              )}
-
-              {/* VIEW 2: NOTEBOOK */}
-              {currentView === 'notebook' && (
-                <Notebook onNavigateToCalcul={handleSelectCalcul} />
               )}
 
               {/* VIEW 3: LEXIQUE */}

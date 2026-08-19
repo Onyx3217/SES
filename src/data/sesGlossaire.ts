@@ -1709,5 +1709,489 @@ export const sesGlossaire: SesDefinition[] = [
     interpretation: "Il fait contribuer proportionnellement davantage les ménages les plus aisés et peut réduire les inégalités après impôts.",
     exemple: "L'impôt sur le revenu en France fonctionne par tranches avec des taux croissants.",
     pointsCles: ["Taux croissant", "Contribution selon les ressources", "Outil redistributif"]
+  },
+  {
+    id: "cout-marginal",
+    terme: "Coût marginal",
+    sigle: "Cm",
+    categorie: "Production",
+    definition: "Le coût marginal est le supplément de coût engendré par la production d'une unité supplémentaire de bien ou de service.",
+    formule: "Cm = Δ Coût total / Δ Quantité produite",
+    interpretation: "Tant que le prix de vente (recette marginale) est supérieur au coût marginal, l'entreprise a intérêt à continuer de produire.",
+    exemple: "Produire 100 vélos coûte 10 000 €, en produire 101 coûte 10 080 € : le coût marginal du 101e vélo est de 80 €.",
+    pointsCles: ["Coût de la dernière unité", "Règle de maximisation du profit (Prix = Cm en CPP)", "Guide les décisions de production"]
+  },
+  {
+    id: "recette-marginale",
+    terme: "Recette marginale",
+    sigle: "Rm",
+    categorie: "Production",
+    definition: "La recette marginale est le revenu supplémentaire généré par la vente d'une unité supplémentaire.",
+    formule: "Rm = Δ Recette totale / Δ Quantité vendue",
+    interpretation: "En concurrence pure et parfaite, la recette marginale est égale au prix du marché (l'entreprise est preneuse de prix).",
+    exemple: "Si vendre une unité de plus rapporte 50 €, la recette marginale est de 50 €.",
+    pointsCles: ["Revenu de la dernière unité", "Égale au prix en CPP", "Permet de déterminer la quantité optimale"]
+  },
+  {
+    id: "prix-plafond",
+    terme: "Prix plafond",
+    categorie: "Marché",
+    definition: "Un prix plafond est un niveau de prix maximal fixé par l'État en dessous du prix d'équilibre pour protéger le pouvoir d'achat des consommateurs.",
+    interpretation: "Fixé sous l'équilibre, il engendre une pénurie (demande supérieure à l'offre) et peut créer un marché noir.",
+    exemple: "Le plafonnement des loyers dans certaines zones tendues ou le blocage du prix de produits de première nécessité.",
+    pointsCles: ["Régulation publique", "Inférieur au prix d'équilibre", "Risque de pénurie"]
+  },
+  {
+    id: "prix-plancher",
+    terme: "Prix plancher",
+    categorie: "Marché",
+    definition: "Un prix plancher est un niveau de prix minimal garanti par l'État au-dessus du prix d'équilibre pour assurer un revenu minimum aux producteurs.",
+    interpretation: "Fixé au-dessus de l'équilibre, il engendre un excédent de production (offre supérieure à la demande).",
+    exemple: "Le SMIC sur le marché du travail ou les prix agricoles garantis dans la PAC historique.",
+    pointsCles: ["Prix minimum obligatoire", "Supérieur au prix d'équilibre", "Risque d'excédent"]
+  },
+  {
+    id: "asymetrie-information",
+    terme: "Asymétrie d'information",
+    categorie: "Défaillances de marché",
+    definition: "Situation de marché dans laquelle l'un des participants à l'échange dispose de plus d'informations ou de meilleures informations que l'autre partie.",
+    interpretation: "Elle empêche le marché concurrentiel d'aboutir à un résultat efficace et peut conduire à la disparition du marché (Akerlof).",
+    exemple: "Un vendeur de voiture d'occasion connaît les défauts cachés de son véhicule, contrairement à l'acheteur potentiel.",
+    pointsCles: ["Information imparfaite et inégale", "Défaillance de marché", "Engendre antisélection et aléa moral"]
+  },
+  {
+    id: "selection-adverse",
+    terme: "Sélection adverse",
+    sigle: "Antisélection",
+    categorie: "Défaillances de marché",
+    definition: "Défaillance de marché précontractuelle où l'asymétrie d'information sur la qualité d'un bien conduit à évincer les bons produits au profit des mauvais.",
+    interpretation: "Théorisée par George Akerlof (1970) avec le marché des « tacots » (lemons), elle peut justifier des labels, garanties ou réglementations.",
+    exemple: "Sur le marché de l'assurance santé, si les primes sont moyennes, seuls les individus à haut risque souscrivent, faisant fuir les bien-portants.",
+    pointsCles: ["Avant la signature du contrat", "Porte sur une caractéristique cachée", "Éviction des biens de bonne qualité"]
+  },
+  {
+    id: "alea-moral",
+    terme: "Aléa moral",
+    sigle: "Risque moral",
+    categorie: "Défaillances de marché",
+    definition: "Défaillance post-contractuelle où un individu, sachant qu'il est couvert contre un risque, modifie son comportement et prend plus de risques au détriment de l'autre partie.",
+    interpretation: "Elle survient car les actions de l'agent ne sont pas parfaitement observables (comportement opportuniste non surveillé).",
+    exemple: "Un automobiliste entièrement assuré « tous risques » et sans franchise peut être moins vigilant lors de ses stationnements.",
+    pointsCles: ["Après la signature du contrat", "Porte sur une action cachée", "Nécessite franchises ou incitations"]
+  },
+  {
+    id: "pouvoir-marche",
+    terme: "Pouvoir de marché",
+    categorie: "Concurrence",
+    definition: "Capacité d'une entreprise à fixer un prix de vente supérieur au coût marginal sans perdre la totalité de sa clientèle (faiseur de prix).",
+    interpretation: "Le pouvoir de marché s'oppose à la concurrence parfaite et découle des barrières à l'entrée, des monopoles/oligopoles ou de la différenciation.",
+    exemple: "Une grande marque de smartphones peut vendre ses modèles à plus de 1 000 € grâce à son image et ses brevets technologiques.",
+    pointsCles: ["Fixation du prix (Price Maker)", "Marge au-dessus du coût marginal", "Surveillé par les autorités de la concurrence"]
+  },
+  {
+    id: "faiseur-de-prix",
+    terme: "Faiseur de prix",
+    sigle: "Price Maker",
+    categorie: "Concurrence",
+    definition: "Entreprise disposant d'un pouvoir de marché suffisant pour influencer ou fixer le prix auquel elle vend ses biens.",
+    interpretation: "Contrairement au preneur de prix en CPP, elle choisit son couple prix/quantité sur sa courbe de demande.",
+    exemple: "Une entreprise pharmaceutique détenant le brevet exclusif d'un médicament essentiel.",
+    pointsCles: ["Pouvoir de marché", "Prix supérieur au coût marginal", "Monopole ou oligopole"]
+  },
+  {
+    id: "preneur-de-prix",
+    terme: "Preneur de prix",
+    sigle: "Price Taker",
+    categorie: "Concurrence",
+    definition: "Agent économique (producteur ou consommateur) qui ne peut pas influencer le prix du marché et doit l'accepter comme une donnée.",
+    interpretation: "Hypothèse centrale du modèle de concurrence pure et parfaite due à l'atomicité des intervenants.",
+    exemple: "Un producteur de blé individuel qui vend sa récolte au cours mondial fixé sur le marché à terme.",
+    pointsCles: ["Atomicité du marché", "Aucun pouvoir individuel sur le prix", "Prix fixé par l'équilibre global"]
+  },
+  {
+    id: "monopole-naturel",
+    terme: "Monopole naturel",
+    categorie: "Concurrence",
+    definition: "Situation où la présence d'une seule entreprise sur le marché est plus efficace que plusieurs, en raison de coûts fixes initiaux gigantesques et de rendements d'échelle croissants.",
+    interpretation: "Le coût moyen unitaire diminue continuellement avec les volumes, rendant toute concurrence sous-optimale ou impossible.",
+    exemple: "Le réseau ferré national (SNCF Réseau), les réseaux de distribution d'eau ou d'électricité (Enedis).",
+    pointsCles: ["Coûts fixes colossaux", "Rendements d'échelle croissants", "Nécessite souvent régulation ou service public"]
+  },
+  {
+    id: "monopole-legal",
+    terme: "Monopole légal / institutionnel",
+    categorie: "Concurrence",
+    definition: "Monopole garanti et protégé par la loi ou par une décision de la puissance publique qui interdit l'entrée de concurrents.",
+    interpretation: "Mis en place pour des raisons d'ordre public, de sécurité nationale, de santé publique ou pour amortir des investissements.",
+    exemple: "La Française des Jeux (tirages historiques), les pharmacies pour la vente de médicaments sur ordonnance.",
+    pointsCles: ["Barrière légale / réglementaire", "Protection de l'État", "Droits exclusifs octroyés"]
+  },
+  {
+    id: "monopole-innovation",
+    terme: "Monopole d'innovation",
+    sigle: "Monopole Schumpetérien",
+    categorie: "Concurrence",
+    definition: "Monopole temporaire obtenu par une entreprise grâce à une innovation majeure protégée par brevet ou secret de fabrication.",
+    interpretation: "Théorisé par Joseph Schumpeter, ce monopole génère une rente d'innovation qui récompense et stimule la recherche-développement avant d'être imité.",
+    exemple: "Le premier laboratoire à commercialiser un vaccin ARN messager ou un fabricant lançant une rupture technologique.",
+    pointsCles: ["Rente temporaire", "Moteur de la destruction créatrice", "Incitations à l'innovation"]
+  },
+  {
+    id: "oligopole",
+    terme: "Oligopole",
+    categorie: "Concurrence",
+    definition: "Structure de marché caractérisée par un petit nombre de grands offreurs face à une multitude de demandeurs.",
+    interpretation: "Les entreprises sont interdépendantes stratégiquement : chaque décision de prix ou de quantité d'une firme affecte directement ses rivales.",
+    exemple: "Le marché de la téléphonie mobile en France (Orange, SFR, Bouygues, Free) ou de la construction aéronautique civile (Airbus, Boeing).",
+    pointsCles: ["Quelques vendeurs", "Interdépendance stratégique", "Risque d'entente ou guerre des prix"]
+  },
+  {
+    id: "cartel",
+    terme: "Cartel / Entente illicite",
+    categorie: "Concurrence",
+    definition: "Accord formel ou secret entre entreprises concurrentes sur un marché oligopolistique pour fixer les prix, se partager les parts de marché ou limiter la production.",
+    interpretation: "Le cartel vise à neutraliser la concurrence pour maximiser le profit joint des membres au détriment du surplus des consommateurs.",
+    exemple: "Le cartel de l'OPEP sur le pétrole (légal car entre États) ou les ententes sanctionnées sur les produits d'hygiène et la téléphonie.",
+    pointsCles: ["Entente sur les prix ou quotas", "Illégal et sanctionné", "Réduit le surplus du consommateur"]
+  },
+  {
+    id: "politique-concurrence",
+    terme: "Politique de la concurrence",
+    categorie: "Concurrence",
+    definition: "Ensemble des règles et actions mises en œuvre par les autorités publiques pour maintenir un degré suffisant de concurrence sur les marchés.",
+    interpretation: "Elle lutte contre les cartels, les abus de position dominante, contrôle les fusions-acquisitions et encadre les aides d'État.",
+    exemple: "L'Autorité de la Concurrence en France et la Commission Européenne infligeant des amendes record aux géants du numérique.",
+    pointsCles: ["Contrôle des concentrations", "Répression des ententes et abus", "Protection du bien-être des consommateurs"]
+  },
+  {
+    id: "barriere-entree",
+    terme: "Barrières à l'entrée",
+    categorie: "Concurrence",
+    definition: "Obstacles économiques, techniques, juridiques ou stratégiques qui empêchent ou dissuadent de nouvelles entreprises d'entrer sur un marché.",
+    interpretation: "Elles protègent le pouvoir de marché et les surprofits des firmes installées.",
+    exemple: "Brevets, coûts d'investissement géants, contrôle d'une ressource rare, fortes dépenses publicitaires.",
+    pointsCles: ["Protection des entreprises en place", "Naturelles, légales ou stratégiques", "Contredit la fluidité de la CPP"]
+  },
+  {
+    id: "dilemme-du-prisonnier",
+    terme: "Dilemme du prisonnier",
+    categorie: "Concurrence",
+    definition: "Modèle de théorie des jeux montrant que des individus rationnels poursuivant leur intérêt personnel aboutissent à une situation sous-optimale pour tous en l'absence de coopération.",
+    interpretation: "Appliqué aux oligopoles, il explique pourquoi deux entreprises ont intérêt à baisser leurs prix plutôt que coopérer, diminuant leurs profits mutuels.",
+    exemple: "Deux stations-service voisines qui baissent chacune leurs prix pour attirer les clients au lieu de s'entendre tacitement.",
+    pointsCles: ["Théorie des jeux", "Équilibre de Nash sous-optimal", "Plaidoyer pour la coopération institutionnelle"]
+  },
+  {
+    id: "differenciation-produit",
+    terme: "Différenciation des produits",
+    categorie: "Concurrence",
+    definition: "Stratégie par laquelle une entreprise confère à son produit des caractéristiques réelles ou perçues qui le distinguent de ses concurrents.",
+    interpretation: "Elle permet d'échapper à la concurrence par les prix (homogénéité de la CPP) et d'acquérir un pouvoir de marché local (concurrence monopolistique).",
+    exemple: "Une marque de vêtements utilisant un design unique, une démarche écoresponsable ou un label bio.",
+    pointsCles: ["Horizontale (goûts/couleurs) ou Verticale (qualité)", "Échappe à la guerre des prix", "Fidélise la clientèle"]
+  },
+  {
+    id: "concurrence-monopolistique",
+    terme: "Concurrence monopolistique",
+    categorie: "Concurrence",
+    definition: "Structure de marché où de nombreuses entreprises vendent des produits différenciés mais substituables (Edward Chamberlin).",
+    interpretation: "Chaque entreprise dispose d'un quasi-monopole sur sa variété de produit spécifique tout en subissant la concurrence des autres variétés.",
+    exemple: "Le marché de la restauration : chaque restaurant propose son ambiance et sa cuisine propre tout en étant entouré de concurrents.",
+    pointsCles: ["Nombreux offreurs", "Produits différenciés", "Chamberlin (1933)"]
+  },
+  {
+    id: "socialisation-primaire",
+    terme: "Socialisation primaire",
+    categorie: "Sociologie",
+    definition: "Processus d'apprentissage et d'intériorisation des normes, valeurs et rôles sociaux qui se déroule durant l'enfance et l'adolescence.",
+    interpretation: "Elle est particulièrement durable et structurante pour l'identité de l'individu car elle s'opère dans un contexte affectif intense.",
+    exemple: "L'apprentissage du langage, des règles de politesse et de l'hygiène au sein de la famille et à l'école maternelle.",
+    pointsCles: ["Durant l'enfance", "Instances : famille, école, pairs", "Fondatrice de l'habitus et de l'identité"]
+  },
+  {
+    id: "socialisation-secondaire",
+    terme: "Socialisation secondaire",
+    categorie: "Sociologie",
+    definition: "Processus de socialisation qui intervient à l'âge adulte et se poursuit tout au long de la vie lors de l'entrée dans de nouveaux sous-mondes sociaux.",
+    interpretation: "Elle s'articule avec la socialisation primaire soit en la renforçant (continuité), soit en la transformant ou la remettant en cause (rupture).",
+    exemple: "L'apprentissage des codes professionnels dans une nouvelle entreprise, la socialisation conjugale ou l'engagement politique.",
+    pointsCles: ["À l'âge adulte", "Instances : travail, conjoint, syndicat", "Renforcement ou transformation de l'identité"]
+  },
+  {
+    id: "socialisation-anticipatrice",
+    terme: "Socialisation anticipatrice",
+    categorie: "Sociologie",
+    definition: "Processus par lequel un individu intériorise par avance les normes et valeurs d'un groupe de référence auquel il souhaite appartenir.",
+    interpretation: "Concept forgé par Robert K. Merton, elle facilite l'intégration future dans le groupe visé mais peut créer une marginalité dans son groupe d'origine.",
+    exemple: "Un étudiant d'origine modeste adoptant le langage, les vêtements et les habitudes culturelles de la bourgeoisie d'affaires.",
+    pointsCles: ["Robert K. Merton", "Adoption des codes d'un groupe convoité", "Favorise la mobilité sociale"]
+  },
+  {
+    id: "groupe-appartenance",
+    terme: "Groupe d'appartenance",
+    categorie: "Sociologie",
+    definition: "Groupe social auquel un individu appartient objectivement en raison de sa position sociale, familiale ou professionnelle.",
+    interpretation: "L'individu y a acquis ses premiers repères de socialisation et y partage des conditions d'existence concrètes.",
+    exemple: "La classe sociale d'origine d'un ouvrier ou le groupe des étudiants d'une même promotion.",
+    pointsCles: ["Appartenance de fait", "Base de la socialisation initiale", "Merton"]
+  },
+  {
+    id: "groupe-reference",
+    terme: "Groupe de référence",
+    categorie: "Sociologie",
+    definition: "Groupe social dont un individu adopte les valeurs, les normes et les comportements pour orienter ses actions et jugements, sans forcément en faire partie.",
+    interpretation: "Il peut être identique au groupe d'appartenance (conformisme) ou différent (socialisation anticipatrice et désir de mobilité).",
+    exemple: "Un cadre débutant qui prend pour modèle le style de vie et les codes du comité exécutif de son entreprise.",
+    pointsCles: ["Groupe modèle", "Guide les aspirations", "Robert K. Merton"]
+  },
+  {
+    id: "normes-sociales",
+    terme: "Normes sociales",
+    categorie: "Sociologie",
+    definition: "Règles de conduite implicites (coutumes, usages) ou explicites (lois, règlements) qui guident le comportement des individus en société.",
+    interpretation: "Leur non-respect entraîne des sanctions sociales (réprobation, moquerie) ou juridiques (amende, emprisonnement).",
+    exemple: "Faire la queue dans un commerce (norme informelle) ou respecter le code de la route (norme formelle juridique).",
+    pointsCles: ["Règles de conduite", "Associées à des sanctions", "Traduction concrète des valeurs"]
+  },
+  {
+    id: "valeurs-sociales",
+    terme: "Valeurs sociales",
+    categorie: "Sociologie",
+    definition: "Principes et idéaux moraux partagés par un groupe social ou une société, qui définissent ce qui est estimable, désirable ou juste.",
+    interpretation: "Les valeurs inspirent et légitiment les normes sociales qui en sont l'application pratique au quotidien.",
+    exemple: "La liberté, la solidarité, l'honnêteté, l'égalité, le respect d'autrui.",
+    pointsCles: ["Idéaux et principes partagés", "Fondement des normes", "Varient selon les époques et cultures"]
+  },
+  {
+    id: "role-social",
+    terme: "Rôle social",
+    categorie: "Sociologie",
+    definition: "Ensemble des comportements et attitudes attendus d'un individu en fonction de la position (statut) qu'il occupe dans un groupe social.",
+    interpretation: "Un même individu cumule plusieurs rôles (rôle de parent, d'élève, de collègue, de citoyen), ce qui peut engendrer des conflits de rôles.",
+    exemple: "Du médecin, on attend écoute, compétence et secret professionnel ; de l'élève, assiduité et respect des consignes.",
+    pointsCles: ["Attentes de comportement", "Lié au statut", "Appris lors de la socialisation"]
+  },
+  {
+    id: "statut-social",
+    terme: "Statut social",
+    categorie: "Sociologie",
+    definition: "Position occupée par un individu au sein d'une structure sociale donnée, assortie de droits et de devoirs.",
+    interpretation: "Il peut être assigné (hérité à la naissance) ou acquis (obtenu par l'effort, les diplômes ou la trajectoire professionnelle).",
+    exemple: "Statut de cadre dirigeant, statut d'artisan, statut d'étudiant boursier.",
+    pointsCles: ["Position dans la hiérarchie", "Assorti de droits et devoirs", "Statut assigné vs statut acquis"]
+  },
+  {
+    id: "capital-culturel",
+    terme: "Capital culturel",
+    categorie: "Sociologie",
+    definition: "Ensemble des ressources culturelles dont dispose un individu sous trois formes : incorporé (habitus, langage), objectivé (livres, œuvres) et institutionnalisé (diplômes).",
+    interpretation: "Concept central de Pierre Bourdieu, son inégale transmission familiale explique largement la reproduction des inégalités scolaires.",
+    exemple: "La maîtrise du langage soutenu valorisé par l'école, la fréquentation régulière des musées et la possession de diplômes prestigieux.",
+    pointsCles: ["Pierre Bourdieu", "3 formes (incorporé, objectivé, institutionnalisé)", "Moteur de la réussite scolaire et sociale"]
+  },
+  {
+    id: "capital-social",
+    terme: "Capital social",
+    categorie: "Sociologie",
+    definition: "Ensemble des relations et réseaux de relations durables et mobilisables qu'un individu ou une famille peut activer à son profit.",
+    interpretation: "Selon Bourdieu ou Granovetter, un capital social étendu facilite l'accès aux stages, aux emplois de prestige et aux informations stratégiques.",
+    exemple: "Le réseau d'anciens élèves d'une grande école ou les relations professionnelles activées pour décrocher un entretien d'embauche.",
+    pointsCles: ["Réseau relationnel utile", "Transmissible et entretenu", "Pierre Bourdieu / Mark Granovetter"]
+  },
+  {
+    id: "capital-economique",
+    terme: "Capital économique",
+    categorie: "Sociologie",
+    definition: "Ensemble des ressources financières et patrimoniales (revenus, biens immobiliers, actifs financiers) détenues par un individu ou un ménage.",
+    interpretation: "Il se combine aux capitaux culturel et social pour déterminer la position dans l'espace social (Bourdieu).",
+    exemple: "Posséder un patrimoine immobilier locatif et un portefeuille d'actions en bourse.",
+    pointsCles: ["Revenus et patrimoine", "Convertible en d'autres capitaux", "Pierre Bourdieu"]
+  },
+  {
+    id: "habitus",
+    terme: "Habitus",
+    categorie: "Sociologie",
+    definition: "Système de dispositions durables et transposables, intériorisé par les individus lors de leur socialisation, qui oriente leurs manières de penser, d'agir et de percevoir le monde.",
+    interpretation: "Forgé par Pierre Bourdieu, il explique pourquoi les membres d'une même classe sociale adoptent spontanément des pratiques et goûts similaires.",
+    exemple: "Les préférences artistiques, alimentaires, sportives ou vestimentaires spontanées liées à l'origine sociale.",
+    pointsCles: ["Pierre Bourdieu", "Structure structurée et structurante", "Matrice des goûts et conduites"]
+  },
+  {
+    id: "reproduction-sociale",
+    terme: "Reproduction sociale",
+    categorie: "Sociologie",
+    definition: "Phénomène par lequel la position sociale des individus au sein de la hiérarchie sociale a tendance à être identique à celle de leurs parents.",
+    interpretation: "Elle met en évidence la faible mobilité sociale et le rôle des capitaux familiaux et de l'école dans le maintien de l'ordre établi (Bourdieu & Passeron).",
+    exemple: "Un fils d'ouvrier qui devient lui-même ouvrier, ou un enfant de cadre supérieur qui intègre une école d'ingénieurs.",
+    pointsCles: ["Maintien des positions sociales", "Héritage des capitaux", "Opposition à la méritocratie pure"]
+  },
+  {
+    id: "mobilite-sociale",
+    terme: "Mobilité sociale",
+    categorie: "Sociologie",
+    definition: "Changement de position sociale d'un individu par rapport à celle de ses parents (mobilité intergénérationnelle) ou au cours de sa propre vie (intragénérationnelle).",
+    interpretation: "Elle est mesurée à l'aide des tables de mobilité de l'Insee pour évaluer la perméabilité de la société.",
+    exemple: "Une fille d'agriculteur devenant professeure certifiée de sciences économiques et sociales.",
+    pointsCles: ["Intergénérationnelle vs Intragénérationnelle", "Mesurée par l'Insee", "Indicateur d'ouverture de la société"]
+  },
+  {
+    id: "mobilite-ascendante",
+    terme: "Mobilité sociale ascendante",
+    sigle: "Promotion sociale",
+    categorie: "Sociologie",
+    definition: "Trajectoire d'un individu accédant à une position sociale plus élevée dans la hiérarchie sociale que celle de ses parents.",
+    interpretation: "Synonyme de promotion sociale, elle est favorisée par la démocratisation scolaire et la tertiarisation de l'économie.",
+    exemple: "Le fils d'un employé non qualifié devenant médecin ou magistrat.",
+    pointsCles: ["Élévation dans la hiérarchie", "Promotion sociale", "Rôle du diplôme et de la structure des emplois"]
+  },
+  {
+    id: "mobilite-descendante",
+    terme: "Mobilité sociale descendante",
+    sigle: "Déclassement social",
+    categorie: "Sociologie",
+    definition: "Trajectoire d'un individu occupant une position sociale inférieure à celle de ses parents.",
+    interpretation: "Étudiée par Camille Peugny, elle suscite souvent un sentiment de frustration relative chez les individus concernés.",
+    exemple: "L'enfant de cadres supérieurs occupant un emploi d'employé précaire.",
+    pointsCles: ["Chute dans la hiérarchie", "Déclassement social", "Camille Peugny"]
+  },
+  {
+    id: "fluidite-sociale",
+    terme: "Fluidité sociale",
+    sigle: "Mobilité nette / Relative",
+    categorie: "Sociologie",
+    definition: "Mesure des chances relatives d'accéder à une position sociale donnée pour des individus issus de milieux sociaux différents, indépendamment de l'évolution de la structure des emplois.",
+    interpretation: "Mesurée par les odds ratios (rapports de chances relatives), elle évalue l'égalité réelle des chances dans une société.",
+    exemple: "Calculer si les enfants de cadres ont 5 fois ou 10 fois plus de chances de devenir cadres que les enfants d'ouvriers.",
+    pointsCles: ["Indépendante de la structure des emplois", "Mesurée par les odds ratios", "Véritable mesure de l'égalité des chances"]
+  },
+  {
+    id: "taux-interet-nominal",
+    terme: "Taux d'intérêt nominal",
+    categorie: "Finance",
+    definition: "Taux d'intérêt affiché et stipulé dans un contrat de prêt ou d'épargne, sans correction de l'effet de l'inflation.",
+    interpretation: "Il rémunère le prêteur pour le renoncement à la liquidité et le risque de crédit, mais ne reflète pas le gain réel de pouvoir d'achat.",
+    exemple: "Un crédit immobilier souscrit au taux nominal de 3,5 % par an.",
+    pointsCles: ["Taux affiché au contrat", "Ne prend pas en compte l'inflation", "Diffère du taux d'intérêt réel"]
+  },
+  {
+    id: "taux-interet-reel",
+    terme: "Taux d'intérêt réel",
+    categorie: "Finance",
+    definition: "Taux d'intérêt corrigé de l'inflation, mesurant la variation réelle du pouvoir d'achat du capital prêté ou emprunté.",
+    formule: "Taux d'intérêt réel ≈ Taux d'intérêt nominal − Taux d'inflation",
+    interpretation: "Si l'inflation est supérieure au taux nominal, le taux réel est négatif : l'emprunteur s'enrichit en termes réels au détriment de l'épargnant (équation de Fisher).",
+    exemple: "Avec un taux nominal de 4 % et une inflation de 3 %, le taux réel est de 1 %.",
+    pointsCles: ["Équation de Fisher", "Pouvoir d'achat effectif", "Détermine le coût réel du crédit"]
+  },
+  {
+    id: "politique-monetaire",
+    terme: "Politique monétaire",
+    categorie: "Finance",
+    definition: "Action par laquelle la banque centrale régule la quantité de monnaie en circulation et le coût du crédit pour stabiliser les prix et soutenir l'activité économique.",
+    interpretation: "Elle utilise principalement ses taux directeurs : une hausse freine l'inflation mais ralentit l'activité, une baisse stimule l'investissement et la consommation.",
+    exemple: "La Banque Centrale Européenne (BCE) ajustant ses taux pour viser une cible d'inflation de 2 % à moyen terme.",
+    pointsCles: ["Banque centrale (BCE)", "Taux directeurs et opérations de refinancement", "Stabilité des prix"]
+  },
+  {
+    id: "taux-directeur",
+    terme: "Taux directeur",
+    categorie: "Finance",
+    definition: "Taux d'intérêt fixé par la banque centrale auquel les banques commerciales peuvent lui emprunter des liquidités (monnaie banque centrale).",
+    interpretation: "Le taux directeur détermine le coût des ressources pour les banques, qui le répercutent ensuite sur les taux des crédits accordés aux ménages et entreprises.",
+    exemple: "Si la BCE relève son taux de refinancement à 4 %, les crédits immobiliers et d'investissement deviennent plus chers.",
+    pointsCles: ["Outil principal de la politique monétaire", "Influence tous les taux du marché", "Transmis par le canal du crédit"]
+  },
+  {
+    id: "creation-monetaire",
+    terme: "Création monétaire",
+    categorie: "Finance",
+    definition: "Processus par lequel les banques commerciales créent de la monnaie scripturale ex-nihilo en accordant des crédits ou en achetant des actifs.",
+    interpretation: "« Les crédits font les dépôts » : une banque n'a pas besoin de dépôts préalables pour prêter, elle crée la monnaie en créditant le compte de l'emprunteur.",
+    exemple: "Une banque accorde un prêt de 20 000 € à un particulier : la masse monétaire en circulation augmente de 20 000 €.",
+    pointsCles: ["« Les crédits font les dépôts »", "Création ex-nihilo par les banques commerciales", "Destruction lors du remboursement"]
+  },
+  {
+    id: "masse-monetaire",
+    terme: "Masse monétaire",
+    categorie: "Finance",
+    definition: "Quantité totale de monnaie en circulation dans une économie, regroupée en agrégats selon leur degré de liquidité (M1, M2, M3).",
+    interpretation: "M1 regroupe les pièces, billets et dépôts à vue. M2 ajoute les livrets d'épargne. M3 inclut les placements monétaires à court terme.",
+    exemple: "Les ménages de la zone euro détiennent plusieurs milliers de milliards d'euros en dépôts à vue (M1).",
+    pointsCles: ["Agrégats M1, M2, M3", "Mesure des liquidités disponibles", "Surveillée par la banque centrale"]
+  },
+  {
+    id: "desinflation",
+    terme: "Désinflation",
+    categorie: "Macroéconomie",
+    definition: "Ralentissement du rythme de hausse des prix : les prix continuent d'augmenter, mais à une vitesse moins rapide qu'auparavant.",
+    interpretation: "À ne jamais confondre avec la déflation : le taux d'inflation reste positif (ex : passage de 6 % à 2 % par an).",
+    exemple: "Une inflation qui passe de 5,2 % en 2022 à 2,1 % en 2024 correspond à une phase de désinflation.",
+    pointsCles: ["Baisse du taux d'inflation", "Les prix continuent de monter", "Diffère fondamentalement de la déflation"]
+  },
+  {
+    id: "deflation",
+    terme: "Déflation",
+    categorie: "Macroéconomie",
+    definition: "Baisse générale, continue et auto-entretenue du niveau général des prix et de l'activité économique.",
+    interpretation: "Phénomène dangereux car les agents reportent leurs achats en attendant des prix plus bas, ce qui plonge l'économie dans la récession et alourdit la dette réelle.",
+    exemple: "La grande crise des années 1930 aux États-Unis ou la longue stagnation japonaise des années 1990-2000.",
+    pointsCles: ["Baisse généralisée des prix", "Taux d'inflation négatif", "Spirale déflationniste redoutable"]
+  },
+  {
+    id: "stagflation",
+    terme: "Stagflation",
+    categorie: "Macroéconomie",
+    definition: "Situation économique conjuguant simultanément une stagnation de l'activité économique (faible croissance et chômage élevé) et une forte inflation.",
+    interpretation: "Apparue lors des chocs pétroliers des années 1970, elle invalide temporairement la courbe de Phillips et complique les politiques économiques.",
+    exemple: "L'économie des pays occidentaux entre 1973 et 1979 après le premier choc pétrolier.",
+    pointsCles: ["Stagnation + Inflation", "Chocs d'offre négatifs", "Dilemme pour les banques centrales"]
+  },
+  {
+    id: "pouvoir-achat",
+    terme: "Pouvoir d'achat",
+    categorie: "Revenus",
+    definition: "Quantité de biens et de services qu'un ménage peut acquérir grâce à son revenu disponible, compte tenu du niveau des prix.",
+    formule: "Évolution du pouvoir d'achat ≈ Évolution du revenu disponible − Taux d'inflation",
+    interpretation: "Si les revenus augmentent de 3 % alors que l'inflation est de 5 %, le pouvoir d'achat diminue d'environ 2 %.",
+    exemple: "Un ménage disposant de 2 500 € par mois voit son pouvoir d'achat augmenter si son salaire progresse plus vite que l'indice des prix à la consommation.",
+    pointsCles: ["Rapport entre revenus et prix", "Mesure du niveau de vie réel", "Calculé par l'Insee"]
+  },
+  {
+    id: "paradoxe-olson",
+    terme: "Paradoxe d'Olson",
+    sigle: "Passager clandestin / Free rider",
+    categorie: "Science politique",
+    definition: "Paradoxe selon lequel un individu rationnel a intérêt à ne pas participer à une action collective tout en espérant bénéficier des retombées positives de celle-ci si d'autres se mobilisent.",
+    interpretation: "Forgé par Mancur Olson (1965), il explique pourquoi les groupes nombreux ont du mal à se mobiliser sans incitations sélectives ou contraintes.",
+    exemple: "Un salarié qui ne fait pas grève (ne perd pas de salaire) mais profite des augmentations obtenues par les syndicats grévistes.",
+    pointsCles: ["Mancur Olson (1965)", "Comportement de passager clandestin", "Résolu par les incitations sélectives"]
+  },
+  {
+    id: "incitations-selectives",
+    terme: "Incitations sélectives",
+    categorie: "Science politique",
+    definition: "Mécanismes par lesquels une organisation réserve des avantages matériels, juridiques ou financiers uniquement à ses membres actifs pour surmonter le paradoxe d'Olson.",
+    interpretation: "Elles récompensent les participants et pénalisent les passagers clandestins.",
+    exemple: "Une caisse de grève qui indemnise uniquement les adhérents syndiqués ou l'accès exclusif à des services juridiques.",
+    pointsCles: ["Réponse au passager clandestin", "Avantages réservés aux membres", "Mancur Olson"]
+  },
+  {
+    id: "retributions-symboliques",
+    terme: "Rétributions symboliques",
+    categorie: "Science politique",
+    definition: "Récompenses non matérielles (prestige social, sentiment d'utilité, liens d'amitié, valorisation de soi) retirées par les individus de leur engagement militant.",
+    interpretation: "Concept forgé par Daniel Gaxie pour expliquer pourquoi les individus s'engagent même sans gain financier immédiat.",
+    exemple: "La fierté de militer pour une cause écologique, la reconnaissance par ses pairs au sein d'une association caritative.",
+    pointsCles: ["Daniel Gaxie", "Gains moraux et sociaux de l'engagement", "Complément aux incitations matérielles"]
+  },
+  {
+    id: "volatilite-electorale",
+    terme: "Volatilité électorale",
+    categorie: "Science politique",
+    definition: "Tendance des électeurs à modifier leur comportement électoral d'un scrutin à l'autre (changement de parti ou alternance entre vote et abstention).",
+    interpretation: "Elle traduit l'affaiblissement des loyautés partisanes traditionnelles et l'essor de l'électeur rationnel ou intermittent.",
+    exemple: "Un électeur votant pour un parti écologiste aux européennes, puis pour un parti centriste à la présidentielle, ou s'abstenant aux législatives.",
+    pointsCles: ["Instabilité du vote", "Déclin des allégeances partisanes", "Électeur stratège / intermittent"]
   }
 ];
+
