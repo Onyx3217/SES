@@ -70,7 +70,7 @@ export function generateFullNotebookLMDossier(selection: DossierSelection, titre
   const selectedCalculs = calculsCatalog.filter(c => selection.calculIds.includes(c.id));
   const selectedTerms = allGlossaryTerms.filter(t => selection.termeIds.includes(t.id));
   const selectedAuteurs = auteursSES.filter(a => selection.auteurIds.includes(a.id));
-  const selectedMecanismes = mecanismesSES.filter(m => selection.mecanismeIds.includes(m.id));
+  const selectedMecanismes = mecanismesData.filter(m => selection.mecanismeIds.includes(m.id));
 
   let doc = `# ${titreCustom || 'Dossier Source SES — Révision Officielle Seconde & Première'}\n`;
   doc += `*Document de synthèse généré le ${dateStr} pour importation directe dans Google NotebookLM / Gemini*\n\n`;

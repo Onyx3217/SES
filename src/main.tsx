@@ -431,4 +431,45 @@ function App() {
   );
 }
 
-createRoot(document.getElementById('root')!).render(<App />);
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean; error: any }> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+  static getDerivedStateFromError(error: any) {
+    return { hasError: true, error };
+  }
+  componentDidCatch(error: any, info: any) {
+    console.error('SES Compagnon runtime error:', error, info);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: 40, fontFamily: 'system-ui, sans-serif', textAlign: 'center', background: '#f8fafc', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ fontSize: '3rem', marginBottom: 12 }}>⚠️</div>
+          <h2 style={{ color: '#0f172a', margin: '0 0 8px' }}>Une erreur d'affichage est survenue</h2>
+          <p style={{ color: '#64748b', maxWidth: 500, margin: '0 0 20px' }}>
+            {String(this.state.error?.message || this.state.error || 'Erreur inattendue')}
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              localStorage.removeItem('ses_dossier_selection_v2');
+              window.location.reload();
+            }}
+            style={{ background: '#2563eb', color: '#ffffff', border: 'none', padding: '12px 24px', borderRadius: 14, fontWeight: 800, fontSize: '0.95rem', cursor: 'pointer' }}
+          >
+            🔄 Réinitialiser et recharger
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+createRoot(document.getElementById('root')!).render(
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>
+);
