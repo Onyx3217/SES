@@ -18,7 +18,7 @@ import PomodoroTimer from './components/PomodoroTimer';
 import { CountUpNumber } from './components/AnimatedNumber';
 
 const views = [
-  { key: 'notebook', label: 'Gemini Notebook', icon: '✨', badge: 'IA' },
+  { key: 'notebook', label: 'Dossier NotebookLM', icon: '📑', badge: 'Export' },
   { key: 'calculs', label: 'Calculs & Formules', icon: '🧮' },
   { key: 'lexique', label: 'Lexique & Vocabulaire', icon: '📖' },
   { key: 'auteurs', label: 'Grands Auteurs', icon: '🏛️' },

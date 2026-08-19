@@ -425,7 +425,7 @@ export default function Lexique({ onSelectCalcul }: { onSelectCalcul?: (calculId
                         cursor: 'pointer',
                       }}
                     >
-                      📥 Notebook
+                      📥 Dossier
                     </button>
 
                     <button

@@ -251,7 +251,7 @@ export default function FicheDetail({ id, onNavigateTo }: { id: string | null; o
                 cursor: 'pointer',
               }}
             >
-              📥 Notebook
+              📥 Ajouter au Dossier
             </button>
           </div>
         </div>
