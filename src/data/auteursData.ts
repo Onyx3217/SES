@@ -184,5 +184,152 @@ export const auteursSES: AuteurSES[] = [
     contexteUtilisationBac: 'À mobiliser sur la citoyenneté, l\'engagement civique, la stratification sociale et le rôle des corps intermédiaires / associations.',
     explicationDetaillee: 'Tocqueville observe aux États-Unis que la vitalité des associations civiles constitue le meilleur rempart contre le repli individualiste et la tentation de confier tout le pouvoir à un État tutélaire.',
     chapitresAssocies: ['Organisation de la vie politique', 'Engagement politique']
+  },
+  // ================= PHILOSOPHES POLITIQUES =================
+  {
+    id: 'john-rawls',
+    nom: 'John Rawls',
+    siecle: 'XXe siècle (1921-2002)',
+    discipline: 'Sociologie et science politique',
+    courant: 'Philosophie politique libérale-égalitaire',
+    theseCentrale: 'La justice comme équité : derrière le « voile d\'ignorance », des individus rationnels choisiraient deux principes — liberté égale pour tous et principe de différence (les inégalités ne sont acceptables que si elles profitent aux plus défavorisés).',
+    notionsCles: ['Voile d\'ignorance', 'Position originelle', 'Principe de différence', 'Maximin', 'Justice procédurale'],
+    citationIncontournable: '« Les inégalités sociales et économiques doivent être à l\'avantage des membres les plus désavantagés de la société. » (*Théorie de la justice*, 1971)',
+    contexteUtilisationBac: 'Indispensable sur les chapitres justice sociale, inégalités et redistribution. À opposer à Nozick (libertarien) et à utiliser pour justifier une redistribution progressive.',
+    explicationDetaillee: 'Derrière le voile d\'ignorance, ignorant sa position future dans la société, chaque individu rationnel choisit de protéger les plus défavorisés (logique maximin = maximiser le bien-être du moins bien loti).',
+    chapitresAssocies: ['Justice sociale et inégalités', 'État-providence et protection sociale']
+  },
+  {
+    id: 'amartya-sen',
+    nom: 'Amartya Sen',
+    siecle: 'XXe-XXIe siècle (1933-présent, Prix Nobel 1998)',
+    discipline: 'Économie',
+    courant: 'Économie du bien-être / Approche par les capabilités',
+    theseCentrale: 'Le développement ne doit pas se mesurer uniquement au revenu mais aux libertés réelles (capabilités) que les individus ont d\'accomplir ce à quoi ils tiennent. L\'IDH est inspiré de cette vision multidimensionnelle.',
+    notionsCles: ['Capabilités', 'Libertés réelles', 'IDH', 'Développement humain', 'Agentivité'],
+    citationIncontournable: '« Le développement peut être conçu comme un processus d\'expansion des libertés réelles dont jouissent les individus. » (*Un nouveau modèle économique*, 1999)',
+    contexteUtilisationBac: 'À mobiliser pour critiquer le PIB comme seul indicateur de richesse et défendre une conception multidimensionnelle du bien-être et du développement.',
+    explicationDetaillee: 'Un revenu identique ne garantit pas les mêmes capabilités : une personne handicapée ou malade a besoin de plus de ressources pour disposer des mêmes libertés réelles qu\'une personne valide. Cela justifie des transferts différenciés selon les besoins.',
+    chapitresAssocies: ['Justice sociale et inégalités', 'Mondialisation et développement']
+  },
+  // ================= ÉCONOMISTES SUPPLÉMENTAIRES =================
+  {
+    id: 'milton-friedman',
+    nom: 'Milton Friedman',
+    siecle: 'XXe siècle (1912-2006, Prix Nobel 1976)',
+    discipline: 'Économie',
+    courant: 'Monétarisme / École de Chicago',
+    theseCentrale: 'L\'inflation est toujours et partout un phénomène monétaire. La politique monétaire discrétionnaire nuit à la stabilité car les anticipations des agents neutralisent l\'effet des politiques keynésiennes (taux de chômage naturel).',
+    notionsCles: ['Monétarisme', 'Taux de chômage naturel (NAIRU)', 'Courbe de Phillips verticale à long terme', 'Anticipations adaptatives', 'Règle de Friedman'],
+    citationIncontournable: '« L\'inflation est toujours et partout un phénomène monétaire. » (*A Monetary History of the United States*, 1963)',
+    contexteUtilisationBac: 'À mobiliser pour expliquer les limites des politiques keynésiennes de relance et la politique de ciblage d\'inflation de la BCE.',
+    explicationDetaillee: 'Friedman démontre que la courbe de Phillips (arbitrage inflation-chômage) ne tient qu\'à court terme. À long terme, les agents anticipent l\'inflation et la neutralisent, rendant le chômage revenir à son niveau naturel structurel.',
+    chapitresAssocies: ['Monnaie et financement', 'Politiques macroéconomiques et conjoncture']
+  },
+  {
+    id: 'friedrich-hayek',
+    nom: 'Friedrich Hayek',
+    siecle: 'XXe siècle (1899-1992, Prix Nobel 1974)',
+    discipline: 'Économie',
+    courant: 'Libéralisme autrichien / Ordre spontané',
+    theseCentrale: 'Le mécanisme des prix est un système extraordinairement efficace de traitement de l\'information dispersée dans la société. Toute planification centralisée est condamnée à l\'échec faute de pouvoir agréger ce savoir local.',
+    notionsCles: ['Information dispersée', 'Ordre spontané (catallaxie)', 'Prix comme signal', 'Critique de la planification', 'Concurrence comme processus de découverte'],
+    citationIncontournable: '« Le système des prix est l\'un des mécanismes par lesquels l\'homme arrive à utiliser une connaissance aussi vaste et dispersée qu\'aucun individu ne pourrait la traiter. » (*L\'utilisation de la connaissance dans la société*, 1945)',
+    contexteUtilisationBac: 'À opposer à Keynes sur le rôle de l\'État et à citer sur l\'efficacité informationnelle du marché concurrentiel.',
+    explicationDetaillee: 'Pour Hayek, le prix d\'un bien reflète des millions d\'informations locales (offre, demande, préférences) qu\'aucune autorité centrale ne pourrait collecter et traiter. La régulation par les prix est donc supérieure à toute planification étatique.',
+    chapitresAssocies: ['Marché concurrentiel', 'Politiques macroéconomiques']
+  },
+  {
+    id: 'thomas-piketty',
+    nom: 'Thomas Piketty',
+    siecle: 'XXIe siècle (1971-présent)',
+    discipline: 'Économie',
+    courant: 'Économie des inégalités et du patrimoine',
+    theseCentrale: 'Lorsque le taux de rendement du capital (r) dépasse durablement le taux de croissance économique (g), les inégalités de patrimoine et de revenus s\'accroissent mécaniquement, menaçant la cohésion démocratique.',
+    notionsCles: ['Loi r > g', 'Capital au XXIe siècle', 'Concentration du patrimoine', 'Impôt progressif mondial sur le capital', 'Courbe en U des inégalités'],
+    citationIncontournable: '« Quand le taux de rendement du capital dépasse durablement le taux de croissance de la production et du revenu, le capitalisme produit mécaniquement des inégalités insoutenables. » (*Le Capital au XXIe siècle*, 2013)',
+    contexteUtilisationBac: 'Incontournable pour expliquer la montée des inégalités patrimoniales depuis 1980 et les débats sur la fiscalité du capital.',
+    explicationDetaillee: 'Piketty montre à partir de données fiscales historiques (1700-2010) que la règle r > g a prévalu sur le long terme, concentrant le patrimoine. Les Trente Glorieuses (1945-1975) constituent une exception liée aux destructions de guerre et à la fiscalité élevée.',
+    chapitresAssocies: ['Justice sociale et inégalités', 'Revenus, pouvoir d\'achat et protection sociale']
+  },
+  {
+    id: 'gary-becker',
+    nom: 'Gary Becker',
+    siecle: 'XXe siècle (1930-2014, Prix Nobel 1992)',
+    discipline: 'Économie',
+    courant: 'Impérialisme économique / École de Chicago',
+    theseCentrale: 'L\'analyse économique (maximisation, coûts-bénéfices, capital humain) peut s\'appliquer à tous les comportements humains y compris non marchands : éducation, mariage, discrimination, criminalité.',
+    notionsCles: ['Capital humain', 'Discrimination statistique', 'Économie de la famille', 'Coût d\'opportunité', 'Rendement de l\'éducation'],
+    citationIncontournable: '« L\'éducation est un investissement en capital humain : son rendement s\'évalue en termes de gains salariaux futurs actualisés. » (*Human Capital*, 1964)',
+    contexteUtilisationBac: 'À mobiliser sur le rendement de l\'éducation, la théorie du capital humain et la discrimination sur le marché du travail.',
+    explicationDetaillee: 'Becker formalise l\'idée que les individus investissent en éducation et formation car ils anticipent un rendement salarial futur. Les entreprises pratiquant la discrimination (Becker, 1957) subissent un coût compétitif à long terme.',
+    chapitresAssocies: ['Diplôme, emploi et salaire', 'Justice sociale et inégalités']
+  },
+  {
+    id: 'irving-fisher',
+    nom: 'Irving Fisher',
+    siecle: 'XIXe-XXe siècle (1867-1947)',
+    discipline: 'Économie',
+    courant: 'Néoclassicisme / Théorie quantitative de la monnaie',
+    theseCentrale: 'La monnaie est neutre à long terme : une augmentation de la masse monétaire ne fait qu\'augmenter les prix sans affecter la production réelle. Le taux d\'intérêt réel = taux nominal − inflation anticipée.',
+    notionsCles: ['Équation de Fisher (taux réel ≈ taux nominal − inflation)', 'Théorie quantitative de la monnaie (MV = PT)', 'Illusion monétaire', 'Déflation par la dette'],
+    citationIncontournable: '« Le taux d\'intérêt réel est approximativement égal au taux nominal diminué du taux d\'inflation anticipé. » (*The Rate of Interest*, 1907)',
+    contexteUtilisationBac: 'Formule de Fisher incontournable dans tous les chapitres sur la monnaie, l\'inflation et le financement de l\'économie.',
+    explicationDetaillee: 'Fisher développe aussi la théorie de la déflation par la dette : quand les prix baissent, la valeur réelle des dettes augmente, amplifiant la crise (spirale déflationniste de 1929). Il préfigure ainsi la trappe à liquidité keynésienne.',
+    chapitresAssocies: ['Monnaie et financement', 'Politiques macroéconomiques']
+  },
+  // ================= SOCIOLOGUES SUPPLÉMENTAIRES =================
+  {
+    id: 'robert-putnam',
+    nom: 'Robert Putnam',
+    siecle: 'XXe-XXIe siècle (1941-présent)',
+    discipline: 'Sociologie et science politique',
+    courant: 'Sociologie du capital social et de la démocratie participative',
+    theseCentrale: 'Le « capital social » — réseaux de confiance, normes de réciprocité et associations civiques — est un facteur essentiel de la prospérité économique et de la bonne gouvernance démocratique.',
+    notionsCles: ['Capital social', 'Confiance interpersonnelle', 'Réseaux civiques', 'Bridging capital', 'Bonding capital'],
+    citationIncontournable: '« Le capital social améliore l\'efficience de la société en facilitant les actions coordonnées. » (*Bowling Alone*, 2000)',
+    contexteUtilisationBac: 'À mobiliser sur les liens entre cohésion sociale, participation associative et performance économique ou démocratique.',
+    explicationDetaillee: 'Putnam montre que les régions italiennes du nord (riches en associations) fonctionnent économiquement et politiquement mieux que le sud. Aux États-Unis, le déclin de la participation associative depuis les années 1960 affaiblit la démocratie.',
+    chapitresAssocies: ['Réseaux sociaux et sociabilité', 'Organisation de la vie politique']
+  },
+  {
+    id: 'erving-goffman',
+    nom: 'Erving Goffman',
+    siecle: 'XXe siècle (1922-1982)',
+    discipline: 'Sociologie et science politique',
+    courant: 'Interactionnisme symbolique / Sociologie de la vie quotidienne',
+    theseCentrale: 'La vie sociale est analogue à une pièce de théâtre : les individus jouent des rôles en modulant leur « présentation de soi » selon le contexte (scène vs coulisses), gérant l\'impression qu\'ils produisent sur les autres.',
+    notionsCles: ['Présentation de soi', 'Stigmate', 'Interaction en face-à-face', 'Cadre de l\'interaction', 'Scène / coulisses'],
+    citationIncontournable: '« La vie quotidienne est une scène sur laquelle chacun joue un rôle pour gérer l\'impression qu\'il produit sur autrui. » (*La Mise en scène de la vie quotidienne*, 1959)',
+    contexteUtilisationBac: 'À mobiliser sur la socialisation, les normes d\'interaction, les rôles sociaux et les processus de stigmatisation sociale.',
+    explicationDetaillee: 'Goffman décrit dans *Stigmate* comment les individus portant une caractéristique dévalorisée (handicap, maladie mentale, ethnie) gèrent leur identité abîmée et les techniques de normalisation en interaction.',
+    chapitresAssocies: ['Socialisation et acteurs sociaux', 'Stratification et structure sociale']
+  },
+  {
+    id: 'robert-castel',
+    nom: 'Robert Castel',
+    siecle: 'XXe-XXIe siècle (1933-2013)',
+    discipline: 'Sociologie et science politique',
+    courant: 'Sociologie des inégalités et de la désaffiliation sociale',
+    theseCentrale: 'La cohésion sociale repose sur deux axes : l\'intégration par le travail (emploi stable) et les liens relationnels (famille, communauté). Leur affaiblissement crée des « zones de vulnérabilité » menant à la désaffiliation.',
+    notionsCles: ['Désaffiliation', 'Zone d\'intégration / vulnérabilité / désaffiliation', 'Salariat', 'Propriété sociale', 'Précarité'],
+    citationIncontournable: '« La précarité est un processus de désaffiliation qui s\'installe quand l\'individu perd ses ancrages dans le travail et dans les liens sociaux. » (*Les Métamorphoses de la question sociale*, 1995)',
+    contexteUtilisationBac: 'Indispensable pour analyser l\'exclusion sociale, la précarité du travail et la fragilisation des liens sociaux dans les sociétés contemporaines.',
+    explicationDetaillee: 'Castel distingue trois zones : intégration (emploi stable + réseau dense), vulnérabilité (emploi précaire + réseau fragile) et désaffiliation (sans emploi + isolé). La montée de la flexibilité depuis 1980 a gonflé la zone de vulnérabilité.',
+    chapitresAssocies: ['Stratification et structure sociale', 'Emploi et travail']
+  },
+  {
+    id: 'francois-de-singly',
+    nom: 'François de Singly',
+    siecle: 'XXe-XXIe siècle (1948-présent)',
+    discipline: 'Sociologie et science politique',
+    courant: 'Sociologie de la famille et de l\'individu contemporain',
+    theseCentrale: 'La famille contemporaine évolue vers un modèle d\'« individualisme relationnel » : les individus cherchent à la fois à s\'affirmer comme personnes autonomes et à maintenir des liens affectifs forts.',
+    notionsCles: ['Individualisme relationnel', 'Famille contemporaine', 'Décohabitation', 'Pluralité des formes familiales', 'Double contrainte identitaire'],
+    citationIncontournable: '« La famille est un espace de tension entre le besoin d\'appartenance et la nécessité de s\'individualiser. » (*Sociologie de la famille contemporaine*, 1993)',
+    contexteUtilisationBac: 'À mobiliser pour analyser les mutations des structures familiales, la socialisation dans un contexte de recomposition familiale et l\'individualisation des trajectoires.',
+    explicationDetaillee: 'De Singly montre que les formes familiales se diversifient (familles monoparentales, recomposées, homoparentales) sans que la famille perde son rôle de socialisation primaire fondamental.',
+    chapitresAssocies: ['Socialisation et configurations familiales', 'Réseaux sociaux et sociabilité']
   }
 ];
+

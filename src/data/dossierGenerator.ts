@@ -2,7 +2,6 @@ import { calculsCatalog, FicheCalcul } from './calculsData';
 import { allGlossaryTerms, EnrichedGlossaryTerm } from './glossaireHelper';
 import { auteursSES, AuteurSES } from './auteursData';
 import { mecanismesData, SchemaCausal } from './mecanismesData';
-import { methodesBac, methodeAEI, guidesEpreuves, EpreuveGuide } from './methodeBacData';
 
 export type DossierSelection = {
   niveaux: ('Seconde' | 'Première')[];
@@ -125,12 +124,12 @@ export function generateFullNotebookLMDossier(selection: DossierSelection, titre
       doc += `- **Formule officielle** : \`${c.formule}\`\n`;
       doc += `- **Explication des termes** :\n`;
       c.termesFormule.forEach(tf => {
-        doc += `  * \`${tf.symbole}\` : ${tf.signification} (Unité : ${tf.unite})\n`;
+        doc += `  * \`${tf.symbole}\` : ${tf.sens}\n`;
       });
       if (selection.inclureExemplesChiffres) {
         doc += `- **Exemple chiffré du cours** :\n`;
-        doc += `  * *Données* : ${c.exempleCours.donnees}\n`;
-        doc += `  * *Calcul posé* : \`${c.exempleCours.calculPose}\`\n`;
+        doc += `  * *Énoncé* : ${c.exempleCours.enonce}\n`;
+        doc += `  * *Calcul posé* : \`${c.exempleCours.calcul}\`\n`;
         doc += `  * *Résultat* : **${c.exempleCours.resultat}**\n`;
         doc += `  * *Phrase de lecture type BAC (aux 4 critères)* : « ${c.exempleCours.phraseLecture} »\n`;
       }

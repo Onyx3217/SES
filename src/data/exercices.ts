@@ -1,6 +1,9 @@
 import { calculsCatalog, generateRandomExerciseFor } from './calculsData';
 import { allGlossaryTerms } from './glossaireHelper';
 
+export type DifficultyLevel = 'debutant' | 'intermediaire' | 'bac';
+export type QuestionType = 'calcul' | 'definition' | 'application' | 'auteur' | 'mecanisme';
+
 export type ExerciseChoice = {
   id: string;
   label: string;
@@ -9,6 +12,8 @@ export type ExerciseChoice = {
 export type Exercise = {
   id: string;
   type: 'calcul' | 'qcm';
+  questionType?: QuestionType;
+  difficulte?: DifficultyLevel;
   theme: string;
   niveau: ('Seconde' | 'Première')[];
   question: string;
@@ -16,6 +21,7 @@ export type Exercise = {
   choices: ExerciseChoice[];
   answer: string;
   explanation: string;
+  auteur?: string;
   pointsCles?: string[];
 };
 
@@ -246,26 +252,213 @@ export const qcmBank: Exercise[] = [
     answer: "Les prestations sont financées par des cotisations sur le travail et réservées aux travailleurs cotisants.",
     explanation: "La logique d'assurance (Bismarck) protège contre la perte de revenu liée aux risques sociaux en contrepartie du paiement de cotisations.",
   },
+  {
+    id: 'qcm-rawls-1',
+    type: 'qcm',
+    theme: 'Justice sociale',
+    niveau: ['Première'],
+    question: "Selon John Rawls (Théorie de la justice, 1971), qu'implique le « principe de différence » issu du voile d'ignorance ?",
+    choices: [
+      { id: '1', label: "Les inégalités économiques ne sont justifiées que si elles améliorent le sort des membres les plus défavorisés de la société (maximin)." },
+      { id: '2', label: "Tous les revenus et patrimoines doivent être strictement égalisés sans exception." },
+      { id: '3', label: "L'État ne doit jamais intervenir dans la répartition des richesses pour préserver la liberté absolue." },
+      { id: '4', label: "Le mérite individuel mesuré par le diplôme est le seul critère légitime de distribution." },
+    ],
+    answer: "Les inégalités économiques ne sont justifiées que si elles améliorent le sort des membres les plus défavorisés de la société (maximin).",
+    explanation: "Derrière le voile d'ignorance, ne sachant pas sa position future, un individu rationnel choisit de protéger le sort du moins bien loti (maximin). Le principe de différence admet les inégalités seulement si elles stimulent l'économie au bénéfice des plus défavorisés.",
+  },
+  {
+    id: 'qcm-piketty-1',
+    type: 'qcm',
+    theme: 'Justice sociale',
+    niveau: ['Première'],
+    question: "Quelle est la signification de la relation « r > g » mise en évidence par l'économiste Thomas Piketty ?",
+    choices: [
+      { id: '1', label: "Quand le rendement du capital (r) dépasse la croissance économique (g), les patrimoines hérités se concentrent plus vite que les revenus du travail." },
+      { id: '2', label: "Le taux d'intérêt réel (r) contraint la dépense publique (g) à diminuer." },
+      { id: '3', label: "La rentabilité des entreprises (r) chute automatiquement en période d'inflation (g)." },
+      { id: '4', label: "Le ratio de redistribution (r) stabilise la dette publique (g)." },
+    ],
+    answer: "Quand le rendement du capital (r) dépasse la croissance économique (g), les patrimoines hérités se concentrent plus vite que les revenus du travail.",
+    explanation: "Dans 'Le Capital au XXIe siècle', Thomas Piketty montre que lorsque le rendement du capital (r ≈ 4-5%) est durablement supérieur à la croissance (g ≈ 1-2%), les patrimoines passés prennent une importance démesurée par rapport aux revenus du travail, creusant les inégalités.",
+  },
+  {
+    id: 'qcm-schumpeter-1',
+    type: 'qcm',
+    theme: 'Marchés et concurrence',
+    niveau: ['Première'],
+    question: "Selon Joseph Schumpeter, pourquoi le monopole issu d'une innovation n'est-il que temporaire ?",
+    choices: [
+      { id: '1', label: "Parce que l'innovation attire des imitateurs en grappe, érodant la rente de monopole jusqu'à la prochaine innovation majeure." },
+      { id: '2', label: "Parce que la loi interdit tout brevet d'une durée supérieure à un an." },
+      { id: '3', label: "Parce que les consommateurs finissent toujours par boycotter les entreprises en position dominante." },
+      { id: '4', label: "Parce que le coût marginal d'une innovation devient infini à moyen terme." },
+    ],
+    answer: "Parce que l'innovation attire des imitateurs en grappe, érodant la rente de monopole jusqu'à la prochaine innovation majeure.",
+    explanation: "C'est le processus de destruction créatrice : l'innovateur jouit d'une rente de monopole temporaire, qui incite d'autres entrepreneurs à imiter ou perfectionner le procédé en 'grappes d'innovations', banalisant le produit et éliminant la survaleur.",
+  },
+  {
+    id: 'qcm-sen-1',
+    type: 'qcm',
+    theme: 'Justice sociale',
+    niveau: ['Première'],
+    question: "Selon Amartya Sen (Prix Nobel 1998), pourquoi le revenu seul est-il insuffisant pour évaluer le bien-être d'un individu ?",
+    choices: [
+      { id: '1', label: "Parce que ce qui importe, ce sont les « capabilités », c'est-à-dire les libertés réelles et capacités concrètes de convertir les ressources en réalisations." },
+      { id: '2', label: "Parce que le revenu ne tient pas compte des cours de la bourse." },
+      { id: '3', label: "Parce que seul le patrimoine immobilier reflète la véritable richesse." },
+      { id: '4', label: "Parce que le bonheur est strictement indépendant des conditions matérielles d'existence." },
+    ],
+    answer: "Parce que ce qui importe, ce sont les « capabilités », c'est-à-dire les libertés réelles et capacités concrètes de convertir les ressources en réalisations.",
+    explanation: "L'approche par les capabilités montre qu'un même niveau de revenu ne confère pas les mêmes libertés réelles : une personne en situation de handicap a besoin de davantage de ressources pour accomplir les mêmes fonctionnements fondamentaux (se déplacer, s'éduquer, participer à la vie sociale).",
+  },
+  {
+    id: 'qcm-fisher-1',
+    type: 'qcm',
+    theme: 'Finance',
+    niveau: ['Première'],
+    question: "Selon la formule d'Irving Fisher, si un emprunt bancaire affiche un taux nominal de 4,5 % et que l'inflation annuelle est de 2,5 %, quel est le taux d'intérêt réel ?",
+    choices: [
+      { id: '1', label: "2,0 % (Taux réel ≈ Taux nominal − Inflation)" },
+      { id: '2', label: "7,0 % (Taux réel ≈ Taux nominal + Inflation)" },
+      { id: '3', label: "1,8 % (Taux réel ≈ Taux nominal / Inflation)" },
+      { id: '4', label: "−2,0 % (Taux réel inversé)" },
+    ],
+    answer: "2,0 % (Taux réel ≈ Taux nominal − Inflation)",
+    explanation: "Formule d'Irving Fisher : Taux d'intérêt réel ≈ Taux d'intérêt nominal − Taux d'inflation. Ici : 4,5 % − 2,5 % = 2,0 %. Le taux réel mesure le coût ou gain effectif en pouvoir d'achat net.",
+  },
 ];
 
-export function generateExerciseSet(count = 5, filterNiveau: 'Tous' | 'Seconde' | 'Première' = 'Tous', modeFilter: 'tous' | 'calculs' | 'qcm' = 'tous'): Exercise[] {
-  const pool: Exercise[] = [];
+// ---------------- DYNAMIC NOTION QCM (240+ DÉFINITIONS DU GLOSSAIRE) ----------------
+export function generateDynamicNotionQcm(
+  filterNiveau: 'Tous' | 'Seconde' | 'Première' = 'Tous',
+  difficulte: DifficultyLevel = 'intermediaire'
+): Exercise {
+  const eligible = allGlossaryTerms.filter((t) =>
+    filterNiveau === 'Tous' ? true : t.niveaux.includes(filterNiveau)
+  );
+  const term = eligible[Math.floor(Math.random() * eligible.length)] || allGlossaryTerms[0];
+  const sameCat = allGlossaryTerms.filter((t) => t.id !== term.id && t.categorie === term.categorie);
+  const diffCat = allGlossaryTerms.filter((t) => t.id !== term.id && t.categorie !== term.categorie);
+  const pool = difficulte === 'debutant' ? diffCat : sameCat.length >= 3 ? sameCat : allGlossaryTerms;
+  const distractors = shuffle(pool.filter((t) => t.id !== term.id)).slice(0, 3);
 
-  if (modeFilter === 'calculs' || modeFilter === 'tous') {
-    // Add dynamic calculation exercises
-    for (let i = 0; i < count; i++) {
-      pool.push(generateCalculationExercise());
+  if (difficulte === 'debutant') {
+    const correctChoice = term.definition;
+    const wrongChoices = distractors.map((d) => d.definition);
+    return {
+      id: `notion-def-${term.id}-${Date.now()}`,
+      type: 'qcm',
+      questionType: 'definition',
+      difficulte: 'debutant',
+      theme: term.categorie,
+      niveau: term.niveaux,
+      question: `⭐ Définition : quelle est la définition officielle de « ${term.terme} » ?`,
+      choices: shuffle([correctChoice, ...wrongChoices]).map((label, idx) => ({ id: `c-${idx}`, label })),
+      answer: correctChoice,
+      explanation: `✅ ${term.terme} : ${term.definition}${term.exemple ? `\n\n📌 Exemple : ${term.exemple}` : ''}`,
+    };
+  } else if (difficulte === 'intermediaire') {
+    const correctChoice = `${term.terme}${term.sigle ? ` (${term.sigle})` : ''}`;
+    const wrongChoices = distractors.map((d) => `${d.terme}${d.sigle ? ` (${d.sigle})` : ''}`);
+    return {
+      id: `notion-concept-${term.id}-${Date.now()}`,
+      type: 'qcm',
+      questionType: 'definition',
+      difficulte: 'intermediaire',
+      theme: term.categorie,
+      niveau: term.niveaux,
+      question: `⭐⭐ À quel concept de SES (${term.categorie}) correspond cette définition ?\n\n« ${term.definition} »`,
+      choices: shuffle([correctChoice, ...wrongChoices]).map((label, idx) => ({ id: `c-${idx}`, label })),
+      answer: correctChoice,
+      explanation: `✅ Il s'agit de « ${term.terme} ».\n\n${term.definition}${term.pointsCles?.length ? `\n\nPoints clés : ${term.pointsCles.join(' ; ')}` : ''}`,
+    };
+  } else {
+    const correctChoice = `${term.terme}${term.sigle ? ` (${term.sigle})` : ''}`;
+    const wrongChoices = distractors.map((d) => `${d.terme}${d.sigle ? ` (${d.sigle})` : ''}`);
+    return {
+      id: `notion-bac-${term.id}-${Date.now()}`,
+      type: 'qcm',
+      questionType: 'application',
+      difficulte: 'bac',
+      theme: term.categorie,
+      niveau: term.niveaux,
+      question: `⭐⭐⭐ Application BAC : identifiez la notion mobilisée dans la situation suivante.`,
+      contexte: term.exemple || term.interpretation || term.definition,
+      choices: shuffle([correctChoice, ...wrongChoices]).map((label, idx) => ({ id: `c-${idx}`, label })),
+      answer: correctChoice,
+      explanation: `✅ Concept : « ${term.terme} ».\nDéfinition : ${term.definition}${term.interpretation ? `\n\nAnalyse : ${term.interpretation}` : ''}`,
+    };
+  }
+}
+
+export function generateExerciseSet(
+  count = 10,
+  filterNiveau: 'Tous' | 'Seconde' | 'Première' = 'Tous',
+  modeFilter: 'tous' | 'calculs' | 'qcm' = 'tous',
+  difficulte: DifficultyLevel | 'mixte' = 'mixte'
+): Exercise[] {
+  const result: Exercise[] = [];
+  const usedKeys = new Set<string>();
+
+  const getDiff = (): DifficultyLevel => {
+    if (difficulte !== 'mixte') return difficulte;
+    const r = Math.random();
+    return r < 0.33 ? 'debutant' : r < 0.66 ? 'intermediaire' : 'bac';
+  };
+
+  const maxAttempts = count * 8;
+  let attempts = 0;
+
+  while (result.length < count && attempts < maxAttempts) {
+    attempts++;
+    let exo: Exercise;
+    const d = getDiff();
+
+    if (modeFilter === 'calculs') {
+      exo = generateCalculationExercise();
+      exo.difficulte = d;
+      exo.questionType = 'calcul';
+    } else if (modeFilter === 'qcm') {
+      const dice = Math.random();
+      if (dice < 0.5) {
+        exo = generateDynamicNotionQcm(filterNiveau, d);
+      } else {
+        const eligibleQcm = qcmBank.filter((q) => {
+          if (filterNiveau === 'Tous') return true;
+          return q.niveau.includes(filterNiveau);
+        });
+        exo = eligibleQcm.length > 0
+          ? eligibleQcm[Math.floor(Math.random() * eligibleQcm.length)]
+          : generateDynamicNotionQcm(filterNiveau, d);
+        exo.difficulte = d;
+      }
+    } else {
+      const dice = Math.random();
+      if (dice < 0.3) {
+        exo = generateCalculationExercise();
+        exo.difficulte = d;
+        exo.questionType = 'calcul';
+      } else if (dice < 0.65) {
+        exo = generateDynamicNotionQcm(filterNiveau, d);
+      } else {
+        const eligibleQcm = qcmBank.filter((q) => {
+          if (filterNiveau === 'Tous') return true;
+          return q.niveau.includes(filterNiveau);
+        });
+        exo = eligibleQcm.length > 0
+          ? eligibleQcm[Math.floor(Math.random() * eligibleQcm.length)]
+          : generateDynamicNotionQcm(filterNiveau, d);
+        exo.difficulte = d;
+      }
+    }
+
+    const key = exo.question.slice(0, 60);
+    if (!usedKeys.has(key)) {
+      usedKeys.add(key);
+      result.push(exo);
     }
   }
 
-  if (modeFilter === 'qcm' || modeFilter === 'tous') {
-    // Add QCM exercises
-    const eligibleQcm = qcmBank.filter((q) => {
-      if (filterNiveau === 'Tous') return true;
-      return q.niveau.includes(filterNiveau);
-    });
-    pool.push(...shuffle(eligibleQcm));
-  }
-
-  return shuffle(pool).slice(0, count);
+  return result;
 }

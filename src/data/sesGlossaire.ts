@@ -2192,6 +2192,1111 @@ export const sesGlossaire: SesDefinition[] = [
     interpretation: "Elle traduit l'affaiblissement des loyautés partisanes traditionnelles et l'essor de l'électeur rationnel ou intermittent.",
     exemple: "Un électeur votant pour un parti écologiste aux européennes, puis pour un parti centriste à la présidentielle, ou s'abstenant aux législatives.",
     pointsCles: ["Instabilité du vote", "Déclin des allégeances partisanes", "Électeur stratège / intermittent"]
+  },
+
+  // ================================================================
+  // FINANCE
+  // ================================================================
+  {
+    id: "marche-financier",
+    terme: "Marché financier",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Lieu (réel ou virtuel) où s'échangent des titres financiers (actions, obligations) entre agents à besoin et à capacité de financement.",
+    interpretation: "Il assure la transformation de l'épargne en investissement à long terme et permet aux entreprises de se financer sans recourir uniquement au crédit bancaire.",
+    exemple: "Euronext Paris est la bourse où les grandes entreprises françaises (TotalEnergies, LVMH) lèvent des capitaux en émettant des actions.",
+    pointsCles: ["Financement direct", "Cotation des titres", "Rôle d'allocation de l'épargne"]
+  },
+  {
+    id: "action",
+    terme: "Action",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Titre de propriété représentant une part du capital d'une société et donnant droit à un dividende et à une voix aux assemblées générales.",
+    interpretation: "L'actionnaire est copropriétaire de l'entreprise ; il assume le risque de perte en capital en contrepartie d'un rendement potentiellement élevé.",
+    exemple: "Acheter une action Apple, c'est devenir copropriétaire à hauteur de sa part du capital de la société.",
+    pointsCles: ["Titre de propriété", "Dividende", "Droit de vote", "Risque de marché"]
+  },
+  {
+    id: "obligation",
+    terme: "Obligation",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Titre de créance émis par une entreprise ou l'État donnant droit à un remboursement du capital et au versement d'intérêts (coupon) à échéance fixe.",
+    interpretation: "Moins risquée qu'une action, l'obligation est un instrument de dette : le porteur est créancier et non propriétaire.",
+    exemple: "L'État français émet des OAT (Obligations Assimilables du Trésor) pour financer son déficit ; les investisseurs perçoivent un coupon annuel fixe.",
+    pointsCles: ["Titre de créance", "Coupon (intérêt)", "Remboursement à l'échéance", "Risque plus faible que l'action"]
+  },
+  {
+    id: "dividende",
+    terme: "Dividende",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Part du bénéfice net distribuée aux actionnaires en rémunération de leur apport en capital, décidée en assemblée générale.",
+    interpretation: "Le dividende est un revenu du capital ; la politique de distribution influence l'attractivité du titre en bourse.",
+    exemple: "TotalEnergies verse un dividende trimestriel : un actionnaire possédant 100 actions perçoit un revenu régulier sans vendre ses titres.",
+    pointsCles: ["Revenu du capital", "Distribution du bénéfice", "Décision en AG", "À distinguer de la plus-value"]
+  },
+  {
+    id: "plus-value-financiere",
+    terme: "Plus-value financière",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Gain réalisé lors de la cession d'un actif financier (action, obligation) correspondant à la différence positive entre le prix de vente et le prix d'achat.",
+    formule: "Plus-value = Prix de vente − Prix d'achat",
+    interpretation: "Elle constitue un revenu du patrimoine et est soumise à la flat tax de 30 % (PFU) en France depuis 2018.",
+    exemple: "Un investisseur achète une action 40 € et la revend 55 € : il réalise une plus-value de 15 €.",
+    pointsCles: ["Gain en capital", "Flat tax 30 % (PFU)", "À distinguer du dividende"]
+  },
+  {
+    id: "taux-interet",
+    terme: "Taux d'intérêt",
+    sigle: "i",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Prix du crédit, exprimé en pourcentage du capital emprunté par unité de temps, rémunérant le prêteur pour le service rendu et le risque supporté.",
+    formule: "Taux réel ≈ Taux nominal − Taux d'inflation (équation de Fisher)",
+    interpretation: "Un taux élevé freine l'investissement et la consommation à crédit ; un taux bas stimule l'économie mais peut alimenter des bulles.",
+    exemple: "Un emprunt immobilier à taux fixe de 3,5 % sur 20 ans : l'emprunteur rembourse le capital augmenté des intérêts calculés à ce taux.",
+    pointsCles: ["Prix du crédit", "Taux nominal vs réel", "Instrument de politique monétaire"]
+  },
+  {
+    id: "bulle-speculative",
+    terme: "Bulle spéculative",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Écart durable et auto-entretenu entre le prix de marché d'un actif et sa valeur fondamentale, alimenté par des anticipations haussières.",
+    interpretation: "Lorsque la bulle éclate, les prix chutent brutalement, provoquant des pertes patrimoniales massives et souvent une crise financière systémique.",
+    exemple: "La bulle internet des années 2000 (dot-com crash) : des start-up sans bénéfices étaient valorisées en milliards avant l'effondrement des cours.",
+    pointsCles: ["Surévaluation des actifs", "Anticipations auto-réalisatrices", "Risque systémique", "Krach lors du retournement"]
+  },
+  {
+    id: "krach-boursier",
+    terme: "Krach boursier",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Chute soudaine et massive des cours boursiers, généralement d'au moins 20 % en quelques jours, provoquée par un mouvement de panique vendeur.",
+    interpretation: "Il amplifie les effets de la crise financière via l'effet de richesse négatif (perte de patrimoine → baisse de la consommation et de l'investissement).",
+    exemple: "Le krach de 1929 (Black Thursday) a vu l'indice Dow Jones perdre 90 % de sa valeur entre 1929 et 1932, plongeant l'économie mondiale en Grande Dépression.",
+    pointsCles: ["Effondrement des cours", "Effet de richesse négatif", "Contagion économique"]
+  },
+  {
+    id: "risque-systemique",
+    terme: "Risque systémique",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Risque que la défaillance d'un ou plusieurs acteurs financiers provoque une crise généralisée de l'ensemble du système financier (effet domino).",
+    interpretation: "L'interconnexion des banques (interbancaire) signifie que la faillite de l'une peut déclencher une cascade de défaillances : c'est l'effet 'too big to fail'.",
+    exemple: "La faillite de Lehman Brothers en 2008 a déclenché un gel total du crédit interbancaire mondial, illustrant le risque systémique.",
+    pointsCles: ["Effet domino", "Interconnexion financière", "Too big to fail", "Prêteur en dernier ressort"]
+  },
+  {
+    id: "titrisation",
+    terme: "Titrisation",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Technique financière consistant à regrouper des créances dans un véhicule ad hoc qui émet des titres vendus aux investisseurs, permettant aux banques de sortir des risques de leur bilan.",
+    interpretation: "Elle diffuse le risque de crédit à l'ensemble des marchés financiers mais peut opacifier le risque total supporté par le système (crise des subprimes).",
+    exemple: "Les MBS (Mortgage-Backed Securities) regroupaient des prêts hypothécaires américains ; leur effondrement en 2007-2008 a déclenché la crise des subprimes.",
+    pointsCles: ["Transfert du risque", "Hors bilan bancaire", "Crise des subprimes", "Régulation prudentielle"]
+  },
+  {
+    id: "effet-levier",
+    terme: "Effet de levier",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Mécanisme par lequel l'endettement amplifie la rentabilité des capitaux propres quand le taux de rendement économique est supérieur au coût de la dette.",
+    formule: "Rentabilité CP = Rentabilité éco + (Rent. éco − Coût dette) × Dettes / CP",
+    interpretation: "L'effet de levier est positif en croissance mais se retourne violemment en cas de choc économique (effet de massue).",
+    exemple: "Un fonds investit 10 M€ en fonds propres et emprunte 90 M€ : si le projet rapporte 10 %, la rentabilité des fonds propres est démultipliée (avant intérêts).",
+    pointsCles: ["Amplification par la dette", "Retournement en récession", "LBO", "Risque financier"]
+  },
+  {
+    id: "taux-change",
+    terme: "Taux de change",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Prix d'une monnaie exprimé en unités d'une autre monnaie, déterminé sur le marché des changes (Forex).",
+    interpretation: "Une appréciation du taux de change rend les exportations plus chères et les importations moins chères ; c'est l'inverse pour une dépréciation.",
+    exemple: "Si 1 € = 1,10 $, une voiture française vendue 30 000 € coûte 33 000 $ aux États-Unis. Si l'euro monte à 1,20 $, elle vaut 36 000 $, ce qui pénalise les exportateurs.",
+    pointsCles: ["Compétitivité prix", "Appréciation / dépréciation", "Marché des changes (Forex)"]
+  },
+  {
+    id: "marche-changes",
+    terme: "Marché des changes",
+    sigle: "Forex",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Marché mondial décentralisé sur lequel s'échangent les devises 24h/24, avec un volume de transactions d'environ 7 500 milliards de dollars par jour (BRI 2022).",
+    interpretation: "Les taux de change fluctuent en fonction des flux commerciaux, des différentiels de taux d'intérêt et des anticipations des acteurs financiers.",
+    exemple: "La BCE intervient parfois sur le Forex pour éviter une appréciation excessive de l'euro préjudiciable aux exportateurs de la zone euro.",
+    pointsCles: ["Plus grand marché mondial", "Change flottant", "Spéculation et arbitrage"]
+  },
+  {
+    id: "intermediation-financiere",
+    terme: "Intermédiation financière",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Fonction des banques consistant à collecter l'épargne des agents à capacité de financement pour la prêter aux agents à besoin de financement, en transformant les échéances.",
+    interpretation: "L'intermédiaire financier supporte le risque de crédit et le risque de taux en cas de mismatch entre la durée des dépôts et des prêts.",
+    exemple: "La Caisse d'Épargne collecte les dépôts à vue de ses clients (court terme) et accorde des crédits immobiliers sur 20 ans (long terme).",
+    pointsCles: ["Collecte de l'épargne", "Transformation d'échéances", "Financement indirect"]
+  },
+  {
+    id: "financement-direct",
+    terme: "Financement direct (désintermédiation)",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Mode de financement dans lequel les agents à besoin de financement se procurent des ressources directement auprès des épargnants via les marchés financiers, sans intermédiaire bancaire.",
+    interpretation: "Le financement direct a progressé depuis la déréglementation financière des années 1980 (règle des 3D : Déréglementation, Désintermédiation, Décloisonnement).",
+    exemple: "TotalEnergies émet des obligations sur le marché obligataire pour lever 2 milliards d'euros directement auprès de fonds de pension.",
+    pointsCles: ["Marché financier", "Règle des 3D", "Financement sans banque"]
+  },
+  {
+    id: "autofinancement",
+    terme: "Autofinancement",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Financement de l'investissement par les ressources propres générées par l'activité de l'entreprise (bénéfices mis en réserve et dotations aux amortissements).",
+    formule: "CAF ≈ Résultat net + Dotations aux amortissements",
+    interpretation: "L'autofinancement évite la dépendance vis-à-vis des créanciers et des actionnaires, mais limite le recours au levier financier.",
+    exemple: "Une PME dégage 200 000 € de bénéfice net et ne distribue pas de dividende, gardant ces fonds pour acheter une nouvelle machine.",
+    pointsCles: ["Ressources internes", "Indépendance financière", "Bénéfices mis en réserve"]
+  },
+  {
+    id: "politique-monetaire",
+    terme: "Politique monétaire",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Ensemble des décisions prises par la banque centrale visant à influencer la masse monétaire et les taux d'intérêt directeurs pour atteindre ses objectifs (stabilité des prix, soutien à la croissance).",
+    interpretation: "La BCE cible une inflation proche de 2 % ; elle utilise le taux directeur et des outils non conventionnels (QE) pour y parvenir.",
+    exemple: "Face à une inflation de 10 % en 2022, la BCE a relevé ses taux directeurs de 0 % à 4,5 % pour freiner le crédit et la demande.",
+    pointsCles: ["Taux directeurs", "Stabilité des prix", "BCE", "Conventionnel vs non conventionnel"]
+  },
+  {
+    id: "quantitative-easing",
+    terme: "Assouplissement quantitatif",
+    sigle: "QE",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Politique monétaire non conventionnelle consistant pour la banque centrale à acheter massivement des actifs financiers pour injecter des liquidités et faire baisser les taux longs.",
+    interpretation: "Le QE est utilisé quand les taux directeurs ont atteint leur plancher zéro (Zero Lower Bound) et que la politique conventionnelle est inefficace.",
+    exemple: "La BCE a acheté plus de 3 000 milliards d'euros d'obligations entre 2015 et 2022 (programme PSPP) pour relancer une inflation trop basse.",
+    pointsCles: ["Outil non conventionnel", "Création monétaire", "Taux plancher zéro", "Trappe à liquidité"]
+  },
+  {
+    id: "trappe-liquidite",
+    terme: "Trappe à liquidité",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Situation dans laquelle les taux d'intérêt sont si bas que les agents préfèrent détenir de la monnaie liquide plutôt que des actifs financiers, rendant la politique monétaire expansive inefficace.",
+    interpretation: "Décrite par Keynes, la trappe à liquidité justifie le recours à la politique budgétaire pour relancer la demande.",
+    exemple: "Au Japon des années 1990-2000, les taux proches de zéro n'ont pas relancé l'investissement car les entreprises anticipaient une stagnation prolongée.",
+    pointsCles: ["Inefficacité de la monnaie", "Taux zéro", "Keynes", "Justification de la relance budgétaire"]
+  },
+  {
+    id: "oat",
+    terme: "Obligations assimilables du Trésor",
+    sigle: "OAT",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Titres de dette souveraine émis par l'État français sur les marchés financiers pour financer son déficit budgétaire, avec une durée allant généralement de 2 à 50 ans.",
+    interpretation: "Le taux des OAT à 10 ans est la référence du financement de l'État : une hausse de ce taux augmente la charge de la dette et contraint les marges de manœuvre budgétaires.",
+    exemple: "En 2024, la France emprunte à environ 3,5 % sur 10 ans via des OAT ; si ce taux monte à 5 %, le coût de la dette publique augmente de plusieurs milliards d'euros.",
+    pointsCles: ["Dette souveraine française", "Taux de référence à 10 ans", "Charge de la dette", "Agences de notation"]
+  },
+  {
+    id: "spread",
+    terme: "Spread (prime de risque souverain)",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Écart entre le taux d'intérêt exigé par les marchés pour financer un État et le taux de référence considéré sans risque (généralement l'OAT allemande à 10 ans — Bund).",
+    interpretation: "Un spread élevé signale que les marchés jugent l'État plus risqué : c'est un signal de méfiance sur la soutenabilité de la dette publique.",
+    exemple: "En 2012, le spread grec atteignait 3 500 points de base (35 % d'écart avec l'Allemagne), indiquant un risque de défaut quasi certain.",
+    pointsCles: ["Prime de risque", "Écart avec le Bund allemand", "Crise des dettes souveraines", "Signal de marché"]
+  },
+  {
+    id: "fonds-propres",
+    terme: "Fonds propres (capitaux propres)",
+    categorie: "Finance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Ressources appartenant aux actionnaires : capital apporté à la création, bénéfices mis en réserve et résultats non distribués, représentant la richesse nette de l'entreprise.",
+    formule: "Fonds propres = Actif total − Dettes totales",
+    interpretation: "Ils constituent le coussin d'absorption des pertes ; les exigences en fonds propres bancaires (Bâle III : ratio CET1 ≥ 4,5 %) visent à prévenir les crises systémiques.",
+    exemple: "BNP Paribas doit maintenir un ratio de fonds propres d'au moins 11-13 % de ses actifs pondérés du risque pour satisfaire aux exigences réglementaires de Bâle III.",
+    pointsCles: ["Actif − Dettes", "Coussin d'absorption", "Ratio Bâle III", "Exigences prudentielles"]
+  },
+
+  // ================================================================
+  // FINANCES PUBLIQUES
+  // ================================================================
+  {
+    id: "budget-etat",
+    terme: "Budget de l'État",
+    categorie: "Finances publiques",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Document comptable et politique présenté en loi de finances votée par le Parlement, retraçant l'ensemble des recettes (impôts, taxes) et des dépenses prévisionnelles de l'État pour une année.",
+    interpretation: "Il est l'acte principal de la politique budgétaire et incarne les priorités politiques du gouvernement.",
+    exemple: "La loi de finances 2024 prévoyait environ 490 milliards d'euros de dépenses pour l'État, financées par les impôts et partiellement par le déficit public.",
+    pointsCles: ["Recettes et dépenses de l'État", "Voté par le Parlement", "Instrument de politique économique"]
+  },
+  {
+    id: "deficit-public",
+    terme: "Déficit public",
+    categorie: "Finances publiques",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Situation dans laquelle les dépenses publiques (État, collectivités territoriales, sécurité sociale) dépassent les recettes publiques sur une année.",
+    formule: "Déficit = Recettes publiques − Dépenses publiques (résultat négatif)",
+    interpretation: "Un déficit se finance par emprunt, augmentant la dette publique. Le Pacte de stabilité européen fixe un plafond de 3 % du PIB.",
+    exemple: "En 2023, le déficit public français représentait 5,5 % du PIB, au-dessus de la limite du Pacte de stabilité et de croissance de l'UE.",
+    pointsCles: ["Dépenses > Recettes", "3 % du PIB (Maastricht)", "Financement par emprunt"]
+  },
+  {
+    id: "dette-publique",
+    terme: "Dette publique",
+    categorie: "Finances publiques",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Stock cumulé des emprunts contractés par les administrations publiques pour financer les déficits passés.",
+    formule: "Dette (n) = Dette (n-1) + Déficit (n)",
+    interpretation: "Elle est mesurée en % du PIB (critère de Maastricht : plafond à 60 %). Une dette élevée peut menacer la souveraineté budgétaire si les taux augmentent.",
+    exemple: "La dette publique française dépasse 110 % du PIB en 2024 ; son service est devenu le premier poste de dépense de l'État.",
+    pointsCles: ["Stock vs flux (déficit)", "60 % du PIB (Maastricht)", "Charge de la dette", "Soutenabilité"]
+  },
+  {
+    id: "impot-progressif",
+    terme: "Impôt progressif",
+    categorie: "Finances publiques",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Impôt dont le taux marginal augmente avec la base imposable : plus les revenus sont élevés, plus la proportion prélevée est forte.",
+    interpretation: "L'impôt progressif est un outil de redistribution verticale visant à réduire les inégalités de revenus. Il constitue aussi un stabilisateur automatique.",
+    exemple: "L'impôt sur le revenu français comporte 5 tranches allant de 0 % à 45 % : un revenu élevé est taxé à 45 % sur la fraction excédentaire.",
+    pointsCles: ["Taux marginal croissant", "Outil de redistribution", "Stabilisateur automatique", "IRPP"]
+  },
+  {
+    id: "impot-proportionnel",
+    terme: "Impôt proportionnel (flat tax)",
+    categorie: "Finances publiques",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Impôt dont le taux est constant quel que soit le niveau de la base imposable.",
+    interpretation: "La flat tax favorise la simplicité administrative mais est généralement jugée moins redistributive que l'impôt progressif.",
+    exemple: "Le prélèvement forfaitaire unique (PFU) de 30 % sur les revenus du capital est une flat tax appliquée en France depuis 2018.",
+    pointsCles: ["Taux unique", "Moins redistributif", "PFU 30 % sur les revenus du capital"]
+  },
+  {
+    id: "stabilisateurs-automatiques",
+    terme: "Stabilisateurs automatiques",
+    categorie: "Finances publiques",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Mécanismes budgétaires qui atténuent automatiquement les fluctuations conjoncturelles sans décision politique discrétionnaire (hausse des allocations chômage en récession, baisse de l'IRPP).",
+    interpretation: "Ils opèrent via l'effet contra-cyclique : en récession, les dépenses sociales augmentent et les recettes fiscales baissent, soutenant la demande automatiquement.",
+    exemple: "Pendant la crise Covid, le nombre de chômeurs indemnisés a automatiquement augmenté, injectant des milliards dans l'économie sans vote du Parlement.",
+    pointsCles: ["Automatique (sans décision)", "Contra-cyclique", "Allocations chômage + IRPP"]
+  },
+  {
+    id: "multiplicateur-budgetaire",
+    terme: "Multiplicateur budgétaire",
+    categorie: "Finances publiques",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Coefficient mesurant l'effet sur le PIB d'une variation de dépenses publiques ou de recettes fiscales : un multiplicateur de 1,5 signifie qu'une hausse de G de 1 Md€ augmente le PIB de 1,5 Md€.",
+    formule: "k = 1 / (1 − c(1 − t))   où c = propension marginale à consommer, t = taux d'imposition",
+    interpretation: "Le multiplicateur est plus fort en récession et en économie fermée ; il peut être inférieur à 1 si l'effet d'éviction joue fortement.",
+    exemple: "Le FMI a reconnu avoir sous-estimé le multiplicateur à 1,5-1,7 lors des plans d'austérité grecs de 2010-2012, aggravant la récession.",
+    pointsCles: ["Effet sur le PIB", "Propension à consommer", "Effet d'éviction possible", "Multiplicateur keynésien"]
+  },
+  {
+    id: "effet-eviction",
+    terme: "Effet d'éviction",
+    categorie: "Finances publiques",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Phénomène par lequel une augmentation des dépenses publiques financée par emprunt fait monter les taux d'intérêt, réduisant l'investissement privé et atténuant l'effet de relance.",
+    interpretation: "L'effet d'éviction est au cœur du débat keynésien vs libéral : les libéraux estiment qu'il annule les plans de relance, les keynésiens qu'il est faible en sous-emploi.",
+    exemple: "Si l'État emprunte massivement, la concurrence sur le marché obligataire fait monter les taux, renchérissant le crédit pour les entreprises.",
+    pointsCles: ["Hausse des taux d'intérêt", "Réduction de l'investissement privé", "Argument contre la relance budgétaire"]
+  },
+  {
+    id: "politique-austerite",
+    terme: "Politique d'austérité",
+    categorie: "Finances publiques",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Ensemble de mesures budgétaires visant à réduire le déficit public par une hausse des prélèvements obligatoires et/ou une baisse des dépenses publiques.",
+    interpretation: "L'austérité peut créer un cercle vicieux si elle comprime la demande et donc la croissance, réduisant les recettes fiscales et aggravant le déficit (paradoxe de l'austérité).",
+    exemple: "La Grèce (2010-2015) a appliqué une austérité sévère sous pression de la Troïka (FMI, BCE, UE), réduisant son PIB de 25 % sur la période.",
+    pointsCles: ["Réduction du déficit", "Risque de récession", "Paradoxe de l'austérité", "Consolidation budgétaire"]
+  },
+  {
+    id: "prelevements-obligatoires",
+    terme: "Prélèvements obligatoires",
+    sigle: "PO",
+    categorie: "Finances publiques",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Ensemble des impôts, taxes et cotisations sociales versés obligatoirement par les ménages et entreprises aux administrations publiques.",
+    formule: "Taux de PO = Prélèvements obligatoires / PIB × 100",
+    interpretation: "La France affiche un des taux de PO les plus élevés d'Europe (environ 46 % du PIB) pour financer un État social étendu.",
+    exemple: "La TVA, l'IRPP, les cotisations retraite et maladie constituent les prélèvements obligatoires payés par un salarié français.",
+    pointsCles: ["Impôts + cotisations sociales", "Mesurés en % du PIB", "Financement de la protection sociale"]
+  },
+  {
+    id: "recettes-fiscales",
+    terme: "Recettes fiscales",
+    categorie: "Finances publiques",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Ensemble des ressources financières perçues par l'État et les administrations publiques via les impôts directs (IRPP, IS) et indirects (TVA, TIPP) sur les revenus, bénéfices et dépenses.",
+    interpretation: "La TVA est la principale source de recettes fiscales de l'État français (environ 160 Md€/an) car elle frappe toute la consommation finale.",
+    exemple: "L'État perçoit la TVA à chaque étape de la chaîne de production : un consommateur achetant un téléphone à 600 € paye environ 100 € de TVA (20 %).",
+    pointsCles: ["Impôts directs et indirects", "TVA principale recette", "Élasticité fiscale au PIB", "Loi de finances"]
+  },
+  {
+    id: "solde-primaire",
+    terme: "Solde primaire",
+    categorie: "Finances publiques",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Solde budgétaire de l'État calculé en excluant le paiement des intérêts de la dette publique : il indique si l'État couvre ses dépenses hors intérêts par ses recettes.",
+    formule: "Solde primaire = Recettes − (Dépenses − Intérêts de la dette)",
+    interpretation: "Un solde primaire positif (excédent primaire) signifie que l'État peut stabiliser sa dette même si elle est très élevée, à condition que le taux d'intérêt soit proche du taux de croissance.",
+    exemple: "La Grèce a réalisé un excédent primaire en 2016 malgré un déficit nominal important : sans la charge des intérêts, ses recettes dépassaient ses dépenses.",
+    pointsCles: ["Hors intérêts de la dette", "Indicateur de soutenabilité", "Différent du déficit nominal", "Stabilisation de la dette"]
+  },
+
+  // ================================================================
+  // COMMERCE INTERNATIONAL
+  // ================================================================
+  {
+    id: "avantage-comparatif",
+    terme: "Avantage comparatif",
+    categorie: "Commerce international",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Selon David Ricardo, un pays a intérêt à se spécialiser dans la production pour laquelle il a le coût d'opportunité relatif le plus faible, même s'il est moins efficace que ses partenaires dans toutes les productions.",
+    interpretation: "Il démontre que le libre-échange est mutuellement bénéfique, même pour les pays les moins productifs (différence avec l'avantage absolu d'Adam Smith).",
+    exemple: "Si l'Angleterre produit le drap moins cher en termes relatifs et le Portugal le vin, les deux gagnent à se spécialiser et à échanger.",
+    pointsCles: ["Ricardo (1817)", "Coût d'opportunité", "Spécialisation internationale", "Libre-échange mutuellement bénéfique"]
+  },
+  {
+    id: "avantage-absolu",
+    terme: "Avantage absolu",
+    categorie: "Commerce international",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Selon Adam Smith, un pays dispose d'un avantage absolu s'il peut produire un bien avec moins de ressources (moins de travail) qu'un autre pays.",
+    interpretation: "Moins général que l'avantage comparatif de Ricardo : un pays sans aucun avantage absolu peut quand même bénéficier du commerce international.",
+    exemple: "Si la France produit du vin avec 10 heures de travail et l'Allemagne avec 15 heures, la France a un avantage absolu dans la viticulture.",
+    pointsCles: ["Adam Smith (1776)", "Moins de ressources pour produire", "Moins général que le comparatif"]
+  },
+  {
+    id: "libre-echange",
+    terme: "Libre-échange",
+    categorie: "Commerce international",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Doctrine économique et politique commerciale prônant la suppression de toutes les barrières aux échanges internationaux (droits de douane, quotas, normes discriminatoires).",
+    interpretation: "Le libre-échange favorise la spécialisation et les gains d'efficacité mais peut accentuer les inégalités et exposer les économies à la concurrence déloyale.",
+    exemple: "L'OMC (1995) promeut le libre-échange via des accords de réduction tarifaire multilatéraux.",
+    pointsCles: ["Suppression des barrières commerciales", "Gains de l'échange", "Risques sociaux", "OMC"]
+  },
+  {
+    id: "protectionnisme",
+    terme: "Protectionnisme",
+    categorie: "Commerce international",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Politique commerciale visant à protéger les producteurs nationaux de la concurrence étrangère par des droits de douane, quotas d'importation, subventions à l'exportation ou normes techniques.",
+    interpretation: "Il peut être justifié pour protéger les industries naissantes ou les emplois, mais risque de provoquer des guerres commerciales et des inefficacités.",
+    exemple: "Les droits de douane américains de 25 % sur l'acier importé en 2018 ont suscité des représailles commerciales chinoises et européennes.",
+    pointsCles: ["Droits de douane", "Quotas", "Industries naissantes", "Risque de guerre commerciale"]
+  },
+  {
+    id: "dumping",
+    terme: "Dumping",
+    categorie: "Commerce international",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Pratique commerciale déloyale consistant à exporter un bien à un prix inférieur à son coût de production ou à son prix sur le marché intérieur, visant à conquérir des parts de marché étrangères.",
+    interpretation: "Le dumping peut être social (bas salaires), fiscal (paradis fiscaux) ou monétaire (dévaluation compétitive) ; il est condamnable par l'OMC.",
+    exemple: "Des producteurs chinois de panneaux solaires vendus sous le coût de revient en Europe ont fait l'objet d'une enquête antidumping de la Commission européenne.",
+    pointsCles: ["Prix < coût de production", "Pratique déloyale", "Droits antidumping", "OMC"]
+  },
+  {
+    id: "balance-commerciale",
+    terme: "Balance commerciale",
+    categorie: "Commerce international",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Document comptable enregistrant la différence entre la valeur des exportations et des importations de biens d'un pays sur une période donnée.",
+    formule: "Solde commercial = Exportations − Importations (de biens)",
+    interpretation: "Un excédent signifie que le pays vend plus qu'il n'achète à l'étranger. Elle ne comprend pas les services (voir balance des paiements).",
+    exemple: "L'Allemagne affiche structurellement un excédent commercial, tandis que la France est en déficit commercial depuis 2004.",
+    pointsCles: ["Exportations − Importations", "Biens uniquement", "Excédent / Déficit commercial"]
+  },
+  {
+    id: "balance-paiements",
+    terme: "Balance des paiements",
+    categorie: "Commerce international",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Document statistique enregistrant l'ensemble des flux économiques (biens, services, revenus, transferts, capitaux) entre les résidents d'un pays et le reste du monde sur une année.",
+    interpretation: "Elle est toujours équilibrée en comptabilité ; un déficit du compte courant est compensé par un excédent du compte financier (entrées de capitaux).",
+    exemple: "Si la France importe plus qu'elle n'exporte, elle doit attirer des capitaux étrangers (IDE, achats d'obligations) pour financer ce déficit.",
+    pointsCles: ["Compte courant + compte financier", "Toujours équilibrée", "Flux résidents / non-résidents"]
+  },
+  {
+    id: "delocalisations",
+    terme: "Délocalisations",
+    categorie: "Commerce international",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Transfert de tout ou partie d'une activité productive vers un pays étranger où les coûts (surtout salariaux) sont plus bas, tout en réimportant la production dans le pays d'origine.",
+    interpretation: "Elles créent des emplois dans les pays d'accueil mais en détruisent dans les pays d'origine ; elles participent au processus de désindustrialisation des économies avancées.",
+    exemple: "Renault a délocalisé une partie de la production de la Sandero en Roumanie pour réduire les coûts de main-d'œuvre et maintenir un prix compétitif.",
+    pointsCles: ["Arbitrage sur les coûts salariaux", "Désindustrialisation", "IDE vers les pays à bas salaires"]
+  },
+  {
+    id: "chaines-valeur-mondiales",
+    terme: "Chaînes de valeur mondiales",
+    sigle: "CVM",
+    categorie: "Commerce international",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Fragmentation internationale du processus de production : chaque étape (R&D, fabrication, assemblage, distribution) est réalisée dans le pays offrant le meilleur avantage comparatif.",
+    interpretation: "Elles reflètent le commerce de tâches plutôt que le commerce de produits finis ; leur vulnérabilité a été révélée par la crise Covid (pénurie de semi-conducteurs).",
+    exemple: "Un iPhone est conçu aux États-Unis, fabriqué avec des composants japonais et coréens, assemblé en Chine et vendu dans le monde entier.",
+    pointsCles: ["Fragmentation de la production", "Commerce de tâches", "Spécialisation par étape", "Risque de rupture"]
+  },
+  {
+    id: "ide",
+    terme: "Investissements directs à l'étranger",
+    sigle: "IDE",
+    categorie: "Commerce international",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Investissements réalisés par des entreprises résidentes dans des entreprises étrangères avec l'intention d'exercer une influence durable sur leur gestion (seuil conventionnel : 10 % du capital).",
+    interpretation: "Ils diffèrent des investissements de portefeuille (spéculatifs) car ils impliquent un contrôle stratégique ; ils transfèrent aussi savoir-faire et technologies.",
+    exemple: "Toyota a investi massivement en France (usine de Valenciennes) pour produire directement dans la zone euro et éviter les droits de douane.",
+    pointsCles: ["10 % du capital minimum", "Contrôle durable", "Transfert de technologie"]
+  },
+  {
+    id: "mondialisation",
+    terme: "Mondialisation",
+    categorie: "Commerce international",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Processus d'intégration croissante des économies nationales par la libre circulation des biens, services, capitaux et, dans une moindre mesure, des personnes à l'échelle planétaire.",
+    interpretation: "Elle produit des gains d'efficacité et accroît le niveau de vie moyen mais peut creuser les inégalités entre et au sein des nations.",
+    exemple: "Le commerce mondial de marchandises a été multiplié par 30 depuis les années 1970, sous l'effet de la baisse des coûts de transport et des droits de douane.",
+    pointsCles: ["Intégration des marchés", "Gains d'efficacité", "Inégalités", "OMC / GATT"]
+  },
+
+  // ================================================================
+  // CONCURRENCE
+  // ================================================================
+  {
+    id: "monopole",
+    terme: "Monopole",
+    categorie: "Concurrence",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Structure de marché dans laquelle un seul offreur fait face à de nombreux demandeurs, lui conférant un pouvoir de marché lui permettant de fixer le prix au-dessus du coût marginal.",
+    interpretation: "Le monopole génère une perte sèche sociale (deadweight loss) car la production est inférieure à l'optimum concurrentiel ; il peut être naturel ou légal.",
+    exemple: "La SNCF est un monopole légal sur les grandes lignes françaises ; EDF l'était pour l'électricité jusqu'en 2007.",
+    pointsCles: ["Un seul offreur", "Pouvoir de marché", "Perte sèche sociale", "Monopole naturel / légal"]
+  },
+  {
+    id: "oligopole",
+    terme: "Oligopole",
+    categorie: "Concurrence",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Structure de marché caractérisée par un petit nombre de vendeurs détenant ensemble une part importante du marché, avec interdépendance stratégique entre eux.",
+    interpretation: "Les oligopoleurs peuvent être tentés de s'entendre (cartel) ou de s'engager dans une guerre des prix (concurrence à la Bertrand).",
+    exemple: "Le marché français de la téléphonie mobile est un oligopole : Orange, SFR, Bouygues et Free se partagent plus de 95 % des abonnés.",
+    pointsCles: ["Peu d'offreurs", "Interdépendance stratégique", "Risque de collusion", "Jeux non coopératifs"]
+  },
+  {
+    id: "cartel",
+    terme: "Cartel",
+    categorie: "Concurrence",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Accord explicite ou tacite entre des entreprises concurrentes pour fixer les prix, partager les marchés ou limiter la production, en violation du droit de la concurrence.",
+    interpretation: "Le cartel permet aux membres de se comporter collectivement comme un monopole, mais il est instable car chaque membre a intérêt à tricher (dilemme du prisonnier).",
+    exemple: "L'OPEP fonctionne comme un cartel : ses membres s'accordent sur des quotas de production pétrolière pour maintenir des prix élevés.",
+    pointsCles: ["Entente illicite", "Fixation des prix", "Autorité de la concurrence", "Dilemme du prisonnier"]
+  },
+  {
+    id: "concurrence-monopolistique",
+    terme: "Concurrence monopolistique",
+    categorie: "Concurrence",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Structure de marché avec de nombreuses entreprises vendant des produits différenciés substituables imparfaitement, donnant à chacune un certain pouvoir de marché sur sa variété.",
+    interpretation: "La différenciation peut être horizontale (goût, design) ou verticale (qualité) ; elle permet de pratiquer un prix légèrement supérieur au coût marginal.",
+    exemple: "Le marché de la restauration rapide ou des shampoings illustre la concurrence monopolistique : nombreuses marques, produits proches mais différenciés.",
+    pointsCles: ["Différenciation des produits", "Nombreuses entreprises", "Pouvoir de marché limité", "Chamberlin / Robinson"]
+  },
+  {
+    id: "barriere-entree",
+    terme: "Barrières à l'entrée",
+    categorie: "Concurrence",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Obstacles (économiques, technologiques, réglementaires, stratégiques) empêchant ou rendant très coûteuse l'entrée de nouveaux concurrents sur un marché.",
+    interpretation: "Elles permettent aux firmes en place de maintenir un pouvoir de marché et un profit supérieur à la normale à long terme.",
+    exemple: "Le marché des moteurs d'avion est protégé par d'énormes barrières : coûts de R&D de dizaines de milliards, brevets et certifications de sécurité strictes.",
+    pointsCles: ["Coûts irrécupérables (sunk costs)", "Brevets", "Économies d'échelle", "Maintien du pouvoir de marché"]
+  },
+  {
+    id: "pouvoir-marche",
+    terme: "Pouvoir de marché",
+    categorie: "Concurrence",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Capacité d'une entreprise à fixer un prix supérieur à son coût marginal sans perdre l'intégralité de ses clients, mesuré par l'indice de Lerner.",
+    formule: "Indice de Lerner = (P − Cm) / P",
+    interpretation: "Il est d'autant plus fort que la demande est inélastique (peu de substituts) et que les barrières à l'entrée sont élevées.",
+    exemple: "Pfizer détient un fort pouvoir de marché sur un médicament sous brevet exclusif : aucun générique ne pouvant entrer, il peut maintenir un prix très élevé.",
+    pointsCles: ["Prix > Coût marginal", "Indice de Lerner", "Demande inélastique", "Barrières à l'entrée"]
+  },
+  {
+    id: "dilemme-prisonnier",
+    terme: "Dilemme du prisonnier",
+    categorie: "Concurrence",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Jeu non coopératif dans lequel deux joueurs rationnels choisissent une stratégie individuellement dominante aboutissant à un équilibre sous-optimal collectivement, faute de coordination.",
+    interpretation: "Il explique l'instabilité des cartels (tentation de tricherie) et justifie la régulation publique pour forcer la coopération quand le marché génère de mauvais équilibres.",
+    exemple: "Deux entreprises peuvent baisser leurs prix pour gagner des parts de marché, aboutissant à une guerre des prix perdante pour les deux.",
+    pointsCles: ["Équilibre de Nash sous-optimal", "Stratégie dominante", "Instabilité des cartels", "Théorie des jeux"]
+  },
+  {
+    id: "equilibre-nash",
+    terme: "Équilibre de Nash",
+    categorie: "Concurrence",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Situation dans un jeu stratégique où aucun joueur n'a intérêt à modifier unilatéralement sa stratégie, étant donné la stratégie des autres joueurs.",
+    interpretation: "Il peut exister des équilibres de Nash qui ne sont pas efficaces au sens de Pareto (dilemme du prisonnier) : la rationalité individuelle ne garantit pas l'optimum collectif.",
+    exemple: "Dans une guerre des prix entre deux opérateurs télécom, chacun maintient des prix bas même si tous deux auraient préféré les maintenir élevés.",
+    pointsCles: ["John Nash (Prix Nobel 1994)", "Aucun intérêt à dévier seul", "Peut être sous-optimal", "Théorie des jeux"]
+  },
+  {
+    id: "monopsone",
+    terme: "Monopsone",
+    categorie: "Concurrence",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Structure de marché dans laquelle il n'existe qu'un seul acheteur (demandeur) face à de nombreux vendeurs, conférant à cet acheteur unique un fort pouvoir de négociation.",
+    interpretation: "Le monopsone sur le marché du travail justifie théoriquement le salaire minimum : l'employeur unique peut imposer un salaire inférieur au produit marginal du travail.",
+    exemple: "Dans certaines régions, un seul employeur dominant (mine, usine textile) peut fixer les salaires à la baisse, illustrant le monopsone sur le marché local du travail.",
+    pointsCles: ["Un seul acheteur", "Pouvoir de négociation de l'acheteur", "Marché du travail local", "Justifie le salaire minimum"]
+  },
+
+  // ================================================================
+  // DÉFAILLANCES DE MARCHÉ
+  // ================================================================
+  {
+    id: "bien-public",
+    terme: "Bien public",
+    categorie: "Défaillances de marché",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Bien à la fois non rival (la consommation par un agent ne diminue pas celle des autres) et non excluable (on ne peut pas exclure quelqu'un de sa consommation sans coût prohibitif).",
+    interpretation: "Le marché ne peut pas fournir efficacement les biens publics car le problème du passager clandestin empêche leur financement marchand.",
+    exemple: "La défense nationale, l'éclairage public et la météorologie sont des biens publics.",
+    pointsCles: ["Non rival + Non excluable", "Défaillance de marché", "Passager clandestin", "Financement par l'impôt"]
+  },
+  {
+    id: "externalite-positive",
+    terme: "Externalité positive",
+    categorie: "Défaillances de marché",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Effet bénéfique non compensé par un paiement marchand qu'une activité économique procure à des tiers extérieurs à la transaction.",
+    interpretation: "Elle entraîne une sous-production par rapport à l'optimum social ; cela justifie une subvention publique pour ramener la production à l'optimum.",
+    exemple: "La vaccination protège aussi les non-vaccinés (immunité collective), générant un bénéfice social non payé par les bénéficiaires indirects.",
+    pointsCles: ["Sous-production", "Subvention ou réglementation", "Bénéfice non rémunéré", "Immunité collective"]
+  },
+  {
+    id: "taxe-pigouvienne",
+    terme: "Taxe pigouvienne",
+    categorie: "Défaillances de marché",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Taxe égale au coût marginal externe d'une activité polluante, visant à internaliser l'externalité négative en faisant payer au pollueur le coût infligé à la société.",
+    interpretation: "Elle corrige le signal-prix défaillant : en augmentant le coût privé au niveau du coût social, l'entreprise réduit spontanément sa pollution.",
+    exemple: "La taxe carbone fait payer aux émetteurs de CO₂ le coût de la tonne de carbone pour internaliser les dommages climatiques.",
+    pointsCles: ["Arthur Cecil Pigou (1920)", "Coût = Coût marginal externe", "Internalisation", "Taxe carbone"]
+  },
+  {
+    id: "alea-moral",
+    terme: "Aléa moral",
+    sigle: "AM",
+    categorie: "Défaillances de marché",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Modification du comportement (plus risquée, moins prudente) d'un agent après avoir souscrit un contrat d'assurance, car il ne supporte plus entièrement les conséquences négatives de ses actes.",
+    interpretation: "L'aléa moral est un problème d'information postcontractuelle ; il est atténué par la franchise, le bonus-malus ou la co-assurance.",
+    exemple: "Un conducteur couvert par une assurance tous risques peut conduire plus imprudemment car l'assureur remboursera les dommages.",
+    pointsCles: ["Information postcontractuelle", "Comportement risqué", "Franchise / bonus-malus", "Assurance"]
+  },
+  {
+    id: "regulation-publique",
+    terme: "Régulation publique",
+    categorie: "Défaillances de marché",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Ensemble des interventions de l'État ou d'autorités indépendantes pour corriger les défaillances de marché (externalités, bien public, asymétrie d'information, position dominante).",
+    interpretation: "Elle peut prendre la forme d'une réglementation, d'une taxation, d'une subvention ou d'une nationalisation. Sa légitimité est débattue (risque de capture réglementaire).",
+    exemple: "L'Autorité de la concurrence française peut sanctionner les ententes anticoncurrentielles et interdire certaines fusions-acquisitions.",
+    pointsCles: ["Correcteur des défaillances", "Réglementation / taxe / subvention", "Capture réglementaire", "Autorité de la concurrence"]
+  },
+  {
+    id: "bien-commun-tragédie",
+    terme: "Tragédie des communs",
+    categorie: "Défaillances de marché",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Phénomène décrit par Garrett Hardin (1968) par lequel des ressources communes rivales mais non excluables sont surexploitées par des individus rationnels agissant dans leur intérêt personnel.",
+    interpretation: "Elinor Ostrom (Prix Nobel 2009) a nuancé cette vision en montrant que des communautés peuvent gérer durablement les communs par des règles endogènes.",
+    exemple: "La surpêche dans les eaux internationales illustre la tragédie des communs : chaque pêcheur maximise sa prise individuelle jusqu'à épuisement des stocks.",
+    pointsCles: ["Garrett Hardin (1968)", "Rival + Non excluable", "Elinor Ostrom (2009)", "Surexploitation"]
+  },
+
+  // ================================================================
+  // JUSTICE SOCIALE
+  // ================================================================
+  {
+    id: "principe-difference-rawls",
+    terme: "Principe de différence",
+    categorie: "Justice sociale",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Principe formulé par John Rawls selon lequel les inégalités sociales et économiques ne sont justifiées que si elles profitent aux membres les plus défavorisés de la société.",
+    interpretation: "Il fonde une conception libérale-égalitaire de la justice : on peut accepter des inégalités si elles créent des incitations bénéfiques à terme pour les plus pauvres.",
+    exemple: "Des salaires d'ingénieurs plus élevés peuvent être justes si la dynamique d'innovation qu'ils génèrent améliore à terme le niveau de vie des plus pauvres.",
+    pointsCles: ["John Rawls (1971)", "Inégalités justifiables", "Bénéfice pour les plus défavorisés", "Maximin"]
+  },
+  {
+    id: "voile-ignorance",
+    terme: "Voile d'ignorance",
+    categorie: "Justice sociale",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Expérience de pensée de Rawls dans laquelle des individus choisissent les principes de justice en ignorant leur position future dans la société (sexe, origine, talents).",
+    interpretation: "Derrière le voile, des individus rationnels et avers au risque choisiraient le principe de différence : protéger les plus démunis au cas où ils le deviendraient.",
+    exemple: "Si vous ne saviez pas si vous naîtriez riche ou pauvre, vous choisiriez probablement un système garantissant un niveau de vie décent même aux plus défavorisés.",
+    pointsCles: ["John Rawls", "Position originelle", "Aversion au risque", "Fondement du principe de différence"]
+  },
+  {
+    id: "capabilites-sen",
+    terme: "Capabilités (approche par les capacités)",
+    categorie: "Justice sociale",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Concept d'Amartya Sen désignant les libertés réelles qu'un individu a de mener la vie qu'il souhaite, en tenant compte non seulement des ressources mais aussi des conditions permettant d'en faire usage.",
+    interpretation: "Un revenu égal ne garantit pas les mêmes capabilités : une personne handicapée a besoin de plus de ressources pour avoir les mêmes libertés réelles.",
+    exemple: "Un enfant très malade peut avoir le même revenu qu'un enfant en bonne santé mais des capabilités très inférieures pour s'éduquer.",
+    pointsCles: ["Amartya Sen (Prix Nobel 1998)", "Libertés réelles", "Au-delà du revenu", "IDH inspiré de cette approche"]
+  },
+  {
+    id: "idh",
+    terme: "Indice de développement humain",
+    sigle: "IDH",
+    categorie: "Justice sociale",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Indicateur composite mesurant le niveau de développement humain d'un pays selon trois dimensions : longévité (espérance de vie), savoir (éducation) et niveau de vie (revenu par habitant).",
+    formule: "IDH = (Indice santé × Indice éducation × Indice revenu)^(1/3)",
+    interpretation: "L'IDH corrige les limites du PIB/habitant en intégrant des dimensions non monétaires du bien-être ; il a été créé par le PNUD en 1990.",
+    exemple: "La Norvège affiche régulièrement l'IDH le plus élevé (>0,95), combinant haute espérance de vie, excellent système éducatif et revenu élevé.",
+    pointsCles: ["PNUD (1990)", "Trois dimensions", "Au-delà du PIB", "Classement mondial des pays"]
+  },
+  {
+    id: "discrimination",
+    terme: "Discrimination",
+    categorie: "Justice sociale",
+    discipline: "Sociologie et science politique",
+    niveau: ["Première"],
+    definition: "Traitement inégal et injustifié fondé sur un critère prohibé (origine, sexe, âge, handicap, religion) entraînant un désavantage illégitime pour les personnes concernées.",
+    interpretation: "La discrimination peut être directe (explicite) ou indirecte (règle neutre mais à effet défavorable disproportionné) ; elle est sanctionnée par le droit du travail et pénal.",
+    exemple: "Un recruteur écartant systématiquement les CV avec un prénom d'origine étrangère pratique une discrimination directe à l'embauche.",
+    pointsCles: ["Directe / Indirecte", "Critères prohibés par la loi", "Testing (méthode de mesure)", "Défenseur des droits"]
+  },
+  {
+    id: "coefficient-gini",
+    terme: "Coefficient de Gini",
+    categorie: "Justice sociale",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Mesure statistique des inégalités de distribution d'un revenu ou d'une richesse, compris entre 0 (égalité parfaite) et 1 (inégalité maximale).",
+    formule: "G = Aire entre la diagonale d'égalité parfaite et la courbe de Lorenz / Aire totale du triangle",
+    interpretation: "Plus le Gini est proche de 1, plus les inégalités sont fortes. Il est généralement calculé avant et après redistribution.",
+    exemple: "Le Gini américain (~0,39) est plus élevé que le Gini danois (~0,28), reflétant des inégalités plus marquées aux États-Unis.",
+    pointsCles: ["0 = égalité parfaite", "1 = inégalité totale", "Courbe de Lorenz", "Comparaison internationale"]
+  },
+  {
+    id: "redistribution",
+    terme: "Redistribution",
+    categorie: "Justice sociale",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Ensemble des mécanismes par lesquels l'État prélève des ressources (impôts, cotisations) et les réalloue (transferts, services publics) pour réduire les inégalités et protéger contre les risques sociaux.",
+    interpretation: "La redistribution verticale réduit les inégalités entre revenus ; la redistribution horizontale transfère des ressources entre groupes à risques différents.",
+    exemple: "Les allocations familiales, le RSA, l'impôt progressif et les soins remboursés constituent les principaux outils de redistribution en France.",
+    pointsCles: ["Verticale (inégalités) / Horizontale (risques)", "Transferts et services publics", "Prélèvements obligatoires"]
+  },
+  {
+    id: "discrimination-positive",
+    terme: "Discrimination positive",
+    categorie: "Justice sociale",
+    discipline: "Sociologie et science politique",
+    niveau: ["Première"],
+    definition: "Politique visant à rétablir l'égalité des chances en accordant des avantages temporaires à des groupes sous-représentés ou historiquement désavantagés (femmes, minorités ethniques).",
+    interpretation: "Controversée, elle s'oppose à la méritocratie pure (égalité formelle) pour aller vers une égalité réelle ; elle peut créer des effets de stigmatisation.",
+    exemple: "Les quotas de femmes dans les conseils d'administration (loi Copé-Zimmermann, 40 %) constituent une mesure de discrimination positive visant à corriger l'inégalité de représentation.",
+    pointsCles: ["Égalité réelle vs formelle", "Quotas", "Affirmative action (États-Unis)", "ZEP (éducation)"]
+  },
+
+  // ================================================================
+  // ORGANISATION
+  // ================================================================
+  {
+    id: "cout-transaction",
+    terme: "Coût de transaction",
+    categorie: "Organisation",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Coût lié à l'organisation d'un échange marchand : coûts de recherche d'information, de négociation, de rédaction et d'exécution des contrats, et de surveillance des partenaires.",
+    interpretation: "Coase (1937) explique l'existence des firmes : internaliser une transaction dans une hiérarchie coûte moins cher que d'y recourir via le marché quand les coûts de transaction sont élevés.",
+    exemple: "Embaucher un salarié peut être moins coûteux que de passer un contrat pour chaque tâche avec des free-lances sur un marché.",
+    pointsCles: ["Ronald Coase (1937, Prix Nobel 1991)", "Frontières de la firme", "Make or buy", "Hiérarchie vs marché"]
+  },
+  {
+    id: "relation-principal-agent",
+    terme: "Relation principal-agent",
+    categorie: "Organisation",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Cadre théorique analysant la relation entre un principal (employeur, actionnaire) qui délègue une tâche à un agent (salarié, dirigeant) dont les actions sont imparfaitement observables.",
+    interpretation: "L'asymétrie d'information pousse le principal à concevoir des contrats incitatifs (prime, intéressement) pour aligner les intérêts de l'agent sur les siens.",
+    exemple: "Les stock-options accordées aux PDG les rendent actionnaires de leur propre entreprise, alignant leur intérêt (hausse du cours) sur celui des actionnaires.",
+    pointsCles: ["Principal / Agent", "Aléa moral intraorganisationnel", "Contrat incitatif", "Jensen & Meckling (1976)"]
+  },
+  {
+    id: "economies-echelle",
+    terme: "Économies d'échelle",
+    categorie: "Organisation",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Réduction du coût unitaire moyen de production obtenue en augmentant la quantité produite, liée à la dilution des coûts fixes sur un plus grand nombre d'unités.",
+    formule: "Coût moyen = Coût total / Quantité (décroissant en cas d'éco. d'échelle)",
+    interpretation: "Elles constituent une barrière à l'entrée naturelle et expliquent les monopoles naturels (réseaux ferroviaires, télécommunications).",
+    exemple: "Airbus peut produire un A320 avec un coût unitaire décroissant : les dépenses de R&D se diluent sur chaque avion supplémentaire.",
+    pointsCles: ["Coût fixe dilué", "Seuil de rentabilité", "Monopole naturel", "Barrière à l'entrée"]
+  },
+  {
+    id: "integration-verticale",
+    terme: "Intégration verticale",
+    categorie: "Organisation",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Stratégie par laquelle une entreprise internalise des étapes en amont (fournisseurs) ou en aval (distributeurs) de sa chaîne de valeur pour réduire les coûts de transaction ou sécuriser l'approvisionnement.",
+    interpretation: "Elle réduit la dépendance vis-à-vis des partenaires mais alourdit la structure et peut réduire la flexibilité.",
+    exemple: "Amazon est à la fois plateforme de vente, gestionnaire d'entrepôts logistiques et producteur de contenu streaming.",
+    pointsCles: ["Internalisation de la chaîne de valeur", "Réduction des coûts de transaction", "Amont / Aval", "Opposé à l'externalisation"]
+  },
+
+  // ================================================================
+  // TRAVAIL
+  // ================================================================
+  {
+    id: "salaire-minimum",
+    terme: "Salaire minimum interprofessionnel de croissance",
+    sigle: "SMIC",
+    categorie: "Travail",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Plancher légal en-dessous duquel un employeur ne peut rémunérer un salarié, fixé par l'État et revalorisé chaque 1er janvier et automatiquement en cas d'inflation supérieure à 2 %.",
+    interpretation: "En théorie concurrentielle, le SMIC crée du chômage ; en pratique (monopsone), les économistes débattent de son effet (Card & Krueger 1994).",
+    exemple: "En 2024, le SMIC est d'environ 11,65 €/h brut en France. Sa revalorisation automatique protège le pouvoir d'achat des travailleurs non qualifiés.",
+    pointsCles: ["Plancher légal", "Revalorisation automatique à l'inflation", "Débat emploi vs pouvoir d'achat", "Card & Krueger"]
+  },
+  {
+    id: "fordisme",
+    terme: "Fordisme",
+    categorie: "Travail",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Mode d'organisation industrielle fondé sur la chaîne de montage, la standardisation des produits, la parcellisation des tâches et des salaires élevés permettant aux ouvriers de consommer les produits qu'ils fabriquent.",
+    interpretation: "Il a organisé la croissance des Trente Glorieuses (1945-1973) en articulant production de masse et consommation de masse.",
+    exemple: "Henry Ford a introduit la chaîne de montage en 1913 à Detroit, multipliant la production de la Model T tout en doublant les salaires.",
+    pointsCles: ["Taylorisme + salaires élevés", "Chaîne de montage", "Consommation de masse", "Trente Glorieuses"]
+  },
+  {
+    id: "taylorisme",
+    terme: "Taylorisme",
+    categorie: "Travail",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Organisation scientifique du travail (OST) de Frederick Taylor visant à maximiser la productivité par la parcellisation des tâches, la standardisation des gestes et la séparation conception/exécution.",
+    interpretation: "Le taylorisme augmente la productivité mais génère déshumanisation, maladies professionnelles et aliénation ; il est progressivement remplacé par des modes plus flexibles.",
+    exemple: "Dans une usine tayloriste, un ouvrier ne fait qu'une seule opération répétitive (visser un boulon) au rythme imposé par la cadence de production.",
+    pointsCles: ["Frederick W. Taylor (1911)", "OST", "Parcellisation des tâches", "One best way"]
+  },
+  {
+    id: "taux-activite",
+    terme: "Taux d'activité",
+    categorie: "Travail",
+    discipline: "Science économique",
+    niveau: ["Seconde", "Première"],
+    definition: "Proportion de la population active (en emploi + chômeurs BIT) au sein de la population en âge de travailler (15-64 ans).",
+    formule: "Taux d'activité = Population active / Population en âge de travailler × 100",
+    interpretation: "Un taux d'activité élevé signifie qu'une grande part de la population participe au marché du travail ; il a fortement augmenté pour les femmes depuis les années 1960.",
+    exemple: "En France, le taux d'activité des 15-64 ans est d'environ 73 % en 2023.",
+    pointsCles: ["Population active / Population en âge de travailler", "En hausse pour les femmes", "Varie selon l'âge et le sexe"]
+  },
+  {
+    id: "sous-emploi",
+    terme: "Sous-emploi",
+    categorie: "Travail",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Situation des personnes qui occupent un emploi mais souhaitent et sont disponibles pour travailler davantage (temps partiel subi, chômage partiel).",
+    interpretation: "Le sous-emploi est un halo autour du chômage officiel (BIT) qui ne saisit pas toute l'ampleur du non-emploi.",
+    exemple: "Une caissière en CDI à temps partiel (20h/semaine) qui cherche activement un temps plein est en situation de sous-emploi.",
+    pointsCles: ["Temps partiel subi", "Halo du chômage", "Indicateurs larges du non-emploi"]
+  },
+  {
+    id: "qualification",
+    terme: "Qualification professionnelle",
+    categorie: "Travail",
+    discipline: "Science économique",
+    niveau: ["Seconde", "Première"],
+    definition: "Reconnaissance institutionnelle et sociale de compétences, savoirs et savoir-faire d'un travailleur, attestée par un diplôme, un titre ou une convention collective.",
+    interpretation: "La qualification permet d'accéder à des emplois du marché primaire mieux rémunérés ; elle protège contre le chômage et le déclassement professionnel.",
+    exemple: "Un baccalauréat professionnel chaudronnerie qualifie son titulaire à un niveau reconnu par les grilles de salaires de la branche métallurgique.",
+    pointsCles: ["Diplôme / titre / convention collective", "Marché primaire", "Protection contre le chômage", "Capital humain"]
+  },
+  {
+    id: "precarite-emploi",
+    terme: "Précarité de l'emploi",
+    categorie: "Travail",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Situation d'instabilité et d'insécurité au travail caractérisée par des contrats à durée limitée (CDD, intérim, auto-entrepreneuriat subi), des faibles salaires et une faible protection sociale.",
+    interpretation: "La montée de la précarité depuis les années 1980 a fragmenté le marché du travail et limité la couverture des droits sociaux pour les travailleurs atypiques.",
+    exemple: "Un chauffeur Uber indépendant qui n'a pas de garantie de revenus, pas de congés payés et pas de couverture chômage est dans une situation de précarité professionnelle.",
+    pointsCles: ["CDD / intérim / auto-entrepreneuriat subi", "Faible protection sociale", "Dualisme du marché du travail", "Ubérisation"]
+  },
+
+  // ================================================================
+  // CROISSANCE
+  // ================================================================
+  {
+    id: "croissance-endogene",
+    terme: "Croissance endogène",
+    categorie: "Croissance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Théorie selon laquelle les facteurs qui stimulent la croissance à long terme (progrès technique, capital humain, capital public) sont produits à l'intérieur même du système économique, sans rendement nécessairement décroissant.",
+    interpretation: "Romer (1990) et Lucas (1988) soulignent le rôle des externalités positives du savoir et du capital humain.",
+    exemple: "L'investissement dans l'enseignement supérieur génère des externalités positives qui soutiennent la croissance sans que le rendement décroisse comme pour le capital physique.",
+    pointsCles: ["Romer / Lucas / Barro", "Savoir et capital humain non rivaux", "Externalités positives", "Justifie l'investissement public en R&D"]
+  },
+  {
+    id: "destruction-creatrice",
+    terme: "Destruction créatrice",
+    categorie: "Croissance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Processus décrit par Schumpeter selon lequel l'innovation fait émerger de nouvelles activités et entreprises tout en détruisant les activités et emplois qui leur sont devenus obsolètes.",
+    interpretation: "La destruction créatrice explique le dynamisme capitaliste : les entreprises qui n'innovent pas sont éliminées par de nouveaux entrants plus innovants.",
+    exemple: "Le développement du streaming (Spotify, Netflix) a détruit le marché du CD et du DVD mais créé de nouveaux emplois dans le numérique.",
+    pointsCles: ["Joseph Schumpeter (1942)", "Innovation = moteur du capitalisme", "Nouveaux marchés / vieux secteurs détruits", "Disruption"]
+  },
+  {
+    id: "progres-technique",
+    terme: "Progrès technique",
+    categorie: "Croissance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Ensemble des innovations de produits et de procédés permettant de produire plus ou mieux avec les mêmes ressources, ou les mêmes biens avec moins de ressources.",
+    interpretation: "Solow (1957) a montré que le progrès technique (résidu de Solow) explique la majeure partie de la croissance à long terme.",
+    exemple: "L'automatisation robotisée d'une chaîne automobile permet de produire le même nombre de véhicules avec 30 % de main-d'œuvre en moins.",
+    pointsCles: ["Résidu de Solow", "Innovation de produit / de procédé", "Exogène (Solow) → Endogène (Romer)", "Productivité globale des facteurs"]
+  },
+  {
+    id: "developpement-durable",
+    terme: "Développement durable",
+    categorie: "Croissance",
+    discipline: "Regards croisés",
+    niveau: ["Première"],
+    definition: "Mode de développement répondant aux besoins du présent sans compromettre la capacité des générations futures à satisfaire les leurs (rapport Brundtland, ONU, 1987).",
+    interpretation: "Il articule trois piliers : économique (efficacité), social (équité) et environnemental (soutenabilité).",
+    exemple: "Les énergies renouvelables permettent de maintenir un niveau de production électrique sans épuiser les ressources fossiles ni accumuler du CO₂.",
+    pointsCles: ["Rapport Brundtland (1987)", "Trois piliers", "Équité intergénérationnelle", "ODD (ONU)"]
+  },
+  {
+    id: "soutenabilite-forte",
+    terme: "Soutenabilité forte",
+    categorie: "Croissance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Conception du développement durable selon laquelle le capital naturel (ressources non renouvelables, biodiversité) ne peut être substitué par du capital physique ou humain.",
+    interpretation: "S'oppose à la soutenabilité faible (substitution possible) ; implique une contrainte de non-dépassement des limites planétaires.",
+    exemple: "La disparition d'une espèce de pollinisateur est irréversible : aucun capital humain ou physique ne peut remplacer la pollinisation.",
+    pointsCles: ["Capital naturel non substituable", "Limites planétaires", "Irréversibilité", "Opposé à la soutenabilité faible"]
+  },
+  {
+    id: "innovation",
+    terme: "Innovation",
+    categorie: "Croissance",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Mise sur le marché d'un produit ou d'un procédé nouveau ou amélioré, ou d'une nouvelle forme d'organisation. Schumpeter distingue 5 types : produit, procédé, marché, source d'approvisionnement, organisation.",
+    interpretation: "L'innovation est le moteur de la destruction créatrice : elle génère des rentes temporaires (brevet) qui incitent les entreprises à investir en R&D.",
+    exemple: "L'iPhone (2007) est une innovation de produit radicale qui a créé le marché des smartphones et détruit l'industrie des téléphones classiques.",
+    pointsCles: ["Schumpeter : 5 types", "Moteur de la croissance", "Rente temporaire du brevet", "Destruction créatrice"]
+  },
+
+  // ================================================================
+  // REGARDS CROISÉS
+  // ================================================================
+  {
+    id: "etat-providence",
+    terme: "État-providence",
+    categorie: "Regards croisés",
+    discipline: "Regards croisés",
+    niveau: ["Première"],
+    definition: "Système dans lequel l'État garantit un niveau minimal de bien-être à tous les citoyens en organisant la protection contre les principaux risques sociaux (maladie, vieillesse, chômage, pauvreté).",
+    interpretation: "Gøsta Esping-Andersen (1990) distingue trois régimes : libéral (États-Unis), conservateur-corporatiste (France/Allemagne) et social-démocrate (Scandinavie).",
+    exemple: "En France, la Sécurité sociale (1945) couvre les risques maladie, retraite, famille et accidents du travail.",
+    pointsCles: ["Esping-Andersen (3 régimes)", "Risques sociaux", "Bismarck (assurance) vs Beveridge (assistance)", "Crise de financement"]
+  },
+  {
+    id: "anomie",
+    terme: "Anomie",
+    categorie: "Regards croisés",
+    discipline: "Sociologie et science politique",
+    niveau: ["Première"],
+    definition: "État de dérèglement social caractérisé par l'affaiblissement ou l'inadaptation des normes collectives qui régulent les comportements individuels, décrit par Émile Durkheim.",
+    interpretation: "L'anomie survient lors de transformations sociales rapides (crises économiques, mutations technologiques) qui désynchronisent aspirations individuelles et normes sociales.",
+    exemple: "Durkheim a montré dans Le Suicide (1897) que le suicide anomique augmentait lors des crises économiques soudaines.",
+    pointsCles: ["Émile Durkheim (1893, 1897)", "Déficit de régulation normative", "Suicide anomique", "Transformations sociales rapides"]
+  },
+  {
+    id: "lien-social",
+    terme: "Lien social",
+    categorie: "Regards croisés",
+    discipline: "Sociologie et science politique",
+    niveau: ["Première"],
+    definition: "Ensemble des relations et appartenances qui unissent les individus à une société (famille, travail, associations, religion, nation) et les protègent contre la désaffiliation et la marginalisation.",
+    interpretation: "Robert Castel distingue une zone d'intégration (liens forts), une zone de vulnérabilité et une zone de désaffiliation (rupture des liens).",
+    exemple: "Un retraité isolé dont les enfants vivent loin et sans activité bénévole risque une rupture du lien social pouvant mener à la solitude.",
+    pointsCles: ["Robert Castel", "Zone d'intégration / vulnérabilité / désaffiliation", "Travail et famille", "Cohésion sociale"]
+  },
+  {
+    id: "cohesion-sociale",
+    terme: "Cohésion sociale",
+    categorie: "Regards croisés",
+    discipline: "Sociologie et science politique",
+    niveau: ["Première"],
+    definition: "Qualité d'une société caractérisée par des liens sociaux forts, un sentiment d'appartenance commune et un niveau faible d'inégalités et d'exclusion sociales.",
+    interpretation: "La cohésion sociale est à la fois un produit de l'intégration (Durkheim) et une condition de la coopération économique (capital social de Putnam).",
+    exemple: "Les pays nordiques présentent une forte cohésion sociale liée à des inégalités faibles, une haute confiance interpersonnelle et des institutions inclusives.",
+    pointsCles: ["Solidarité organique / mécanique (Durkheim)", "Capital social (Putnam)", "Confiance", "Lutte contre l'exclusion"]
+  },
+
+  // ================================================================
+  // MACROÉCONOMIE (compléments)
+  // ================================================================
+  {
+    id: "pib-approche-depense",
+    terme: "PIB par l'approche dépenses",
+    categorie: "Macroéconomie",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Méthode de calcul du PIB par la somme des dépenses finales : consommation des ménages (C), investissement des entreprises (I), dépenses publiques (G) et exportations nettes (X − M).",
+    formule: "PIB = C + I + G + (X − M)",
+    interpretation: "Cette identité keynésienne est fondamentale pour analyser les politiques de demande : relancer C, I ou G stimule le PIB.",
+    exemple: "En 2023, la consommation des ménages représente environ 55 % du PIB français, l'investissement privé 25 %, les dépenses publiques 22 %.",
+    pointsCles: ["C + I + G + (X − M)", "Demande agrégée", "Identité comptable", "Approche keynésienne"]
+  },
+  {
+    id: "recession",
+    terme: "Récession",
+    categorie: "Macroéconomie",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Contraction du PIB réel pendant au moins deux trimestres consécutifs ou fort ralentissement de l'activité économique accompagné d'une hausse du chômage.",
+    interpretation: "Elle active les stabilisateurs automatiques et peut nécessiter une relance budgétaire discrétionnaire.",
+    exemple: "La France a connu une récession historique au printemps 2020 (−13,7 % du PIB au T2), liée aux confinements Covid.",
+    pointsCles: ["2 trimestres de baisse du PIB", "Stabilisateurs automatiques", "Chômage cyclique", "Creux du cycle économique"]
+  },
+  {
+    id: "desinflation",
+    terme: "Désinflation",
+    categorie: "Macroéconomie",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Ralentissement du taux d'inflation (l'inflation reste positive mais diminue), à distinguer de la déflation (baisse du niveau général des prix).",
+    interpretation: "La désinflation peut résulter d'une politique monétaire restrictive (hausse des taux) ou d'un choc d'offre positif.",
+    exemple: "L'inflation française est passée de 6 % en 2022 à 2,5 % en 2024 : c'est une désinflation (l'inflation ralentit) mais les prix continuent de monter.",
+    pointsCles: ["Inflation positive mais qui diminue", "≠ Déflation", "Politique monétaire restrictive", "Courbe de Phillips"]
+  },
+  {
+    id: "demande-agregee",
+    terme: "Demande agrégée",
+    categorie: "Macroéconomie",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Somme de toutes les dépenses finales réelles dans une économie à un niveau de prix donné : consommation, investissement, dépenses publiques et exportations nettes.",
+    interpretation: "Dans le modèle keynésien à court terme, la demande agrégée détermine le niveau de production et d'emploi.",
+    exemple: "Quand le gouvernement augmente ses dépenses publiques de 10 Md€, la demande agrégée augmente directement, puis se multiplie via le multiplicateur.",
+    pointsCles: ["C + I + G + XN", "Détermine l'activité à court terme (Keynes)", "Courbe à pente négative", "Politiques de demande"]
+  },
+  {
+    id: "choc-offre",
+    terme: "Choc d'offre",
+    categorie: "Macroéconomie",
+    discipline: "Science économique",
+    niveau: ["Première"],
+    definition: "Modification soudaine et imprévue des conditions de production (coûts, capacités productives) affectant l'offre agrégée et l'équilibre macroéconomique.",
+    interpretation: "Un choc d'offre négatif (hausse des coûts de l'énergie) provoque une stagflation (moins de croissance + plus d'inflation) ; un choc positif (baisse du pétrole) stimule l'économie.",
+    exemple: "Le quadruplement du prix du pétrole en 1973 (premier choc pétrolier) est un choc d'offre négatif majeur qui a mis fin aux Trente Glorieuses.",
+    pointsCles: ["Positif (favorable) / Négatif (défavorable)", "Stagflation si choc négatif", "1973-1979 (chocs pétroliers)", "Offre agrégée"]
   }
 ];
 

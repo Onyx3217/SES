@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { generateExerciseSet, Exercise } from '../data/exercices';
+import { generateExerciseSet, Exercise, DifficultyLevel } from '../data/exercices';
 
 export default function Exercices({ onNavigateToCalcul }: { onNavigateToCalcul?: (calculId: string) => void }) {
   const [levelFilter, setLevelFilter] = useState<'Tous' | 'Seconde' | 'Première'>('Tous');
   const [modeFilter, setModeFilter] = useState<'tous' | 'calculs' | 'qcm'>('tous');
-  const [exercises, setExercises] = useState<Exercise[]>(() => generateExerciseSet(5, 'Tous', 'tous'));
+  const [diffFilter, setDiffFilter] = useState<DifficultyLevel | 'mixte'>('mixte');
+  const [questionCount, setQuestionCount] = useState<number>(10);
+  const [exercises, setExercises] = useState<Exercise[]>(() => generateExerciseSet(10, 'Tous', 'tous', 'mixte'));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -13,8 +15,13 @@ export default function Exercices({ onNavigateToCalcul }: { onNavigateToCalcul?:
 
   const current = exercises[currentIndex];
 
-  const handleStartNewSet = (count = 5, lvl = levelFilter, m = modeFilter) => {
-    setExercises(generateExerciseSet(count, lvl, m));
+  const handleStartNewSet = (
+    count = questionCount,
+    lvl = levelFilter,
+    m = modeFilter,
+    d = diffFilter
+  ) => {
+    setExercises(generateExerciseSet(count, lvl, m, d));
     setCurrentIndex(0);
     setSelectedChoice(null);
     setShowAnswer(false);
@@ -46,41 +53,41 @@ export default function Exercices({ onNavigateToCalcul }: { onNavigateToCalcul?:
   const progressPercent = ((currentIndex + (isFinished ? 1 : 0)) / exercises.length) * 100;
 
   return (
-    <div style={{ display: 'grid', gap: 20 }}>
+    <div style={{ display: 'grid', gap: 24 }}>
       {/* HEADER */}
       <div
         style={{
-          padding: '24px 22px',
-          borderRadius: 24,
+          padding: '28px 32px',
+          borderRadius: 28,
           background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)',
           color: '#ffffff',
-          boxShadow: '0 16px 40px rgba(15, 23, 42, 0.25)',
+          boxShadow: '0 20px 45px rgba(15, 23, 42, 0.25)',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
           <div>
             <div style={{ color: '#a5b4fc', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 800 }}>
-              Entraînement & Évaluation
+              Générateur Infini • 240+ Notions & 30 Calculs
             </div>
             <h2 style={{ margin: '6px 0', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 800 }}>
-              Exercices & QCM Interactifs
+              Quiz & Entraînement Dynamique
             </h2>
-            <p style={{ margin: 0, color: '#c7d2fe', fontSize: '0.95rem', maxWidth: 650, lineHeight: 1.5 }}>
-              Testez vos compétences sur les calculs de base et les notions clés du programme de Seconde et Première.
+            <p style={{ margin: 0, color: '#c7d2fe', fontSize: '0.96rem', maxWidth: 680, lineHeight: 1.6 }}>
+              Des séries adaptées et renouvelées sans répétition : niveaux Débutant, Intermédiaire et BAC avec corrigés complets.
             </p>
           </div>
 
           <button
             type="button"
-            onClick={() => handleStartNewSet(5)}
+            onClick={() => handleStartNewSet(questionCount)}
             style={{
               border: 'none',
               background: 'linear-gradient(135deg, #4f46e5, #6366f1)',
               color: '#ffffff',
               borderRadius: 999,
-              padding: '12px 22px',
+              padding: '14px 26px',
               fontWeight: 800,
-              fontSize: '0.9rem',
+              fontSize: '0.92rem',
               cursor: 'pointer',
               boxShadow: '0 10px 25px rgba(79, 70, 229, 0.35)',
               display: 'flex',
@@ -88,13 +95,26 @@ export default function Exercices({ onNavigateToCalcul }: { onNavigateToCalcul?:
               gap: 8,
             }}
           >
-            <span>🔄</span> Nouvelle série
+            <span>🔄</span> Générer une nouvelle série
           </button>
         </div>
       </div>
 
-      {/* FILTER BAR */}
-      <div style={{ padding: 16, borderRadius: 20, background: '#ffffff', border: '1px solid #e2e8f0', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
+      {/* FILTER & CONFIG BAR */}
+      <div
+        style={{
+          padding: '18px 24px',
+          borderRadius: 24,
+          background: '#ffffff',
+          border: '1.5px solid #e2e8f0',
+          boxShadow: '0 8px 24px rgba(15, 23, 42, 0.03)',
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: 16,
+        }}
+      >
         {/* Mode filter */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
           <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#64748b', marginRight: 4 }}>Mode :</span>
@@ -104,20 +124,21 @@ export default function Exercices({ onNavigateToCalcul }: { onNavigateToCalcul?:
               type="button"
               onClick={() => {
                 setModeFilter(m);
-                handleStartNewSet(5, levelFilter, m);
+                handleStartNewSet(questionCount, levelFilter, m, diffFilter);
               }}
               style={{
                 border: 'none',
                 background: modeFilter === m ? '#1e1b4b' : '#f1f5f9',
                 color: modeFilter === m ? '#ffffff' : '#475569',
-                padding: '8px 14px',
+                padding: '8px 16px',
                 borderRadius: 12,
                 fontWeight: 800,
-                fontSize: '0.82rem',
+                fontSize: '0.84rem',
                 cursor: 'pointer',
+                transition: 'all 0.15s ease',
               }}
             >
-              {m === 'calculs' ? '🧮 Calculs pratiques' : m === 'qcm' ? '🎓 QCM Notions' : '🌟 Mix complet'}
+              {m === 'calculs' ? '🧮 Calculs pratiques' : m === 'qcm' ? '🎓 Notions & Auteurs' : '🌟 Mix complet'}
             </button>
           ))}
         </div>
@@ -131,20 +152,77 @@ export default function Exercices({ onNavigateToCalcul }: { onNavigateToCalcul?:
               type="button"
               onClick={() => {
                 setLevelFilter(lvl);
-                handleStartNewSet(5, lvl, modeFilter);
+                handleStartNewSet(questionCount, lvl, modeFilter, diffFilter);
               }}
               style={{
                 border: 'none',
                 background: levelFilter === lvl ? '#4f46e5' : '#f1f5f9',
                 color: levelFilter === lvl ? '#ffffff' : '#475569',
-                padding: '8px 14px',
+                padding: '8px 16px',
                 borderRadius: 12,
                 fontWeight: 800,
-                fontSize: '0.82rem',
+                fontSize: '0.84rem',
                 cursor: 'pointer',
+                transition: 'all 0.15s ease',
               }}
             >
               {lvl === 'Seconde' ? '🎓 Seconde' : lvl === 'Première' ? '🏛️ Première' : '🌐 Tous'}
+            </button>
+          ))}
+        </div>
+
+        {/* Difficulty filter */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
+          <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#64748b', marginRight: 4 }}>Difficulté :</span>
+          {(['mixte', 'debutant', 'intermediaire', 'bac'] as const).map((d) => (
+            <button
+              key={d}
+              type="button"
+              onClick={() => {
+                setDiffFilter(d);
+                handleStartNewSet(questionCount, levelFilter, modeFilter, d);
+              }}
+              style={{
+                border: 'none',
+                background: diffFilter === d ? '#0f172a' : '#f1f5f9',
+                color: diffFilter === d ? '#ffffff' : '#475569',
+                padding: '8px 14px',
+                borderRadius: 12,
+                fontWeight: 800,
+                fontSize: '0.84rem',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+              }}
+            >
+              {d === 'debutant' ? '⭐ Débutant' : d === 'intermediaire' ? '⭐⭐ Intermédiaire' : d === 'bac' ? '⭐⭐⭐ BAC' : '🎲 Mixte'}
+            </button>
+          ))}
+        </div>
+
+        {/* Count selector */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
+          <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#64748b', marginRight: 4 }}>Taille :</span>
+          {[5, 10, 20].map((cnt) => (
+            <button
+              key={cnt}
+              type="button"
+              onClick={() => {
+                setQuestionCount(cnt);
+                handleStartNewSet(cnt, levelFilter, modeFilter, diffFilter);
+              }}
+              style={{
+                border: 'none',
+                background: questionCount === cnt ? '#0f766e' : '#f1f5f9',
+                color: questionCount === cnt ? '#ffffff' : '#475569',
+                padding: '8px 14px',
+                borderRadius: 12,
+                fontWeight: 800,
+                fontSize: '0.84rem',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+              }}
+            >
+              {cnt} questions
             </button>
           ))}
         </div>
@@ -154,119 +232,154 @@ export default function Exercices({ onNavigateToCalcul }: { onNavigateToCalcul?:
       {!isFinished && current ? (
         <section
           style={{
-            padding: '24px 22px',
-            borderRadius: 24,
+            padding: '32px 36px',
+            borderRadius: 28,
             background: '#ffffff',
-            border: '1px solid #e2e8f0',
+            border: '1.5px solid #e2e8f0',
             boxShadow: '0 12px 35px rgba(15, 23, 42, 0.04)',
             display: 'grid',
-            gap: 18,
+            gap: 24,
           }}
         >
-          {/* Header question status */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span
-                style={{
-                  background: current.type === 'calcul' ? '#e0e7ff' : '#fef3c7',
-                  color: current.type === 'calcul' ? '#4338ca' : '#b45309',
-                  padding: '4px 10px',
-                  borderRadius: 999,
-                  fontWeight: 800,
-                  fontSize: '0.78rem',
-                }}
-              >
-                {current.type === 'calcul' ? '🧮 Calcul' : '🎓 QCM'} • {current.theme}
-              </span>
-              <span style={{ color: '#64748b', fontSize: '0.85rem', fontWeight: 700 }}>
-                Question {currentIndex + 1} / {exercises.length}
-              </span>
+          {/* TOP BAR WITH PROGRESS */}
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap', gap: 8 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                <span
+                  style={{
+                    background: current.type === 'calcul' ? '#ecfeff' : '#f5f3ff',
+                    color: current.type === 'calcul' ? '#0891b2' : '#6d28d9',
+                    border: `1px solid ${current.type === 'calcul' ? '#a5f3fc' : '#ddd6fe'}`,
+                    padding: '4px 12px',
+                    borderRadius: 999,
+                    fontSize: '0.78rem',
+                    fontWeight: 800,
+                  }}
+                >
+                  {current.type === 'calcul' ? '🧮 Calcul pratique' : '🎓 Notion & Concept'}
+                </span>
+                {current.difficulte && (
+                  <span
+                    style={{
+                      background: current.difficulte === 'bac' ? '#fee2e2' : current.difficulte === 'debutant' ? '#dcfce7' : '#fef3c7',
+                      color: current.difficulte === 'bac' ? '#991b1b' : current.difficulte === 'debutant' ? '#166534' : '#92400e',
+                      border: `1px solid ${current.difficulte === 'bac' ? '#fca5a5' : current.difficulte === 'debutant' ? '#86efac' : '#fde68a'}`,
+                      padding: '4px 10px',
+                      borderRadius: 999,
+                      fontSize: '0.76rem',
+                      fontWeight: 800,
+                    }}
+                  >
+                    {current.difficulte === 'debutant' ? '⭐ Débutant' : current.difficulte === 'bac' ? '⭐⭐⭐ BAC' : '⭐⭐ Intermédiaire'}
+                  </span>
+                )}
+                <span style={{ fontSize: '0.84rem', color: '#64748b', fontWeight: 700 }}>
+                  Thème : {current.theme}
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                <div style={{ fontSize: '0.92rem', fontWeight: 800, color: '#0f172a' }}>
+                  Score : <span style={{ color: '#10b981' }}>{score}</span> / {currentIndex}
+                </div>
+                <div style={{ fontSize: '0.86rem', fontWeight: 800, color: '#64748b' }}>
+                  Question {currentIndex + 1} sur {exercises.length}
+                </div>
+              </div>
             </div>
 
+            {/* PROGRESS BAR */}
+            <div style={{ width: '100%', height: 8, background: '#f1f5f9', borderRadius: 999, overflow: 'hidden' }}>
+              <div
+                style={{
+                  width: `${progressPercent}%`,
+                  height: '100%',
+                  background: 'linear-gradient(90deg, #4f46e5, #06b6d4)',
+                  borderRadius: 999,
+                  transition: 'width 0.3s ease',
+                }}
+              />
+            </div>
+          </div>
+
+          {/* CONTEXT (IF ANY) */}
+          {current.contexte && (
             <div
               style={{
+                padding: '16px 20px',
+                borderRadius: 18,
                 background: '#f8fafc',
                 border: '1px solid #e2e8f0',
-                borderRadius: 999,
-                padding: '6px 14px',
-                fontWeight: 800,
-                color: '#0f172a',
-                fontSize: '0.9rem',
+                color: '#334155',
+                fontSize: '0.95rem',
+                lineHeight: 1.6,
               }}
             >
-              Score : <strong style={{ color: '#4f46e5' }}>{score}</strong> / {exercises.length}
-            </div>
-          </div>
-
-          {/* Progress bar */}
-          <div style={{ height: 8, background: '#f1f5f9', borderRadius: 999, overflow: 'hidden' }}>
-            <div
-              style={{
-                height: '100%',
-                width: `${progressPercent}%`,
-                background: 'linear-gradient(90deg, #4f46e5 0%, #06b6d4 100%)',
-                transition: 'width 0.3s ease',
-              }}
-            />
-          </div>
-
-          {/* Context if any */}
-          {current.contexte && (
-            <div style={{ padding: '14px 16px', borderRadius: 16, background: '#f8fafc', border: '1px solid #e2e8f0', color: '#334155', lineHeight: 1.6, fontSize: '0.98rem' }}>
-              <strong>Mise en situation :</strong> {current.contexte}
+              <div style={{ color: '#0284c7', fontWeight: 800, fontSize: '0.76rem', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
+                📄 Contexte / Données de l'exercice :
+              </div>
+              {current.contexte}
             </div>
           )}
 
-          {/* Question title */}
-          <h3 style={{ margin: 0, color: '#0f172a', fontSize: '1.35rem', lineHeight: 1.5, fontWeight: 800 }}>
+          {/* QUESTION */}
+          <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#0f172a', fontWeight: 800, lineHeight: 1.5, whiteSpace: 'pre-line' }}>
             {current.question}
           </h3>
 
-          {/* Choices list */}
-          <div style={{ display: 'grid', gap: 10 }}>
-            {current.choices.map((choice) => {
-              const isSelected = selectedChoice === choice.label;
-              const isCorrect = choice.label.trim() === current.answer.trim();
-              const showCorrectGlow = showAnswer && isCorrect;
-              const showWrongGlow = showAnswer && isSelected && !isCorrect;
+          {/* CHOICES LIST */}
+          <div style={{ display: 'grid', gap: 12 }}>
+            {current.choices.map((c) => {
+              const isSelected = selectedChoice === c.label;
+              const isCorrect = c.label.trim() === current.answer.trim();
+
+              let bg = '#ffffff';
+              let border = '1.5px solid #e2e8f0';
+              let color = '#1e293b';
+
+              if (showAnswer) {
+                if (isCorrect) {
+                  bg = '#ecfdf5';
+                  border = '2px solid #10b981';
+                  color = '#065f46';
+                } else if (isSelected && !isCorrect) {
+                  bg = '#fef2f2';
+                  border = '2px solid #ef4444';
+                  color = '#991b1b';
+                } else {
+                  color = '#94a3b8';
+                }
+              } else if (isSelected) {
+                bg = '#eff6ff';
+                border = '2px solid #3b82f6';
+                color = '#1d4ed8';
+              }
 
               return (
                 <button
-                  key={choice.id}
+                  key={c.id}
                   type="button"
-                  onClick={() => handleSelectChoice(choice.label)}
+                  onClick={() => handleSelectChoice(c.label)}
                   disabled={showAnswer}
                   style={{
                     textAlign: 'left',
-                    padding: '16px 18px',
-                    borderRadius: 16,
-                    border: `2px solid ${
-                      showCorrectGlow
-                        ? '#22c55e'
-                        : showWrongGlow
-                        ? '#ef4444'
-                        : isSelected
-                        ? '#4f46e5'
-                        : '#e2e8f0'
-                    }`,
-                    background: showCorrectGlow
-                      ? '#f0fdf4'
-                      : showWrongGlow
-                      ? '#fef2f2'
-                      : '#ffffff',
-                    color: '#0f172a',
-                    fontWeight: 700,
-                    fontSize: '1rem',
+                    padding: '16px 20px',
+                    borderRadius: 18,
+                    background: bg,
+                    border,
+                    color,
+                    fontSize: '0.95rem',
+                    fontWeight: isSelected || (showAnswer && isCorrect) ? 700 : 500,
                     cursor: showAnswer ? 'default' : 'pointer',
+                    transition: 'all 0.15s ease',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     gap: 12,
-                    boxShadow: '0 4px 14px rgba(15, 23, 42, 0.02)',
-                    transition: 'all 0.15s ease',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.02)',
                   }}
                 >
-                  <span>{choice.label}</span>
+                  <span>{c.label}</span>
                   {showAnswer && (
                     <span style={{ fontSize: '1.2rem' }}>
                       {isCorrect ? '✅' : isSelected ? '❌' : ''}
@@ -277,34 +390,26 @@ export default function Exercices({ onNavigateToCalcul }: { onNavigateToCalcul?:
             })}
           </div>
 
-          {/* Answer explanation banner */}
+          {/* FEEDBACK & EXPLANATION */}
           {showAnswer && (
             <div
               style={{
-                padding: 18,
-                borderRadius: 18,
-                background: selectedChoice?.trim() === current.answer.trim() ? '#f0fdf4' : '#fffbeb',
-                border: `1.5px solid ${selectedChoice?.trim() === current.answer.trim() ? '#86efac' : '#fde68a'}`,
+                padding: '20px 24px',
+                borderRadius: 20,
+                background: selectedChoice?.trim() === current.answer.trim() ? '#f0fdf4' : '#fff7ed',
+                border: `1.5px solid ${selectedChoice?.trim() === current.answer.trim() ? '#86efac' : '#fed7aa'}`,
                 display: 'grid',
                 gap: 10,
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ fontSize: '1.3rem' }}>
-                  {selectedChoice?.trim() === current.answer.trim() ? '🎉' : '💡'}
-                </span>
-                <strong style={{ color: selectedChoice?.trim() === current.answer.trim() ? '#15803d' : '#b45309', fontSize: '1.05rem' }}>
-                  {selectedChoice?.trim() === current.answer.trim()
-                    ? 'Bravo, c’est la bonne réponse !'
-                    : `Réponse attendue : ${current.answer}`}
-                </strong>
+              <div style={{ fontWeight: 800, color: selectedChoice?.trim() === current.answer.trim() ? '#15803d' : '#c2410c', fontSize: '1rem' }}>
+                {selectedChoice?.trim() === current.answer.trim() ? '🎉 Bravo, excellente réponse !' : '💡 Explication détaillée du corrigé :'}
               </div>
+              <p style={{ margin: 0, color: '#334155', fontSize: '0.94rem', lineHeight: 1.6, whiteSpace: 'pre-line' }}>
+                {current.explanation}
+              </p>
 
-              <div style={{ color: '#334155', fontSize: '0.95rem', lineHeight: 1.6 }}>
-                <strong>Explication détaillée :</strong> {current.explanation}
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 6 }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
                 <button
                   type="button"
                   onClick={handleNextQuestion}
@@ -312,70 +417,72 @@ export default function Exercices({ onNavigateToCalcul }: { onNavigateToCalcul?:
                     border: 'none',
                     background: '#0f172a',
                     color: '#ffffff',
-                    borderRadius: 12,
-                    padding: '12px 20px',
+                    padding: '12px 28px',
+                    borderRadius: 14,
                     fontWeight: 800,
-                    fontSize: '0.92rem',
+                    fontSize: '0.94rem',
                     cursor: 'pointer',
-                    boxShadow: '0 6px 18px rgba(0,0,0,0.15)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
                   }}
                 >
-                  {currentIndex === exercises.length - 1 ? 'Voir le bilan final ➔' : 'Question suivante ➔'}
+                  <span>{currentIndex < exercises.length - 1 ? 'Question suivante' : 'Voir mon bilan'}</span>
+                  <span>➔</span>
                 </button>
               </div>
             </div>
           )}
         </section>
       ) : isFinished ? (
-        /* FINISHED SUMMARY SCREEN */
+        /* FINISHED SCREEN */
         <div
           style={{
-            padding: '40px 24px',
-            borderRadius: 24,
+            padding: 48,
+            borderRadius: 28,
             background: '#ffffff',
-            border: '2px solid #86efac',
-            boxShadow: '0 20px 50px rgba(34, 197, 94, 0.12)',
+            border: '1.5px solid #e2e8f0',
             textAlign: 'center',
             display: 'grid',
             placeItems: 'center',
-            gap: 18,
+            gap: 20,
+            boxShadow: '0 20px 45px rgba(15, 23, 42, 0.05)',
           }}
         >
-          <div style={{ fontSize: '3.5rem' }}>
-            {score >= 4 ? '🏆' : score >= 2 ? '👏' : '📚'}
+          <div style={{ fontSize: '4rem' }}>
+            {score / exercises.length >= 0.8 ? '🏆' : score / exercises.length >= 0.5 ? '👏' : '📚'}
           </div>
 
-          <div>
-            <h3 style={{ margin: '0 0 8px', fontSize: '2rem', color: '#0f172a', fontWeight: 800 }}>
-              Série terminée !
-            </h3>
-            <p style={{ margin: 0, fontSize: '1.2rem', color: '#475569' }}>
-              Vous avez obtenu <strong style={{ color: '#16a34a', fontSize: '1.4rem' }}>{score}</strong> bonne(s) réponse(s) sur <strong>{exercises.length}</strong>.
-            </p>
+          <h3 style={{ margin: 0, fontSize: '2rem', fontWeight: 900, color: '#0f172a' }}>
+            Série terminée !
+          </h3>
+
+          <div style={{ fontSize: '1.2rem', color: '#475569', fontWeight: 600 }}>
+            Votre score : <strong style={{ color: '#2563eb', fontSize: '1.6rem' }}>{score}</strong> sur <strong>{exercises.length}</strong> (
+            {Math.round((score / exercises.length) * 100)} %)
           </div>
 
-          <div style={{ padding: '14px 20px', borderRadius: 16, background: '#f8fafc', border: '1px solid #e2e8f0', maxWidth: 450, color: '#334155', lineHeight: 1.6 }}>
-            {score === 5
-              ? '🥇 Performance parfaite ! Vous maîtrisez parfaitement les mécanismes et calculs de cette série.'
-              : score >= 3
-              ? '👍 Bon score ! Relisez les fiches de calcul ou le lexique pour perfectionner les détails.'
-              : '💪 Ne vous découragez pas ! Révisez la fiche correspondante et réessayez avec de nouvelles valeurs.'}
-          </div>
+          <p style={{ margin: 0, color: '#64748b', maxWidth: 500, lineHeight: 1.6 }}>
+            {score / exercises.length >= 0.8
+              ? 'Excellent niveau ! Vous maîtrisez parfaitement les mécanismes et les calculs testés.'
+              : score / exercises.length >= 0.5
+              ? 'Bon travail ! Quelques notions méritent d’être revues dans le lexique ou les fiches de calcul.'
+              : 'Continuez à vous entraîner ! Relisez les fiches de cours et les schémas causaux pour consolider vos acquis.'}
+          </p>
 
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center', marginTop: 12 }}>
             <button
               type="button"
-              onClick={() => handleStartNewSet(5)}
+              onClick={() => handleStartNewSet(questionCount)}
               style={{
                 border: 'none',
-                background: 'linear-gradient(135deg, #16a34a, #22c55e)',
+                background: 'linear-gradient(135deg, #1e3a8a, #3b82f6)',
                 color: '#ffffff',
-                padding: '14px 24px',
-                borderRadius: 999,
+                padding: '14px 28px',
+                borderRadius: 16,
                 fontWeight: 800,
-                fontSize: '1rem',
+                fontSize: '0.96rem',
                 cursor: 'pointer',
-                boxShadow: '0 10px 25px rgba(22, 163, 74, 0.3)',
               }}
             >
               🔄 Relancer une nouvelle série
