@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { auteursSES, AuteurSES } from '../data/auteursData';
 import { insertSnippetIntoNotebook } from '../data/notebookHelper';
 import { speakText, stopSpeaking } from '../utils/audioHelper';
+import { rechercherAuteurs } from '../search';
 
 export default function Auteurs({ onNavigateToNotebook }: { onNavigateToNotebook?: () => void }) {
   const [disciplineFilter, setDisciplineFilter] = useState<'Toutes' | 'Économie' | 'Sociologie et science politique'>('Toutes');
@@ -11,13 +12,10 @@ export default function Auteurs({ onNavigateToNotebook }: { onNavigateToNotebook
   const [toastMsg, setToastMsg] = useState<string | null>(null);
 
   const filteredAuteurs = useMemo(() => {
-    const q = search.toLowerCase().trim();
-    return auteursSES.filter((a) => {
+    const trimmed = search.trim();
+    const baseList = trimmed ? rechercherAuteurs(trimmed, 50) : auteursSES;
+    return baseList.filter((a) => {
       if (disciplineFilter !== 'Toutes' && a.discipline !== disciplineFilter) return false;
-      if (q) {
-        const hay = `${a.nom} ${a.courant} ${a.theseCentrale} ${a.notionsCles.join(' ')} ${a.citationIncontournable}`.toLowerCase();
-        if (!hay.includes(q)) return false;
-      }
       return true;
     });
   }, [disciplineFilter, search]);
@@ -37,7 +35,6 @@ export default function Auteurs({ onNavigateToNotebook }: { onNavigateToNotebook
     try {
       await navigator.clipboard.writeText(citation);
     } catch {
-      // Fallback for non-HTTPS / older browsers
       const ta = document.createElement('textarea');
       ta.value = citation;
       ta.style.position = 'fixed';
@@ -54,108 +51,142 @@ export default function Auteurs({ onNavigateToNotebook }: { onNavigateToNotebook
   const handleAddToNotebook = (auteur: AuteurSES) => {
     const contenu = `### ${auteur.nom} (${auteur.siecle})\n**Courant :** ${auteur.courant}\n\n**Thèse centrale :**\n${auteur.theseCentrale}\n\n**Concepts clés :** ${auteur.notionsCles.join(', ')}\n\n**Citation pour le bac :**\n${auteur.citationIncontournable}\n\n**Quand le citer :**\n${auteur.contexteUtilisationBac}`;
     insertSnippetIntoNotebook(auteur.nom, contenu, 'Grands Auteurs', 'Auteur');
-    setToastMsg(`« ${auteur.nom} » ajouté à votre Notebook !`);
+    setToastMsg(`« ${auteur.nom} » ajouté au dossier`);
     setTimeout(() => setToastMsg(null), 2500);
   };
 
   return (
-    <div style={{ display: 'grid', gap: 20 }}>
-      {/* HEADER BANNER */}
-      <div
-        style={{
-          padding: '24px 22px',
-          borderRadius: 24,
-          background: 'linear-gradient(135deg, #78350f 0%, #b45309 50%, #d97706 100%)',
-          color: '#ffffff',
-          boxShadow: '0 16px 40px rgba(180, 83, 9, 0.22)',
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-          <div>
-            <div style={{ color: '#fef3c7', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 800 }}>
-              Répertoire Théorique & Auteurs Clés
-            </div>
-            <h2 style={{ margin: '6px 0', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 800 }}>
-              Les Grands Auteurs de SES
-            </h2>
-            <p style={{ margin: 0, color: '#fef3c7', fontSize: '0.95rem', maxWidth: 650, lineHeight: 1.5 }}>
-              Les 20+ économistes et sociologues indispensables pour enrichir vos dissertations, épreuves composées et devoirs surveillés.
-            </p>
-          </div>
+    <div style={{ display: 'grid', gap: 18 }}>
+      {/* HEADER */}
+      <div style={{ marginBottom: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12 }}>
+        <div>
+          <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 700, color: '#111827', letterSpacing: '-0.02em' }}>
+            Grands Auteurs de SES
+          </h2>
+          <p style={{ margin: '4px 0 0', color: '#6b7280', fontSize: '0.88rem' }}>
+            {filteredAuteurs.length} auteurs · économie, sociologie et science politique pour les épreuves du bac
+          </p>
         </div>
       </div>
 
-      {/* TOAST NOTIFICATION */}
+      {/* TOAST */}
       {toastMsg && (
         <div
           style={{
             position: 'fixed',
-            top: 24,
+            bottom: 24,
             right: 24,
-            background: '#0f172a',
-            color: '#38bdf8',
-            padding: '12px 20px',
-            borderRadius: 14,
-            boxShadow: '0 10px 30px rgba(0,0,0,0.25)',
-            fontWeight: 800,
-            fontSize: '0.9rem',
+            background: '#111827',
+            color: '#ffffff',
+            padding: '10px 16px',
+            borderRadius: 6,
+            fontWeight: 500,
+            fontSize: '0.86rem',
             zIndex: 9999,
           }}
         >
-          📥 {toastMsg}
+          {toastMsg}
         </div>
       )}
 
       {/* FILTER & SEARCH BAR */}
-      <div style={{ padding: 18, borderRadius: 22, background: '#ffffff', border: '1px solid #e2e8f0', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 12, boxShadow: '0 8px 24px rgba(15, 23, 42, 0.03)' }}>
-        <div style={{ position: 'relative', flex: '1 1 280px' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
+        <div style={{ position: 'relative', flex: '1 1 260px' }}>
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Rechercher un auteur : Smith, Bourdieu, Keynes, Weber, Olson..."
+            placeholder="Rechercher : Smith, Bourdieu, Keynes, Weber, Olson, Rawls..."
             style={{
               width: '100%',
-              padding: '12px 14px 12px 38px',
-              borderRadius: 14,
-              border: '1.5px solid #fed7aa',
-              background: '#fffdfa',
-              fontSize: '0.92rem',
-              color: '#0f172a',
+              padding: '9px 12px 9px 34px',
+              borderRadius: 6,
+              border: '1px solid #d1d5db',
+              background: '#ffffff',
+              fontSize: '0.86rem',
+              color: '#111827',
               outline: 'none',
             }}
           />
-          <span style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: '#b45309' }}>
-            🔍
+          <span style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: '#9ca3af', fontSize: '0.9rem' }}>
+            ⌕
           </span>
-        </div>
-
-        {/* Discipline Filters */}
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {(['Toutes', 'Économie', 'Sociologie et science politique'] as const).map((d) => (
+          {search && (
             <button
-              key={d}
               type="button"
-              onClick={() => setDisciplineFilter(d)}
+              onClick={() => setSearch('')}
               style={{
+                position: 'absolute',
+                right: 10,
+                top: '50%',
+                transform: 'translateY(-50%)',
                 border: 'none',
-                background: disciplineFilter === d ? '#b45309' : '#f1f5f9',
-                color: disciplineFilter === d ? '#ffffff' : '#475569',
-                borderRadius: 12,
-                padding: '8px 14px',
-                fontWeight: 800,
+                background: 'none',
+                color: '#9ca3af',
                 fontSize: '0.82rem',
                 cursor: 'pointer',
+                padding: 0,
               }}
             >
-              {d === 'Économie' ? '📈 Économie' : d === 'Sociologie et science politique' ? '👥 Sociologie' : '🌐 Tous'}
+              ✕
+            </button>
+          )}
+        </div>
+
+        {/* Discipline filter */}
+        <div style={{ display: 'flex', gap: 2, background: '#f3f4f6', padding: 2, borderRadius: 5 }}>
+          {(['Toutes', 'Économie', 'Sociologie et science politique'] as const).map((disc) => (
+            <button
+              key={disc}
+              type="button"
+              onClick={() => setDisciplineFilter(disc)}
+              style={{
+                border: 'none',
+                background: disciplineFilter === disc ? '#ffffff' : 'transparent',
+                color: disciplineFilter === disc ? '#111827' : '#6b7280',
+                padding: '6px 12px',
+                borderRadius: 4,
+                fontWeight: disciplineFilter === disc ? 600 : 400,
+                fontSize: '0.82rem',
+                cursor: 'pointer',
+                boxShadow: disciplineFilter === disc ? '0 1px 2px rgba(0,0,0,0.07)' : 'none',
+              }}
+            >
+              {disc}
             </button>
           ))}
         </div>
       </div>
 
+
       {/* AUTEURS GRID */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: 18 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 14 }}>
+        {filteredAuteurs.length === 0 && (
+          <div style={{ padding: '36px 16px', borderRadius: 6, background: '#f9fafb', border: '1px dashed #d1d5db', color: '#6b7280', textAlign: 'center', gridColumn: '1 / -1' }}>
+            <div style={{ fontWeight: 500, color: '#374151', fontSize: '0.92rem', marginBottom: 4 }}>
+              Aucun auteur ne correspond à votre recherche
+            </div>
+            {search && (
+              <button
+                type="button"
+                onClick={() => setSearch('')}
+                style={{
+                  marginTop: 6,
+                  border: '1px solid #d1d5db',
+                  background: '#ffffff',
+                  color: '#111827',
+                  borderRadius: 4,
+                  padding: '5px 12px',
+                  fontSize: '0.78rem',
+                  cursor: 'pointer',
+                }}
+              >
+                Effacer la recherche
+              </button>
+            )}
+          </div>
+        )}
+
         {filteredAuteurs.map((auteur) => {
           const isSpeakingThis = speakingId === auteur.id;
           const isCopied = copiedId === auteur.id;
@@ -164,93 +195,97 @@ export default function Auteurs({ onNavigateToNotebook }: { onNavigateToNotebook
             <article
               key={auteur.id}
               style={{
-                padding: 22,
-                borderRadius: 24,
+                padding: '16px 18px',
+                borderRadius: 8,
                 background: '#ffffff',
-                border: '1px solid #e2e8f0',
-                boxShadow: '0 10px 30px rgba(15, 23, 42, 0.03)',
+                border: '1px solid #e5e7eb',
                 display: 'grid',
-                gap: 14,
-                position: 'relative',
+                gap: 10,
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 8 }}>
                 <div>
-                  <span
-                    style={{
-                      background: auteur.discipline === 'Économie' ? '#fef3c7' : '#fce7f3',
-                      color: auteur.discipline === 'Économie' ? '#92400e' : '#be185d',
-                      padding: '4px 10px',
-                      borderRadius: 999,
-                      fontSize: '0.74rem',
-                      fontWeight: 800,
-                    }}
-                  >
-                    {auteur.discipline} • {auteur.siecle}
-                  </span>
-                  <h3 style={{ margin: '6px 0 2px', fontSize: '1.4rem', color: '#0f172a', fontWeight: 900 }}>
+                  <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+                    <span
+                      style={{
+                        background: auteur.discipline === 'Économie' ? '#eff6ff' : '#fdf2f8',
+                        color: auteur.discipline === 'Économie' ? '#1d4ed8' : '#be185d',
+                        border: `1px solid ${auteur.discipline === 'Économie' ? '#bfdbfe' : '#fbcfe8'}`,
+                        padding: '1px 6px',
+                        borderRadius: 3,
+                        fontSize: '0.7rem',
+                        fontWeight: 500,
+                      }}
+                    >
+                      {auteur.discipline}
+                    </span>
+                    <span style={{ color: '#6b7280', fontSize: '0.72rem' }}>
+                      {auteur.siecle}
+                    </span>
+                  </div>
+                  <h3 style={{ margin: '4px 0 1px', fontSize: '1.1rem', color: '#111827', fontWeight: 600 }}>
                     {auteur.nom}
                   </h3>
-                  <div style={{ color: '#64748b', fontSize: '0.82rem', fontWeight: 600 }}>
+                  <div style={{ color: '#6b7280', fontSize: '0.78rem' }}>
                     {auteur.courant}
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: 6 }}>
+                <div style={{ display: 'flex', gap: 4 }}>
                   <button
                     type="button"
                     onClick={() => handleSpeak(auteur)}
-                    title="Écouter la synthèse audio"
+                    title="Écouter"
                     style={{
-                      border: '1px solid #fed7aa',
-                      background: isSpeakingThis ? '#b45309' : '#fffbeb',
-                      color: isSpeakingThis ? '#ffffff' : '#b45309',
-                      borderRadius: 10,
-                      padding: '6px 10px',
-                      fontSize: '0.82rem',
-                      fontWeight: 700,
+                      border: '1px solid #e5e7eb',
+                      background: isSpeakingThis ? '#1d4ed8' : '#f9fafb',
+                      color: isSpeakingThis ? '#ffffff' : '#6b7280',
+                      borderRadius: 4,
+                      padding: '3px 8px',
+                      fontSize: '0.72rem',
+                      fontWeight: 500,
                       cursor: 'pointer',
                     }}
                   >
-                    🔊 {isSpeakingThis ? 'Stop' : 'Écouter'}
+                    {isSpeakingThis ? 'Stop' : '♪'}
                   </button>
 
                   <button
                     type="button"
                     onClick={() => handleAddToNotebook(auteur)}
-                    title="Insérer dans mon Notebook"
+                    title="Ajouter au dossier"
                     style={{
-                      border: '1px solid #cbd5e1',
-                      background: '#f8fafc',
-                      color: '#0f172a',
-                      borderRadius: 10,
-                      padding: '6px 10px',
-                      fontSize: '0.82rem',
-                      fontWeight: 700,
+                      border: '1px solid #e5e7eb',
+                      background: '#f9fafb',
+                      color: '#6b7280',
+                      borderRadius: 4,
+                      padding: '3px 8px',
+                      fontSize: '0.72rem',
+                      fontWeight: 500,
                       cursor: 'pointer',
                     }}
                   >
-                    📥 Notebook
+                    + Dossier
                   </button>
                 </div>
               </div>
 
               {/* Thèse centrale */}
-              <div style={{ padding: '12px 14px', borderRadius: 14, background: '#f8fafc', border: '1px solid #e2e8f0' }}>
-                <div style={{ color: '#b45309', fontWeight: 800, fontSize: '0.76rem', textTransform: 'uppercase', marginBottom: 4 }}>
-                  💡 Thèse centrale
+              <div style={{ padding: '8px 11px', borderRadius: 4, background: '#f9fafb', border: '1px solid #e5e7eb' }}>
+                <div style={{ color: '#4b5563', fontWeight: 600, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: 2 }}>
+                  Thèse centrale
                 </div>
-                <div style={{ color: '#1e293b', fontSize: '0.92rem', lineHeight: 1.6 }}>
+                <div style={{ color: '#1f2937', fontSize: '0.86rem', lineHeight: 1.55 }}>
                   {auteur.theseCentrale}
                 </div>
               </div>
 
-              {/* Citation incontournable */}
-              <div style={{ padding: '12px 14px', borderRadius: 14, background: '#fffbeb', border: '1px solid #fde68a', position: 'relative' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-                  <div style={{ color: '#92400e', fontWeight: 800, fontSize: '0.76rem', textTransform: 'uppercase' }}>
-                    📝 Citation pour le BAC
-                  </div>
+              {/* Citation */}
+              <div style={{ padding: '8px 11px', borderRadius: 4, background: '#fffbeb', border: '1px solid #fef3c7' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }}>
+                  <span style={{ color: '#92400e', fontWeight: 600, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                    Citation pour le bac
+                  </span>
                   <button
                     type="button"
                     onClick={() => handleCopyCitation(auteur.citationIncontournable, auteur.id)}
@@ -258,44 +293,45 @@ export default function Auteurs({ onNavigateToNotebook }: { onNavigateToNotebook
                       border: 'none',
                       background: 'none',
                       color: '#b45309',
-                      fontSize: '0.78rem',
-                      fontWeight: 800,
+                      fontSize: '0.72rem',
+                      fontWeight: 500,
                       cursor: 'pointer',
-                      textDecoration: 'underline',
+                      padding: 0,
                     }}
                   >
-                    {isCopied ? '✅ Copié !' : 'Copier'}
+                    {isCopied ? 'Copié' : 'Copier'}
                   </button>
                 </div>
-                <div style={{ color: '#78350f', fontSize: '0.88rem', fontStyle: 'italic', lineHeight: 1.5 }}>
-                  {auteur.citationIncontournable}
+                <div style={{ color: '#78350f', fontSize: '0.84rem', fontStyle: 'italic', lineHeight: 1.5 }}>
+                  « {auteur.citationIncontournable} »
                 </div>
               </div>
 
               {/* Concepts Clés */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
                 {auteur.notionsCles.map((concept) => (
                   <span
                     key={concept}
                     style={{
-                      background: '#f1f5f9',
-                      color: '#334155',
-                      border: '1px solid #e2e8f0',
-                      borderRadius: 999,
-                      padding: '3px 8px',
-                      fontSize: '0.74rem',
-                      fontWeight: 700,
+                      background: '#f3f4f6',
+                      color: '#4b5563',
+                      border: '1px solid #e5e7eb',
+                      borderRadius: 3,
+                      padding: '2px 6px',
+                      fontSize: '0.72rem',
                     }}
                   >
-                    • {concept}
+                    {concept}
                   </span>
                 ))}
               </div>
 
               {/* Quand le mobiliser */}
-              <div style={{ fontSize: '0.84rem', color: '#475569', lineHeight: 1.5, borderTop: '1px solid #f1f5f9', paddingTop: 8 }}>
-                <strong>🎯 Au bac :</strong> {auteur.contexteUtilisationBac}
-              </div>
+              {auteur.contexteUtilisationBac && (
+                <div style={{ fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.5, borderTop: '1px solid #f3f4f6', paddingTop: 6 }}>
+                  <strong style={{ color: '#374151', fontWeight: 600 }}>Au bac :</strong> {auteur.contexteUtilisationBac}
+                </div>
+              )}
             </article>
           );
         })}

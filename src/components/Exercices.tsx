@@ -55,174 +55,131 @@ export default function Exercices({ onNavigateToCalcul }: { onNavigateToCalcul?:
   return (
     <div style={{ display: 'grid', gap: 24 }}>
       {/* HEADER */}
-      <div
-        style={{
-          padding: '28px 32px',
-          borderRadius: 28,
-          background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)',
-          color: '#ffffff',
-          boxShadow: '0 20px 45px rgba(15, 23, 42, 0.25)',
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
-          <div>
-            <div style={{ color: '#a5b4fc', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 800 }}>
-              Générateur Infini • 240+ Notions & 30 Calculs
-            </div>
-            <h2 style={{ margin: '6px 0', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 800 }}>
-              Quiz & Entraînement Dynamique
-            </h2>
-            <p style={{ margin: 0, color: '#c7d2fe', fontSize: '0.96rem', maxWidth: 680, lineHeight: 1.6 }}>
-              Des séries adaptées et renouvelées sans répétition : niveaux Débutant, Intermédiaire et BAC avec corrigés complets.
-            </p>
-          </div>
-
-          <button
-            type="button"
-            onClick={() => handleStartNewSet(questionCount)}
-            style={{
-              border: 'none',
-              background: 'linear-gradient(135deg, #4f46e5, #6366f1)',
-              color: '#ffffff',
-              borderRadius: 999,
-              padding: '14px 26px',
-              fontWeight: 800,
-              fontSize: '0.92rem',
-              cursor: 'pointer',
-              boxShadow: '0 10px 25px rgba(79, 70, 229, 0.35)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-            }}
-          >
-            <span>🔄</span> Générer une nouvelle série
-          </button>
+      <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12 }}>
+        <div>
+          <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 700, color: '#111827', letterSpacing: '-0.02em' }}>
+            Exercices &amp; QCM
+          </h2>
+          <p style={{ margin: '4px 0 0', color: '#6b7280', fontSize: '0.88rem' }}>
+            Générateur de séries · notions, calculs, niveaux Débutant / Intermédiaire / BAC
+          </p>
         </div>
+
+        <button
+          type="button"
+          onClick={() => handleStartNewSet(questionCount)}
+          style={{
+            border: '1px solid #d1d5db',
+            background: '#111827',
+            color: '#ffffff',
+            borderRadius: 6,
+            padding: '8px 18px',
+            fontWeight: 600,
+            fontSize: '0.86rem',
+            cursor: 'pointer',
+          }}
+        >
+          Nouvelle série
+        </button>
       </div>
 
-      {/* FILTER & CONFIG BAR */}
+      {/* FILTER BAR */}
       <div
         style={{
-          padding: '18px 24px',
-          borderRadius: 24,
+          padding: '12px 16px',
+          borderRadius: 8,
           background: '#ffffff',
-          border: '1.5px solid #e2e8f0',
-          boxShadow: '0 8px 24px rgba(15, 23, 42, 0.03)',
+          border: '1px solid #e5e7eb',
           display: 'flex',
           flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          alignItems: 'center',
           gap: 16,
+          alignItems: 'center',
         }}
       >
-        {/* Mode filter */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
-          <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#64748b', marginRight: 4 }}>Mode :</span>
+        {/* Mode */}
+        <div style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+          <span style={{ fontSize: '0.74rem', fontWeight: 500, color: '#9ca3af', marginRight: 6 }}>Mode</span>
           {(['tous', 'calculs', 'qcm'] as const).map((m) => (
             <button
               key={m}
               type="button"
-              onClick={() => {
-                setModeFilter(m);
-                handleStartNewSet(questionCount, levelFilter, m, diffFilter);
-              }}
+              onClick={() => { setModeFilter(m); handleStartNewSet(questionCount, levelFilter, m, diffFilter); }}
               style={{
                 border: 'none',
-                background: modeFilter === m ? '#1e1b4b' : '#f1f5f9',
-                color: modeFilter === m ? '#ffffff' : '#475569',
-                padding: '8px 16px',
-                borderRadius: 12,
-                fontWeight: 800,
-                fontSize: '0.84rem',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
+                background: modeFilter === m ? '#111827' : '#f3f4f6',
+                color: modeFilter === m ? '#ffffff' : '#4b5563',
+                padding: '5px 12px', borderRadius: 4,
+                fontWeight: modeFilter === m ? 600 : 400,
+                fontSize: '0.8rem', cursor: 'pointer', transition: 'all 0.1s',
               }}
             >
-              {m === 'calculs' ? '🧮 Calculs pratiques' : m === 'qcm' ? '🎓 Notions & Auteurs' : '🌟 Mix complet'}
+              {m === 'calculs' ? 'Calculs' : m === 'qcm' ? 'Notions' : 'Mix'}
             </button>
           ))}
         </div>
 
-        {/* Level filter */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
-          <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#64748b', marginRight: 4 }}>Niveau :</span>
+        {/* Level */}
+        <div style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+          <span style={{ fontSize: '0.74rem', fontWeight: 500, color: '#9ca3af', marginRight: 6 }}>Niveau</span>
           {(['Tous', 'Seconde', 'Première'] as const).map((lvl) => (
             <button
               key={lvl}
               type="button"
-              onClick={() => {
-                setLevelFilter(lvl);
-                handleStartNewSet(questionCount, lvl, modeFilter, diffFilter);
-              }}
+              onClick={() => { setLevelFilter(lvl); handleStartNewSet(questionCount, lvl, modeFilter, diffFilter); }}
               style={{
                 border: 'none',
-                background: levelFilter === lvl ? '#4f46e5' : '#f1f5f9',
-                color: levelFilter === lvl ? '#ffffff' : '#475569',
-                padding: '8px 16px',
-                borderRadius: 12,
-                fontWeight: 800,
-                fontSize: '0.84rem',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
+                background: levelFilter === lvl ? '#2563eb' : '#f3f4f6',
+                color: levelFilter === lvl ? '#ffffff' : '#4b5563',
+                padding: '5px 12px', borderRadius: 4,
+                fontWeight: levelFilter === lvl ? 600 : 400,
+                fontSize: '0.8rem', cursor: 'pointer', transition: 'all 0.1s',
               }}
             >
-              {lvl === 'Seconde' ? '🎓 Seconde' : lvl === 'Première' ? '🏛️ Première' : '🌐 Tous'}
+              {lvl}
             </button>
           ))}
         </div>
 
-        {/* Difficulty filter */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
-          <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#64748b', marginRight: 4 }}>Difficulté :</span>
+        {/* Difficulty */}
+        <div style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+          <span style={{ fontSize: '0.74rem', fontWeight: 500, color: '#9ca3af', marginRight: 6 }}>Difficulté</span>
           {(['mixte', 'debutant', 'intermediaire', 'bac'] as const).map((d) => (
             <button
               key={d}
               type="button"
-              onClick={() => {
-                setDiffFilter(d);
-                handleStartNewSet(questionCount, levelFilter, modeFilter, d);
-              }}
+              onClick={() => { setDiffFilter(d); handleStartNewSet(questionCount, levelFilter, modeFilter, d); }}
               style={{
                 border: 'none',
-                background: diffFilter === d ? '#0f172a' : '#f1f5f9',
-                color: diffFilter === d ? '#ffffff' : '#475569',
-                padding: '8px 14px',
-                borderRadius: 12,
-                fontWeight: 800,
-                fontSize: '0.84rem',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
+                background: diffFilter === d ? '#0f766e' : '#f3f4f6',
+                color: diffFilter === d ? '#ffffff' : '#4b5563',
+                padding: '5px 11px', borderRadius: 4,
+                fontWeight: diffFilter === d ? 600 : 400,
+                fontSize: '0.8rem', cursor: 'pointer', transition: 'all 0.1s',
               }}
             >
-              {d === 'debutant' ? '⭐ Débutant' : d === 'intermediaire' ? '⭐⭐ Intermédiaire' : d === 'bac' ? '⭐⭐⭐ BAC' : '🎲 Mixte'}
+              {d === 'debutant' ? 'Débutant' : d === 'intermediaire' ? 'Intermédiaire' : d === 'bac' ? 'BAC' : 'Mixte'}
             </button>
           ))}
         </div>
 
-        {/* Count selector */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
-          <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#64748b', marginRight: 4 }}>Taille :</span>
+        {/* Count */}
+        <div style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+          <span style={{ fontSize: '0.74rem', fontWeight: 500, color: '#9ca3af', marginRight: 6 }}>Questions</span>
           {[5, 10, 20].map((cnt) => (
             <button
               key={cnt}
               type="button"
-              onClick={() => {
-                setQuestionCount(cnt);
-                handleStartNewSet(cnt, levelFilter, modeFilter, diffFilter);
-              }}
+              onClick={() => { setQuestionCount(cnt); handleStartNewSet(cnt, levelFilter, modeFilter, diffFilter); }}
               style={{
                 border: 'none',
-                background: questionCount === cnt ? '#0f766e' : '#f1f5f9',
-                color: questionCount === cnt ? '#ffffff' : '#475569',
-                padding: '8px 14px',
-                borderRadius: 12,
-                fontWeight: 800,
-                fontSize: '0.84rem',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
+                background: questionCount === cnt ? '#7c3aed' : '#f3f4f6',
+                color: questionCount === cnt ? '#ffffff' : '#4b5563',
+                padding: '5px 11px', borderRadius: 4,
+                fontWeight: questionCount === cnt ? 600 : 400,
+                fontSize: '0.8rem', cursor: 'pointer', transition: 'all 0.1s',
               }}
             >
-              {cnt} questions
+              {cnt}
             </button>
           ))}
         </div>

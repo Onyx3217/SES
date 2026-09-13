@@ -5,6 +5,7 @@ import { auteursSES } from '../data/auteursData';
 import { mecanismesData } from '../data/mecanismesData';
 import { generateFullNotebookLMDossier, DossierSelection, defaultDossierSelection } from '../data/dossierGenerator';
 import { getStoredNotes, addNote, updateNote, deleteNote, NoteItem } from '../data/notebookHelper';
+import { normalizeForSearch } from '../search';
 
 export default function Notebook({ onNavigateToCalcul }: { onNavigateToCalcul?: (id: string) => void }) {
   // Main view: 'dossier' (NotebookLM Builder) | 'notes' (Carnet de notes)
@@ -233,13 +234,12 @@ export default function Notebook({ onNavigateToCalcul }: { onNavigateToCalcul?: 
   }, [notes, selectedNoteId]);
 
   const filteredNotes = useMemo(() => {
-    const q = noteSearch.toLowerCase().trim();
+    const norm = normalizeForSearch(noteSearch);
+    if (!norm) return notes;
+    const tokens = norm.split(' ').filter(Boolean);
     return notes.filter((n) => {
-      if (q) {
-        const text = `${n.titre} ${n.chapitre} ${n.contenu} ${n.tags.join(' ')}`.toLowerCase();
-        if (!text.includes(q)) return false;
-      }
-      return true;
+      const text = normalizeForSearch(`${n.titre} ${n.chapitre} ${n.contenu} ${n.tags.join(' ')}`);
+      return tokens.every((t) => text.includes(t));
     });
   }, [notes, noteSearch]);
 
@@ -274,7 +274,7 @@ export default function Notebook({ onNavigateToCalcul }: { onNavigateToCalcul?: 
     });
     setNotes(updated);
     setIsEditingNote(false);
-    showToast('Note enregistrée !');
+    showToast('Note enregistrée');
   };
 
   const handleDeleteNote = (id: string) => {
@@ -283,26 +283,25 @@ export default function Notebook({ onNavigateToCalcul }: { onNavigateToCalcul?: 
       setNotes(updated);
       setSelectedNoteId(updated[0]?.id || null);
       setIsEditingNote(false);
-      showToast('Note supprimée.');
+      showToast('Note supprimée');
     }
   };
 
   return (
-    <div style={{ display: 'grid', gap: 28 }}>
+    <div style={{ display: 'grid', gap: 20 }}>
       {/* FLOATING TOAST */}
       {toastMsg && (
         <div
           style={{
             position: 'fixed',
-            top: 24,
+            bottom: 24,
             right: 24,
-            background: '#0f172a',
-            color: '#38bdf8',
-            padding: '16px 24px',
-            borderRadius: 18,
-            boxShadow: '0 15px 40px rgba(0,0,0,0.3)',
-            fontWeight: 800,
-            fontSize: '0.94rem',
+            background: '#111827',
+            color: '#ffffff',
+            padding: '10px 16px',
+            borderRadius: 6,
+            fontWeight: 500,
+            fontSize: '0.86rem',
             zIndex: 9999,
           }}
         >
@@ -311,55 +310,43 @@ export default function Notebook({ onNavigateToCalcul }: { onNavigateToCalcul?: 
       )}
 
       {/* TOP HEADER */}
-      <div
-        style={{
-          padding: '28px 32px',
-          borderRadius: 28,
-          background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0369a1 100%)',
-          color: '#ffffff',
-          boxShadow: '0 20px 45px rgba(15, 23, 42, 0.2)',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: 20,
-        }}
-      >
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 14 }}>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
-            <span style={{ background: '#38bdf8', color: '#0f172a', borderRadius: 999, padding: '3px 10px', fontSize: '0.74rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-              Connecteur Google NotebookLM & Gemini
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+            <span style={{ color: '#6b7280', fontSize: '0.74rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 500 }}>
+              Dossier &amp; Synthèses
             </span>
-            <span style={{ color: '#bae6fd', fontSize: '0.82rem', fontWeight: 700 }}>
-              ~{docStats.words.toLocaleString()} mots • {docStats.pagesEstimees} page{docStats.pagesEstimees > 1 ? 's' : ''}
+            <span style={{ color: '#9ca3af', fontSize: '0.75rem' }}>•</span>
+            <span style={{ color: '#6b7280', fontSize: '0.78rem' }}>
+              ~{docStats.words.toLocaleString()} mots ({docStats.pagesEstimees} page{docStats.pagesEstimees > 1 ? 's' : ''})
             </span>
           </div>
-          <h2 style={{ margin: '0 0 8px', fontSize: 'clamp(1.7rem, 2.5vw, 2.4rem)', fontWeight: 900 }}>
-            Générateur de Dossier <span style={{ color: '#38bdf8' }}>NotebookLM</span>
+          <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 700, color: '#111827', letterSpacing: '-0.02em' }}>
+            Dossier NotebookLM &amp; Notes
           </h2>
-          <p style={{ margin: 0, color: '#e0f2fe', fontSize: '0.96rem', maxWidth: 740, lineHeight: 1.6 }}>
-            Sélectionnez vos sujets, calculs, définitions et auteurs pour compiler instantanément un <strong>grand document structuré</strong>. Téléchargez-le en 1 clic ou collez-le directement dans Google NotebookLM ou Gemini pour vos révisions !
+          <p style={{ margin: '4px 0 0', color: '#6b7280', fontSize: '0.88rem', maxWidth: 700 }}>
+            Compilez et exportez vos fiches de cours, calculs et théories vers Google NotebookLM ou Gemini.
           </p>
         </div>
 
-        {/* Top Tab switch */}
-        <div style={{ display: 'flex', gap: 8, background: 'rgba(255, 255, 255, 0.12)', padding: 6, borderRadius: 20 }}>
+        {/* Tab switch */}
+        <div style={{ display: 'flex', gap: 2, background: '#f3f4f6', padding: 3, borderRadius: 6 }}>
           <button
             type="button"
             onClick={() => setActiveTab('dossier')}
             style={{
               border: 'none',
               background: activeTab === 'dossier' ? '#ffffff' : 'transparent',
-              color: activeTab === 'dossier' ? '#0f172a' : '#ffffff',
-              padding: '10px 20px',
-              borderRadius: 14,
-              fontWeight: 800,
-              fontSize: '0.9rem',
+              color: activeTab === 'dossier' ? '#111827' : '#6b7280',
+              padding: '6px 14px',
+              borderRadius: 4,
+              fontWeight: activeTab === 'dossier' ? 600 : 400,
+              fontSize: '0.82rem',
               cursor: 'pointer',
-              transition: 'all 0.2s ease',
+              boxShadow: activeTab === 'dossier' ? '0 1px 2px rgba(0,0,0,0.06)' : 'none',
             }}
           >
-            📑 Dossier Source NotebookLM
+            Dossier Source
           </button>
           <button
             type="button"
@@ -367,16 +354,16 @@ export default function Notebook({ onNavigateToCalcul }: { onNavigateToCalcul?: 
             style={{
               border: 'none',
               background: activeTab === 'notes' ? '#ffffff' : 'transparent',
-              color: activeTab === 'notes' ? '#0f172a' : '#ffffff',
-              padding: '10px 20px',
-              borderRadius: 14,
-              fontWeight: 800,
-              fontSize: '0.9rem',
+              color: activeTab === 'notes' ? '#111827' : '#6b7280',
+              padding: '6px 14px',
+              borderRadius: 4,
+              fontWeight: activeTab === 'notes' ? 600 : 400,
+              fontSize: '0.82rem',
               cursor: 'pointer',
-              transition: 'all 0.2s ease',
+              boxShadow: activeTab === 'notes' ? '0 1px 2px rgba(0,0,0,0.06)' : 'none',
             }}
           >
-            📝 Mes Notes ({notes.length})
+            Mes Notes ({notes.length})
           </button>
         </div>
       </div>
@@ -731,15 +718,15 @@ export default function Notebook({ onNavigateToCalcul }: { onNavigateToCalcul?: 
       {activeTab === 'notes' && (
         <div style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 340px) minmax(0, 1fr)', gap: 28 }}>
           {/* LEFT: NOTES LIST */}
-          <div style={{ padding: 22, borderRadius: 28, background: '#ffffff', border: '1.5px solid #e2e8f0', boxShadow: '0 8px 24px rgba(15, 23, 42, 0.03)', display: 'grid', gap: 14, height: 'fit-content' }}>
+          <div style={{ padding: 16, borderRadius: 8, background: '#ffffff', border: '1px solid #e5e7eb', display: 'grid', gap: 10, height: 'fit-content' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 800 }}>Mes fiches & Notes</h3>
+              <h3 style={{ margin: 0, fontSize: '0.92rem', fontWeight: 600, color: '#111827' }}>Mes fiches &amp; Notes</h3>
               <button
                 type="button"
                 onClick={handleStartCreateNote}
-                style={{ border: 'none', background: '#2563eb', color: '#ffffff', borderRadius: 12, padding: '8px 14px', fontSize: '0.8rem', fontWeight: 800, cursor: 'pointer' }}
+                style={{ border: 'none', background: '#2563eb', color: '#ffffff', borderRadius: 4, padding: '5px 10px', fontSize: '0.78rem', fontWeight: 500, cursor: 'pointer' }}
               >
-                ➕ Nouvelle
+                + Nouvelle
               </button>
             </div>
 
@@ -748,10 +735,15 @@ export default function Notebook({ onNavigateToCalcul }: { onNavigateToCalcul?: 
               placeholder="Filtrer mes notes..."
               value={noteSearch}
               onChange={(e) => setNoteSearch(e.target.value)}
-              style={{ width: '100%', padding: '10px 14px', borderRadius: 12, border: '1px solid #cbd5e1', fontSize: '0.88rem' }}
+              style={{ width: '100%', padding: '7px 10px', borderRadius: 5, border: '1px solid #d1d5db', fontSize: '0.84rem', outline: 'none' }}
             />
 
-            <div style={{ display: 'grid', gap: 8, maxHeight: 480, overflowY: 'auto' }}>
+            <div style={{ display: 'grid', gap: 6, maxHeight: 480, overflowY: 'auto' }}>
+              {filteredNotes.length === 0 && (
+                <div style={{ padding: '16px 8px', textAlign: 'center', color: '#6b7280', fontSize: '0.8rem' }}>
+                  Aucune note trouvée.
+                </div>
+              )}
               {filteredNotes.map((n) => {
                 const isSel = selectedNoteId === n.id;
                 return (
@@ -762,18 +754,18 @@ export default function Notebook({ onNavigateToCalcul }: { onNavigateToCalcul?: 
                       setIsEditingNote(false);
                     }}
                     style={{
-                      padding: '12px 14px',
-                      borderRadius: 16,
-                      background: isSel ? '#eff6ff' : '#f8fafc',
-                      border: `1.5px solid ${isSel ? '#3b82f6' : '#e2e8f0'}`,
+                      padding: '10px 12px',
+                      borderRadius: 6,
+                      background: isSel ? '#eff6ff' : '#ffffff',
+                      border: `1px solid ${isSel ? '#2563eb' : '#e5e7eb'}`,
                       cursor: 'pointer',
-                      transition: 'all 0.15s ease',
+                      transition: 'all 0.1s',
                     }}
                   >
-                    <div style={{ fontWeight: 800, color: isSel ? '#1d4ed8' : '#0f172a', fontSize: '0.92rem', marginBottom: 4 }}>
+                    <div style={{ fontWeight: isSel ? 600 : 500, color: isSel ? '#1d4ed8' : '#111827', fontSize: '0.86rem', marginBottom: 2 }}>
                       {n.titre}
                     </div>
-                    <div style={{ fontSize: '0.76rem', color: '#64748b' }}>{n.chapitre}</div>
+                    <div style={{ fontSize: '0.72rem', color: '#6b7280' }}>{n.chapitre}</div>
                   </div>
                 );
               })}
