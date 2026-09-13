@@ -15,10 +15,12 @@ import Mecanismes from './components/Mecanismes';
 import MethodeBac from './components/MethodeBac';
 import DashboardSRS from './components/DashboardSRS';
 import PomodoroTimer from './components/PomodoroTimer';
+import ActualitesEco from './components/ActualitesEco';
 import { CountUpNumber } from './components/AnimatedNumber';
 
 const views = [
   { key: 'notebook', label: 'Dossier', shortLabel: 'Dossier', badge: 'Export' },
+  { key: 'actualites', label: 'Actualités Éco', shortLabel: 'Actualités', badge: 'Hebdo' },
   { key: 'calculs', label: 'Calculs & Formules', shortLabel: 'Calculs' },
   { key: 'lexique', label: 'Lexique', shortLabel: 'Lexique' },
   { key: 'auteurs', label: 'Auteurs', shortLabel: 'Auteurs' },
@@ -86,7 +88,7 @@ function App() {
     <div style={{ background: bg, color: txt, minHeight: '100vh', transition: 'background 0.2s' }}>
       <style>{`
         *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html, body, #root { margin: 0; min-height: 100%; }
+        html, body, #root { margin: 0; min-height: 100%; width: 100%; overflow-x: hidden; }
         body {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
           font-size: 15px;
@@ -94,11 +96,17 @@ function App() {
           -webkit-font-smoothing: antialiased;
         }
         button, input, textarea, select { font-family: inherit; }
+        /* iOS Safari auto-zoom prevention */
+        @media (max-width: 768px) {
+          input, select, textarea {
+            font-size: 16px !important;
+          }
+        }
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(5px); }
           to   { opacity: 1; transform: translateY(0); }
         }
-        .view-container { animation: fadeUp 200ms ease both; }
+        .view-container { animation: fadeUp 200ms ease both; width: 100%; overflow-x: hidden; }
 
         .nav-item {
           border: none;
@@ -132,28 +140,36 @@ function App() {
         .bottom-nav {
           display: none;
           position: fixed; bottom: 0; left: 0; right: 0;
-          background: ${dk ? 'rgba(13,17,23,0.97)' : 'rgba(255,255,255,0.97)'};
-          backdrop-filter: blur(10px);
+          background: ${dk ? 'rgba(13,17,23,0.98)' : 'rgba(255,255,255,0.98)'};
+          backdrop-filter: blur(12px);
           border-top: 1px solid ${borderClr};
-          padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
-          z-index: 999; overflow-x: auto; gap: 2px;
+          padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 8px));
+          z-index: 999; overflow-x: auto; gap: 3px;
+          -webkit-overflow-scrolling: touch;
         }
         .bottom-nav-item {
           display: flex; flex-direction: column; align-items: center; gap: 2px;
           border: none; background: none; color: ${muted};
           font-size: 0.65rem; font-weight: 500; cursor: pointer;
-          padding: 5px 9px; border-radius: 5px; white-space: nowrap; flex: 0 0 auto;
+          padding: 5px 8px; border-radius: 5px; white-space: nowrap; flex: 0 0 auto;
+          min-width: 54px;
           transition: all 0.1s;
         }
         .bottom-nav-item.active { color: ${accent}; background: ${dk ? '#1d2d44' : '#eff6ff'}; }
-        .bottom-nav-item .icon { font-size: 1rem; line-height: 1; }
+        .bottom-nav-item .icon { font-size: 0.95rem; line-height: 1; }
 
         .desktop-nav { display: flex; }
         @media (max-width: 1024px) {
           .desktop-nav { display: none !important; }
-          .bottom-nav { display: flex; }
-          .main-pad { padding: 16px 14px 90px !important; }
+          .bottom-nav { display: flex !important; }
+          .main-pad { padding: 12px 10px 84px !important; }
           .calculs-layout { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 640px) {
+          .main-header { padding: 9px 12px !important; }
+          .header-sub { display: none !important; }
+          .main-pad { padding: 8px 6px 84px !important; }
+          main { padding: 12px 6px !important; }
         }
         ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
@@ -164,7 +180,7 @@ function App() {
         <div style={{ maxWidth: 1360, margin: '0 auto' }}>
 
           {/* HEADER */}
-          <header style={{
+          <header className="main-header" style={{
             display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between',
             gap: 12, alignItems: 'center', padding: '13px 22px',
             borderBottom: `1px solid ${borderClr}`, background: surface,
@@ -174,7 +190,7 @@ function App() {
               <span style={{ fontSize: '1rem', fontWeight: 700, letterSpacing: '-0.02em', color: txt }}>
                 SES Compagnon
               </span>
-              <span style={{ fontSize: '0.7rem', color: muted, fontWeight: 400 }}>
+              <span className="header-sub" style={{ fontSize: '0.7rem', color: muted, fontWeight: 400 }}>
                 Seconde &amp; Première
               </span>
             </div>
@@ -224,6 +240,17 @@ function App() {
             <div key={currentView} className="view-container">
               {/* NOTEBOOK */}
               {currentView === 'notebook' && <Notebook onNavigateToCalcul={handleSelectCalcul} />}
+
+              {/* ACTUALITES ÉCO */}
+              {currentView === 'actualites' && (
+                <ActualitesEco
+                  onNavigateToLexique={(terme) => {
+                    setCurrentView('lexique');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  onNavigateToNotebook={() => setCurrentView('notebook')}
+                />
+              )}
 
               {/* CALCULS */}
               {currentView === 'calculs' && (
@@ -320,7 +347,7 @@ function App() {
             }}
           >
             <span className="icon">
-              {v.key === 'notebook' ? '▣' : v.key === 'calculs' ? '∑' : v.key === 'lexique' ? 'A' : v.key === 'auteurs' ? '§' : v.key === 'mecanismes' ? '→' : v.key === 'methodeBac' ? '✓' : v.key === 'exercices' ? '?' : v.key === 'programme' ? '≡' : '◎'}
+              {v.key === 'notebook' ? '▣' : v.key === 'actualites' ? '▤' : v.key === 'calculs' ? '∑' : v.key === 'lexique' ? 'A' : v.key === 'auteurs' ? '§' : v.key === 'mecanismes' ? '→' : v.key === 'methodeBac' ? '✓' : v.key === 'exercices' ? '?' : v.key === 'programme' ? '≡' : '◎'}
             </span>
             <span>{(v as any).shortLabel}</span>
           </button>
